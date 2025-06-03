@@ -1,0 +1,974 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>StarDist for Segmentation &#8212; Python for Bioimage Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'course_material/06182025_day3/module_14';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Evaluation of Segmentation" href="module_15.html" />
+    <link rel="prev" title="Cellpose for Segmentation" href="module_13.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Python for Bioimage Analysis - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Python for Bioimage Analysis - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to the Introduction to Python Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 1 - Python Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06162025_day1/module_01.html">Welcome &amp; Setup</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../06162025_day1/module_02.html">Python Basics – Variables &amp; Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06162025_day1/module_03.html">Data Structures &amp; Control Flow in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06162025_day1/module_04.html">Functions &amp; Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06162025_day1/module_05.html">Basic Data Handling with Pandas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 2 - Image Processing with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06172025_day2/module_06.html">Introduction to Bioimage Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06172025_day2/module_07.html">Digital Images as Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06172025_day2/module_08.html">Working with Images in Python Using scikit-image and imageio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06172025_day2/module_09.html">Visualizing Images in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06172025_day2/module_10.html">Image Filtering &amp; Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06172025_day2/module_11.html">Threshold-Based Segmentation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 - Image Segmentation with Deep Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="module_12.html">Deep Learning Basics for Imaging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_13.html">Cellpose for Segmentation</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">StarDist for Segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_15.html">Evaluation of Segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_16.html">Tools &amp; Next Steps in Bioimage Analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcourse_material/06182025_day3/module_14.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/course_material/06182025_day3/module_14.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>StarDist for Segmentation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stardist">Stardist</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-stardist-installation-and-imports">Hands-on: StarDist Installation and Imports</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-and-why-to-use-stardist-vs-cellpose">When and Why to Use StarDist (vs. Cellpose)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-load-and-compare-sample-images">Hands-on: Load and Compare Sample Images</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-segmentation-and-overlay-predictions">Run Segmentation and Overlay Predictions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-apply-stardist-segmentation">Hands-on: Apply StarDist Segmentation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting-segmentations">Troubleshooting Segmentations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-troubleshooting-example">Hands-on: Troubleshooting Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-project">Mini Project</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-summary">Module Summary</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="stardist-for-segmentation">
+<h1>StarDist for Segmentation<a class="headerlink" href="#stardist-for-segmentation" title="Link to this heading">#</a></h1>
+<hr class="docutils" />
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>By the end of this module, learners will be able to:</p>
+<ul class="simple">
+<li><p>Understand what StarDist is and how it works conceptually.</p></li>
+<li><p>Choose when to use StarDist vs. Cellpose for segmentation.</p></li>
+<li><p>Perform segmentation using pre-trained StarDist models in Python.</p></li>
+<li><p>Visualize and overlay segmentation results on microscopy images.</p></li>
+<li><p>Identify and resolve common segmentation issues.</p></li>
+<li><p>Apply StarDist to a real-world dataset in a mini project.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="stardist">
+<h2>Stardist<a class="headerlink" href="#stardist" title="Link to this heading">#</a></h2>
+<p><strong>StarDist</strong> is a deep learning-based instance segmentation tool specifically designed for objects with star-convex shapes (e.g., nuclei). Instead of using pixel-wise masks, <strong>StarDist</strong> predicts each object as a star-convex polygon, defined by a set of radial distances from the center.</p>
+<p><strong>Key ideas:</strong></p>
+<ul class="simple">
+<li><p>Designed for roundish or blob-like objects such as nuclei or cells.</p></li>
+<li><p>Efficient and good at separating touching cells.</p></li>
+<li><p>Outputs instance-wise masks, not just binary foreground-background.</p></li>
+</ul>
+<p><strong>Conceptual Illustration:</strong>
+Each object is represented as a star-shaped polygon radiating out from the center, making it particularly well-suited to objects with roughly circular or elliptical morphology.</p>
+<section id="hands-on-stardist-installation-and-imports">
+<h3>Hands-on: StarDist Installation and Imports<a class="headerlink" href="#hands-on-stardist-installation-and-imports" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install StarDist and dependencies (run once)</span>
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>stardist<span class="w"> </span>csbdeep
+
+<span class="c1"># Imports</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">stardist.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">StarDist2D</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">csbdeep.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">normalize</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">imread</span><span class="p">,</span> <span class="n">imshow</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting stardist
+  Using cached stardist-0.9.1.tar.gz (888 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Installing build dependencies ... ?25l-
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> done
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25h  Getting requirements to build wheel ... ?25l- done
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25h  Preparing metadata (pyproject.toml) ... ?25l-
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> done
+?25hCollecting csbdeep
+  Using cached csbdeep-0.8.1-py2.py3-none-any.whl.metadata (2.4 kB)
+Requirement already satisfied: scikit-image in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from stardist) (0.25.2)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting numba (from stardist)
+  Using cached numba-0.61.2-cp313-cp313-macosx_11_0_arm64.whl.metadata (2.7 kB)
+Requirement already satisfied: imageio in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from stardist) (2.37.0)
+Requirement already satisfied: numpy in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from csbdeep) (2.2.6)
+Requirement already satisfied: scipy in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from csbdeep) (1.15.3)
+Requirement already satisfied: matplotlib in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from csbdeep) (3.10.3)
+Requirement already satisfied: six in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from csbdeep) (1.17.0)
+Requirement already satisfied: tifffile in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from csbdeep) (2025.5.26)
+Collecting tqdm (from csbdeep)
+  Using cached tqdm-4.67.1-py3-none-any.whl.metadata (57 kB)
+Requirement already satisfied: packaging in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from csbdeep) (25.0)
+Requirement already satisfied: pillow&gt;=8.3.2 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from imageio-&gt;stardist) (11.2.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: contourpy&gt;=1.0.1 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from matplotlib-&gt;csbdeep) (1.3.2)
+Requirement already satisfied: cycler&gt;=0.10 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from matplotlib-&gt;csbdeep) (0.12.1)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from matplotlib-&gt;csbdeep) (4.58.1)
+Requirement already satisfied: kiwisolver&gt;=1.3.1 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from matplotlib-&gt;csbdeep) (1.4.8)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from matplotlib-&gt;csbdeep) (3.2.3)
+Requirement already satisfied: python-dateutil&gt;=2.7 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from matplotlib-&gt;csbdeep) (2.9.0.post0)
+Collecting llvmlite&lt;0.45,&gt;=0.44.0dev0 (from numba-&gt;stardist)
+  Using cached llvmlite-0.44.0-cp313-cp313-macosx_11_0_arm64.whl.metadata (4.8 kB)
+Requirement already satisfied: networkx&gt;=3.0 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from scikit-image-&gt;stardist) (3.5)
+Requirement already satisfied: lazy-loader&gt;=0.4 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from scikit-image-&gt;stardist) (0.4)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using cached csbdeep-0.8.1-py2.py3-none-any.whl (71 kB)
+Using cached numba-0.61.2-cp313-cp313-macosx_11_0_arm64.whl (2.8 MB)
+Using cached llvmlite-0.44.0-cp313-cp313-macosx_11_0_arm64.whl (26.2 MB)
+Using cached tqdm-4.67.1-py3-none-any.whl (78 kB)
+Building wheels for collected packages: stardist
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Building wheel for stardist (pyproject.toml) ... ?25l-
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> error
+  <span class=" -Color -Color-Bold -Color-Bold-Red">error</span>: <span class=" -Color -Color-Bold">subprocess-exited-with-error</span>
+  
+  <span class=" -Color -Color-Red">×</span> <span class=" -Color -Color-Green">Building wheel for stardist </span><span class=" -Color -Color-Bold -Color-Bold-Green">(</span><span class=" -Color -Color-Green">pyproject.toml</span><span class=" -Color -Color-Bold -Color-Bold-Green">)</span> did not run successfully.
+  <span class=" -Color -Color-Red">│</span> exit code: <span class=" -Color -Color-Bold -Color-Bold-Cyan">1</span>
+  <span class=" -Color -Color-Red">╰─&gt;</span> <span class=" -Color -Color-Red">[77 lines of output]</span>
+  <span class=" -Color -Color-Red">   </span> /private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-mlpdfnrf/overlay/lib/python3.13/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+  <span class=" -Color -Color-Red">   </span> !!
+  <span class=" -Color -Color-Red">   </span> 
+  <span class=" -Color -Color-Red">   </span>         ********************************************************************************
+  <span class=" -Color -Color-Red">   </span>         Please consider removing the following classifiers in favor of a SPDX license expression:
+  <span class=" -Color -Color-Red">   </span> 
+  <span class=" -Color -Color-Red">   </span>         License :: OSI Approved :: BSD License
+  <span class=" -Color -Color-Red">   </span> 
+  <span class=" -Color -Color-Red">   </span>         See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+  <span class=" -Color -Color-Red">   </span>         ********************************************************************************
+  <span class=" -Color -Color-Red">   </span> 
+  <span class=" -Color -Color-Red">   </span> !!
+  <span class=" -Color -Color-Red">   </span>   self._finalize_license_expression()
+  <span class=" -Color -Color-Red">   </span> running bdist_wheel
+  <span class=" -Color -Color-Red">   </span> running build
+  <span class=" -Color -Color-Red">   </span> running build_py
+  <span class=" -Color -Color-Red">   </span> creating build/lib.macosx-11.1-arm64-cpython-313/stardist
+  <span class=" -Color -Color-Red">   </span> copying stardist/version.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist
+  <span class=" -Color -Color-Red">   </span> copying stardist/rays3d.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist
+  <span class=" -Color -Color-Red">   </span> copying stardist/sample_patches.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist
+  <span class=" -Color -Color-Red">   </span> copying stardist/nms.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist
+  <span class=" -Color -Color-Red">   </span> copying stardist/__init__.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist
+  <span class=" -Color -Color-Red">   </span> copying stardist/matching.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist
+  <span class=" -Color -Color-Red">   </span> copying stardist/bioimageio_utils.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist
+  <span class=" -Color -Color-Red">   </span> copying stardist/utils.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist
+  <span class=" -Color -Color-Red">   </span> copying stardist/big.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist
+  <span class=" -Color -Color-Red">   </span> creating build/lib.macosx-11.1-arm64-cpython-313/stardist/plot
+  <span class=" -Color -Color-Red">   </span> copying stardist/plot/plot.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/plot
+  <span class=" -Color -Color-Red">   </span> copying stardist/plot/render.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/plot
+  <span class=" -Color -Color-Red">   </span> copying stardist/plot/__init__.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/plot
+  <span class=" -Color -Color-Red">   </span> creating build/lib.macosx-11.1-arm64-cpython-313/stardist/models
+  <span class=" -Color -Color-Red">   </span> copying stardist/models/model3d.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/models
+  <span class=" -Color -Color-Red">   </span> copying stardist/models/model2d.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/models
+  <span class=" -Color -Color-Red">   </span> copying stardist/models/__init__.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/models
+  <span class=" -Color -Color-Red">   </span> copying stardist/models/base.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/models
+  <span class=" -Color -Color-Red">   </span> creating build/lib.macosx-11.1-arm64-cpython-313/stardist/scripts
+  <span class=" -Color -Color-Red">   </span> copying stardist/scripts/__init__.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/scripts
+  <span class=" -Color -Color-Red">   </span> copying stardist/scripts/predict2d.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/scripts
+  <span class=" -Color -Color-Red">   </span> copying stardist/scripts/predict3d.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/scripts
+  <span class=" -Color -Color-Red">   </span> creating build/lib.macosx-11.1-arm64-cpython-313/stardist/geometry
+  <span class=" -Color -Color-Red">   </span> copying stardist/geometry/__init__.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/geometry
+  <span class=" -Color -Color-Red">   </span> copying stardist/geometry/geom3d.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/geometry
+  <span class=" -Color -Color-Red">   </span> copying stardist/geometry/geom2d.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/geometry
+  <span class=" -Color -Color-Red">   </span> creating build/lib.macosx-11.1-arm64-cpython-313/stardist/data
+  <span class=" -Color -Color-Red">   </span> copying stardist/data/__init__.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/data
+  <span class=" -Color -Color-Red">   </span> creating build/lib.macosx-11.1-arm64-cpython-313/stardist/kernels
+  <span class=" -Color -Color-Red">   </span> copying stardist/kernels/stardist2d.cl -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/kernels
+  <span class=" -Color -Color-Red">   </span> copying stardist/kernels/stardist3d.cl -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/kernels
+  <span class=" -Color -Color-Red">   </span> creating build/lib.macosx-11.1-arm64-cpython-313/stardist/data/images
+  <span class=" -Color -Color-Red">   </span> copying stardist/data/images/mask2d.tif -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/data/images
+  <span class=" -Color -Color-Red">   </span> copying stardist/data/images/mask3d.tif -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/data/images
+  <span class=" -Color -Color-Red">   </span> copying stardist/data/images/img3d.tif -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/data/images
+  <span class=" -Color -Color-Red">   </span> copying stardist/data/images/img2d.tif -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/data/images
+  <span class=" -Color -Color-Red">   </span> copying stardist/data/images/histo.jpg -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/data/images
+  <span class=" -Color -Color-Red">   </span> running build_ext
+  <span class=" -Color -Color-Red">   </span> building &#39;stardist.lib.stardist2d&#39; extension
+  <span class=" -Color -Color-Red">   </span> creating build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper
+  <span class=" -Color -Color-Red">   </span> clang++ -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -I/private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-mlpdfnrf/overlay/lib/python3.13/site-packages/numpy/_core/include -Istardist/lib/external/clipper -Istardist/lib/external/nanoflann -I/Users/ranit/anaconda3/envs/gbi-python-env/include/python3.13 -c stardist/lib/external/clipper/clipper.cpp -o build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper/clipper.o -std=c++11 -fopenmp
+  <span class=" -Color -Color-Red">   </span> clang++: error: unsupported option &#39;-fopenmp&#39;
+  <span class=" -Color -Color-Red">   </span> &gt;&gt;&gt; compiling with &#39;-fopenmp&#39; failed
+  <span class=" -Color -Color-Red">   </span> building &#39;stardist.lib.stardist2d&#39; extension
+  <span class=" -Color -Color-Red">   </span> clang++ -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -I/private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-mlpdfnrf/overlay/lib/python3.13/site-packages/numpy/_core/include -Istardist/lib/external/clipper -Istardist/lib/external/nanoflann -I/Users/ranit/anaconda3/envs/gbi-python-env/include/python3.13 -c stardist/lib/external/clipper/clipper.cpp -o build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper/clipper.o -std=c++11 -Xpreprocessor -fopenmp
+  <span class=" -Color -Color-Red">   </span> In file included from stardist/lib/external/clipper/clipper.cpp:41:
+  <span class=" -Color -Color-Red">   </span> stardist/lib/external/clipper/clipper.hpp:52:10: fatal error: &#39;vector&#39; file not found
+  <span class=" -Color -Color-Red">   </span>    52 | #include &lt;vector&gt;
+  <span class=" -Color -Color-Red">   </span>       |          ^~~~~~~~
+  <span class=" -Color -Color-Red">   </span> 1 error generated.
+  <span class=" -Color -Color-Red">   </span> &gt;&gt;&gt; compiling with &#39;-Xpreprocessor -fopenmp&#39; failed
+  <span class=" -Color -Color-Red">   </span> &gt;&gt;&gt; compiling with OpenMP support failed, re-trying without
+  <span class=" -Color -Color-Red">   </span> building &#39;stardist.lib.stardist2d&#39; extension
+  <span class=" -Color -Color-Red">   </span> clang++ -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -I/private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-mlpdfnrf/overlay/lib/python3.13/site-packages/numpy/_core/include -Istardist/lib/external/clipper -Istardist/lib/external/nanoflann -I/Users/ranit/anaconda3/envs/gbi-python-env/include/python3.13 -c stardist/lib/external/clipper/clipper.cpp -o build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper/clipper.o -std=c++11
+  <span class=" -Color -Color-Red">   </span> In file included from stardist/lib/external/clipper/clipper.cpp:41:
+  <span class=" -Color -Color-Red">   </span> stardist/lib/external/clipper/clipper.hpp:52:10: fatal error: &#39;vector&#39; file not found
+  <span class=" -Color -Color-Red">   </span>    52 | #include &lt;vector&gt;
+  <span class=" -Color -Color-Red">   </span>       |          ^~~~~~~~
+  <span class=" -Color -Color-Red">   </span> 1 error generated.
+  <span class=" -Color -Color-Red">   </span> error: command &#39;/usr/bin/clang++&#39; failed with exit code 1
+  <span class=" -Color -Color-Red">   </span> <span class=" -Color -Color-Red">[end of output]</span>
+  
+  <span class=" -Color -Color-Bold -Color-Bold-Magenta">note</span>: This error originates from a subprocess, and is likely not a problem with pip.
+<span class=" -Color -Color-Red">  ERROR: Failed building wheel for stardist</span>
+?25hFailed to build stardist
+<span class=" -Color -Color-Red">ERROR: Failed to build installable wheels for some pyproject.toml based projects (stardist)</span>
+
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;pip install stardist csbdeep&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Imports</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">stardist.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">StarDist2D</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">from</span><span class="w"> </span><span class="nn">csbdeep.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">normalize</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">from</span><span class="w"> </span><span class="nn">skimage.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">imread</span><span class="p">,</span> <span class="n">imshow</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;stardist&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="when-and-why-to-use-stardist-vs-cellpose">
+<h3>When and Why to Use StarDist (vs. Cellpose)<a class="headerlink" href="#when-and-why-to-use-stardist-vs-cellpose" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>StarDist</p></th>
+<th class="head"><p>Cellpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Best for</p></td>
+<td><p>Star-shaped objects (e.g., nuclei)</p></td>
+<td><p>Irregular shapes (e.g., whole cells)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Output type</p></td>
+<td><p>Star-convex polygons</p></td>
+<td><p>Vector flow + mask</p></td>
+</tr>
+<tr class="row-even"><td><p>Model tuning needed</p></td>
+<td><p>Less for nucleus images</p></td>
+<td><p>Often more adaptable via scale</p></td>
+</tr>
+<tr class="row-odd"><td><p>Example datasets</p></td>
+<td><p>Fluorescent nucleus images</p></td>
+<td><p>Cytoplasm, brightfield, mixed cells</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Use StarDist if:</strong></p>
+<ul class="simple">
+<li><p>You are segmenting nuclei or small, blob-like organelles.</p></li>
+<li><p>You need high-quality instance segmentation.
+= Your objects are mostly round or elliptical.</p></li>
+</ul>
+</section>
+<section id="hands-on-load-and-compare-sample-images">
+<h3>Hands-on: Load and Compare Sample Images<a class="headerlink" href="#hands-on-load-and-compare-sample-images" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/stardist/stardist/master/examples/images/DSB2018/train/images/0002.tif&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sample Nucleus Image&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="run-segmentation-and-overlay-predictions">
+<h2>Run Segmentation and Overlay Predictions<a class="headerlink" href="#run-segmentation-and-overlay-predictions" title="Link to this heading">#</a></h2>
+<p>StarDist uses a pre-trained model (e.g., “2D_versatile_fluo”) to:</p>
+<ul class="simple">
+<li><p>Normalize input</p></li>
+<li><p>Predict polygons</p></li>
+<li><p>Return label masks</p></li>
+<li><p>The predicted instance masks can be overlaid on the original image for easy visual inspection.</p></li>
+</ul>
+<section id="hands-on-apply-stardist-segmentation">
+<h3>Hands-on: Apply StarDist Segmentation<a class="headerlink" href="#hands-on-apply-stardist-segmentation" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load pre-trained model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">StarDist2D</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;2D_versatile_fluo&#39;</span><span class="p">)</span>
+
+<span class="c1"># Normalize image</span>
+<span class="n">img_norm</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">99.8</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Run prediction</span>
+<span class="n">labels</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_instances</span><span class="p">(</span><span class="n">img_norm</span><span class="p">)</span>
+
+<span class="c1"># Show result</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Original&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;StarDist Segmentation Overlay&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting-segmentations">
+<h2>Troubleshooting Segmentations<a class="headerlink" href="#troubleshooting-segmentations" title="Link to this heading">#</a></h2>
+<p>Common issues and fixes:</p>
+<ul class="simple">
+<li><p><strong>Too many/few segments:</strong> Try normalizing the input or applying Gaussian blur.</p></li>
+<li><p><strong>Merging of touching cells:</strong> StarDist usually handles this well; check normalization.</p></li>
+<li><p><strong>Broken segment shapes:</strong> May be due to background noise or unnormalized input.</p></li>
+<li><p><strong>Model mismatch:</strong> Try other pre-trained models or retrain if needed.</p></li>
+</ul>
+<section id="hands-on-troubleshooting-example">
+<h3>Hands-on: Troubleshooting Example<a class="headerlink" href="#hands-on-troubleshooting-example" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Try with a poorly normalized version</span>
+<span class="n">img_bad</span> <span class="o">=</span> <span class="n">image</span> <span class="o">/</span> <span class="mf">255.0</span>  <span class="c1"># Improper normalization</span>
+<span class="n">labels_bad</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_instances</span><span class="p">(</span><span class="n">img_bad</span><span class="p">)</span>
+
+<span class="c1"># Compare with good normalization</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">labels_bad</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Improper Normalization&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Proper Normalization&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise">
+<h3>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
+<p>Segment this image and compare it with StarDist and Cellpose.</p>
+<p><strong>URL:</strong> <a class="github reference external" href="https://github.com/stardist/stardist/raw/master/examples/images/DSB2018/train/images/0006.tif">stardist/stardist</a></p>
+<p><strong>Tasks:</strong></p>
+<ul class="simple">
+<li><p>Load the image.</p></li>
+<li><p>Run StarDist segmentation.</p></li>
+<li><p>Overlay predictions.</p></li>
+<li><p>Note any challenges or artifacts.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="mini-project">
+<h2>Mini Project<a class="headerlink" href="#mini-project" title="Link to this heading">#</a></h2>
+<p><strong>Goal:</strong> Segment nuclei in a real fluorescence microscopy image and export results.</p>
+<p><strong>Steps:</strong></p>
+<ul class="simple">
+<li><p>Download a microscopy image from your own lab or from DSB 2018 dataset.</p></li>
+<li><p>Apply proper normalization.</p></li>
+<li><p>Use StarDist to generate instance masks.</p></li>
+<li><p>Overlay masks on the original image.</p></li>
+<li><p>Save the result as an image.</p></li>
+<li><p>Export label data to a NumPy array or .tiff file for downstream analysis.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="module-summary">
+<h2>Module Summary<a class="headerlink" href="#module-summary" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Topic</p></th>
+<th class="head"><p>Key Concepts</p></th>
+<th class="head"><p>Skills Gained</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>What is StarDist?</p></td>
+<td><p>Star-convex shapes, polygon-based segmentation</p></td>
+<td><p>Understanding deep learning-based instance segmentation</p></td>
+</tr>
+<tr class="row-odd"><td><p>StarDist vs. Cellpose</p></td>
+<td><p>When to use which, pros/cons</p></td>
+<td><p>Selecting appropriate tools for biological images</p></td>
+</tr>
+<tr class="row-even"><td><p>Run and visualize results</p></td>
+<td><p>Model loading, normalization, overlays</p></td>
+<td><p>Applying StarDist to real images</p></td>
+</tr>
+<tr class="row-odd"><td><p>Troubleshooting</p></td>
+<td><p>Normalization, overlapping, background noise</p></td>
+<td><p>Diagnosing and correcting segmentation problems</p></td>
+</tr>
+<tr class="row-even"><td><p>Mini Project</p></td>
+<td><p>Full pipeline from image to labels</p></td>
+<td><p>Practical experience in bioimage analysis workflows</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./course_material/06182025_day3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="module_13.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Cellpose for Segmentation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="module_15.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Evaluation of Segmentation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stardist">Stardist</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-stardist-installation-and-imports">Hands-on: StarDist Installation and Imports</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-and-why-to-use-stardist-vs-cellpose">When and Why to Use StarDist (vs. Cellpose)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-load-and-compare-sample-images">Hands-on: Load and Compare Sample Images</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-segmentation-and-overlay-predictions">Run Segmentation and Overlay Predictions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-apply-stardist-segmentation">Hands-on: Apply StarDist Segmentation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting-segmentations">Troubleshooting Segmentations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-troubleshooting-example">Hands-on: Troubleshooting Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-project">Mini Project</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-summary">Module Summary</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ranit Karmakar
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

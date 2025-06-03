@@ -1,0 +1,902 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Python Programming Basics &#8212; Python for Bioimage Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'course_material/06162025_day1/01_python_basics';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Python for Bioimage Analysis - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Python for Bioimage Analysis - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to the Introduction to Python Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 1 - Python Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="module_01.html">Welcome &amp; Setup</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="module_02.html">Python Basics – Variables &amp; Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_03.html">Data Structures &amp; Control Flow in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_04.html">Functions &amp; Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_05.html">Basic Data Handling with Pandas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 2 - Image Processing with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06172025_day2/module_06.html">Introduction to Bioimage Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06172025_day2/module_07.html">Digital Images as Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06172025_day2/module_08.html">Working with Images in Python Using scikit-image and imageio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06172025_day2/module_09.html">Visualizing Images in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06172025_day2/module_10.html">Image Filtering &amp; Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06172025_day2/module_11.html">Threshold-Based Segmentation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 - Image Segmentation with Deep Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06182025_day3/module_12.html">Deep Learning Basics for Imaging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06182025_day3/module_13.html">Cellpose for Segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06182025_day3/module_14.html">StarDist for Segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06182025_day3/module_15.html">Evaluation of Segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06182025_day3/module_16.html">Tools &amp; Next Steps in Bioimage Analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcourse_material/06162025_day1/01_python_basics.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/course_material/06162025_day1/01_python_basics.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Python Programming Basics</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-goals">Learning Goals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-python-and-why-are-we-using-it">What is Python and Why Are We Using It?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-python-via-anaconda">Installing Python via Anaconda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-python-environment">What is a Python Environment?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analogy-imaging-setup">Analogy: Imaging Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-create-an-environment-optional">How to Create an Environment (Optional)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-jupyter-notebooks">Using Jupyter Notebooks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-and-basic-data-types">Variables and Basic Data Types</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-structures-in-python">Data Structures in Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lists-ordered-collections">Lists – Ordered Collections</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tuples-fixed-size-groupings">Tuples – Fixed-size Groupings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dictionaries-key-value-pairs">Dictionaries – Key-Value Pairs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-and-print-variables">1. Create and Print Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#work-with-a-list">2. Work With a List</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="python-programming-basics">
+<h1>Python Programming Basics<a class="headerlink" href="#python-programming-basics" title="Link to this heading">#</a></h1>
+<p>Installation, Environment, Jupyter, Variables, Types &amp; Data Structures</p>
+<p><a class="reference external" href="https://colab.research.google.com/github/rkarmaka/Global-BioImaging-Image-Data-2025-Course---India/blob/main/course_material/06162025_day1/01_python_basics.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<hr class="docutils" />
+<section id="learning-goals">
+<h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Link to this heading">#</a></h2>
+<p>By the end of this session, participants will:</p>
+<ul class="simple">
+<li><p>Understand how to install and manage Python environments.</p></li>
+<li><p>Use Jupyter Notebooks to write and execute Python code.</p></li>
+<li><p>Define and use variables and data types.</p></li>
+<li><p>Work with key data structures: lists, tuples, and dictionaries.</p></li>
+<li><p>Recognize how these tools relate to bioimage analysis.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="what-is-python-and-why-are-we-using-it">
+<h2>What is Python and Why Are We Using It?<a class="headerlink" href="#what-is-python-and-why-are-we-using-it" title="Link to this heading">#</a></h2>
+<p>Python is a programming language that’s easy to learn, especially for beginners. In bioimage analysis, Python helps automate tasks like:</p>
+<ul class="simple">
+<li><p>loading and processing large image datasets,</p></li>
+<li><p>applying filters and segmentations,</p></li>
+<li><p>extracting features, and</p></li>
+<li><p>visualizing results.</p></li>
+</ul>
+<p>It’s like a microscope for your data: once you learn how to operate it, you can explore much more, and much faster.</p>
+</section>
+<hr class="docutils" />
+<section id="installing-python-via-anaconda">
+<h2>Installing Python via Anaconda<a class="headerlink" href="#installing-python-via-anaconda" title="Link to this heading">#</a></h2>
+<p><strong>Why use Anaconda?</strong></p>
+<p>Anaconda is like a toolbox that comes with:</p>
+<ul class="simple">
+<li><p>Python (the language),</p></li>
+<li><p>Jupyter Notebook (where we write and run code),</p></li>
+<li><p>Packages (pre-installed tools like NumPy, Matplotlib, etc.).</p></li>
+</ul>
+<p>It removes the hassle of installing things one-by-one and makes scientific computing much smoother.</p>
+</section>
+<hr class="docutils" />
+<section id="what-is-a-python-environment">
+<h2>What is a Python Environment?<a class="headerlink" href="#what-is-a-python-environment" title="Link to this heading">#</a></h2>
+<section id="analogy-imaging-setup">
+<h3>Analogy: Imaging Setup<a class="headerlink" href="#analogy-imaging-setup" title="Link to this heading">#</a></h3>
+<p>Think of a Python environment as a virtual imaging setup:</p>
+<ul class="simple">
+<li><p>Your microscope needs a specific objective, filters, and settings to work for a particular experiment.</p></li>
+<li><p>Similarly, your Python project needs certain packages, tools, and versions to run correctly.</p></li>
+</ul>
+<p>Environments help keep these project-specific tools isolated and clean, so:</p>
+<ul class="simple">
+<li><p>Project A (image segmentation) doesn’t break when you install tools for Project B (deep learning).</p></li>
+</ul>
+</section>
+<section id="how-to-create-an-environment-optional">
+<h3>How to Create an Environment (Optional)<a class="headerlink" href="#how-to-create-an-environment-optional" title="Link to this heading">#</a></h3>
+<p>Using Anaconda Navigator:
+[VIDEO LINK]</p>
+<p>Or via terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">--</span><span class="n">name</span> <span class="n">bioimage</span><span class="o">-</span><span class="n">env</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.10</span>
+<span class="n">conda</span> <span class="n">activate</span> <span class="n">bioimage</span><span class="o">-</span><span class="n">env</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="using-jupyter-notebooks">
+<h2>Using Jupyter Notebooks<a class="headerlink" href="#using-jupyter-notebooks" title="Link to this heading">#</a></h2>
+<p><strong>What is Jupyter?</strong></p>
+<p>Jupyter Notebooks are like lab notebooks for code:</p>
+<ul class="simple">
+<li><p>You write and test code in cells.</p></li>
+<li><p>You can mix code, text, images, and results in one document.</p></li>
+</ul>
+<p><strong>How to Open Jupyter?</strong></p>
+<p>Using Anaconda Navigator:</p>
+<ul class="simple">
+<li><p>Click on “Launch” under Jupyter Notebook.</p></li>
+</ul>
+<p>Using Terminal:</p>
+<p><code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebook</span></code></p>
+</section>
+<hr class="docutils" />
+<section id="variables-and-basic-data-types">
+<h2>Variables and Basic Data Types<a class="headerlink" href="#variables-and-basic-data-types" title="Link to this heading">#</a></h2>
+<p>A variable is a name that stores data. Think of it like labeling a tube in the lab.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Python Name</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Analogy</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Text</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;GFP.tif&quot;</span></code></p></td>
+<td><p>Channel name or file name</p></td>
+</tr>
+<tr class="row-odd"><td><p>Whole #</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">30</span></code></p></td>
+<td><p>Z-slices in a stack</p></td>
+</tr>
+<tr class="row-even"><td><p>Decimal</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.25</span></code></p></td>
+<td><p>Pixel size in microns</p></td>
+</tr>
+<tr class="row-odd"><td><p>True/False</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td><p>Is segmentation done?</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># A string (text)</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;cell_image.tif&quot;</span>
+
+<span class="c1"># An integer (whole number)</span>
+<span class="n">num_slices</span> <span class="o">=</span> <span class="mi">30</span>
+
+<span class="c1"># A float (decimal)</span>
+<span class="n">pixel_size</span> <span class="o">=</span> <span class="mf">0.25</span>  <span class="c1"># in micrometers</span>
+
+<span class="c1"># A boolean (True/False)</span>
+<span class="n">is_segmented</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="data-structures-in-python">
+<h2>Data Structures in Python<a class="headerlink" href="#data-structures-in-python" title="Link to this heading">#</a></h2>
+<section id="lists-ordered-collections">
+<h3>Lists – Ordered Collections<a class="headerlink" href="#lists-ordered-collections" title="Link to this heading">#</a></h3>
+<p>A list holds a collection of items like a channel stack.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1:</span>
+
+<span class="n">channels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;DAPI&quot;</span><span class="p">,</span> <span class="s2">&quot;GFP&quot;</span><span class="p">,</span> <span class="s2">&quot;RFP&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">channels</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># DAPI</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">channels</span><span class="p">))</span>  <span class="c1"># 3</span>
+
+
+<span class="c1"># Example 2:</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+         <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>  <span class="c1"># (2,4)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DAPI
+3
+[[1, 2, 3, 4], [5, 6, 7, 8]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="tuples-fixed-size-groupings">
+<h3>Tuples – Fixed-size Groupings<a class="headerlink" href="#tuples-fixed-size-groupings" title="Link to this heading">#</a></h3>
+<p>Tuples are like lists but immutable (can’t be changed). Useful for things like image shape.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_dimensions</span> <span class="o">=</span> <span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">image_dimensions</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># 512 (width)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>512
+</pre></div>
+</div>
+</div>
+</div>
+<p>Used for pixel dimensions, coordinates, etc.</p>
+</section>
+<section id="dictionaries-key-value-pairs">
+<h3>Dictionaries – Key-Value Pairs<a class="headerlink" href="#dictionaries-key-value-pairs" title="Link to this heading">#</a></h3>
+<p>Dictionaries map keys to values, like an image’s metadata.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_metadata</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;sample001.tif&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;dimensions&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">1024</span><span class="p">),</span>
+    <span class="s2">&quot;pixel_size&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="s2">&quot;channels&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;DAPI&quot;</span><span class="p">,</span> <span class="s2">&quot;GFP&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">image_metadata</span><span class="p">[</span><span class="s2">&quot;channels&quot;</span><span class="p">])</span>  <span class="c1"># [&#39;DAPI&#39;, &#39;GFP&#39;]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;DAPI&#39;, &#39;GFP&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+</section>
+<section id="create-and-print-variables">
+<h2>1. Create and Print Variables<a class="headerlink" href="#create-and-print-variables" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_name</span> <span class="o">=</span> <span class="s2">&quot;embryo_02&quot;</span>
+<span class="n">z_planes</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">pixel_spacing</span> <span class="o">=</span> <span class="mf">0.32</span>
+<span class="n">is_noise_filtered</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sample: </span><span class="si">{</span><span class="n">sample_name</span><span class="si">}</span><span class="s2">, Z: </span><span class="si">{</span><span class="n">z_planes</span><span class="si">}</span><span class="s2">, Pixel: </span><span class="si">{</span><span class="n">pixel_spacing</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample: embryo_02, Z: 40, Pixel: 0.32
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sample_name = # add a sample name as a string</span>
+<span class="c1"># z_planes = # add a number of z-planes as an integer</span>
+<span class="c1"># pixel_spacing = # add a pixel spacing as a float</span>
+<span class="c1"># is_noise_filtered = # add a boolean value</span>
+
+<span class="c1"># print(f&quot;Sample: {sample_name}, Z: {z_planes}, Pixel: {pixel_spacing}&quot;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="work-with-a-list">
+<h2>2. Work With a List<a class="headerlink" href="#work-with-a-list" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fluorophores</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Hoechst&quot;</span><span class="p">,</span> <span class="s2">&quot;GFP&quot;</span><span class="p">,</span> <span class="s2">&quot;mCherry&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fluorophores</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># mCherry</span>
+<span class="n">fluorophores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Alexa647&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fluorophores</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mCherry
+[&#39;Hoechst&#39;, &#39;GFP&#39;, &#39;mCherry&#39;, &#39;Alexa647&#39;]
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fluorophores = # add a list of fluorophores as a list</span>
+<span class="c1"># print(fluorophores[2])  # # print the third fluorophore in the list</span>
+<span class="c1"># fluorophores.append(&quot;Alexa647&quot;)  # # add a new fluorophore to the list</span>
+<span class="c1"># print(fluorophores)  # # print the list after adding a new fluorophore</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p><em>End of Chapter</em></p>
+<p>Day 1:
+- Module 1: Python Basics I - (tools and setup)
+- What is Python?
+- Why use Python?
+- Environments in Python
+- Python Coding tools (VSCode, Jupyter, Colab etc.)
+- Jupyter / Colab walkthrough
+- Module 2: Python Basics II - (intro to programming)
+- Libraries and import functions
+- Numpy, Pandas
+- Variables
+- int, float, string
+- Data structures
+- List, Tupple, Dictionary
+- Logic flow
+- if else statement
+- Loops
+- for and while
+- Functions
+- inbuilt functions (max, min, int, str, float, len, range)
+- Custom functions (how def …: works)</p>
+<p>Day 2:
+- Module 3: Intro to bioimage analysis
+- What it is
+- Why do it
+- History of it
+- Current and future
+- Module 4: Image as data/array
+- What is a digital image
+- Read different images in python (image I/O)
+- Introduce scikit-image
+- Metadata exploration, shape prints etc.
+- Module 5: Image visualization
+- Libraries and tools
+- Napari, Matplotlib
+- Module 6: Basics of image processing
+- Filters
+- Convolution?
+- Module 7: Image segmentation basics
+- Thresholding
+- Number, mean, median, Otsu
+- Validation
+- Visual, comparison</p>
+<p>Day 3:
+- Module 8: Intro to deep learning
+- CNN, libraries etc.
+- Module 9: Segmentation with Cellpose and StarDist
+- Cellpose
+- What is Cellpose
+- Segmentation and visualization
+- Parameters
+- StarDist
+- What is StarDist
+- Segmentation and visualization
+- Parameters
+- Module 10: Putting it all together
+- Tools and resources (ZeroCostDL4Mic, BioModelZoo)
+- Capston project</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./course_material/06162025_day1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-goals">Learning Goals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-python-and-why-are-we-using-it">What is Python and Why Are We Using It?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-python-via-anaconda">Installing Python via Anaconda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-python-environment">What is a Python Environment?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analogy-imaging-setup">Analogy: Imaging Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-create-an-environment-optional">How to Create an Environment (Optional)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-jupyter-notebooks">Using Jupyter Notebooks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-and-basic-data-types">Variables and Basic Data Types</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-structures-in-python">Data Structures in Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lists-ordered-collections">Lists – Ordered Collections</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tuples-fixed-size-groupings">Tuples – Fixed-size Groupings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dictionaries-key-value-pairs">Dictionaries – Key-Value Pairs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-and-print-variables">1. Create and Print Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#work-with-a-list">2. Work With a List</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ranit Karmakar
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

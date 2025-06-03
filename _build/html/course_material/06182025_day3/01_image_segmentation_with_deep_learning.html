@@ -1,0 +1,951 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Image segmentation with deep learning (Cellpose, StarDist – object-based approaches) &#8212; Python for Bioimage Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'course_material/06182025_day3/01_image_segmentation_with_deep_learning';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Python for Bioimage Analysis - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Python for Bioimage Analysis - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to the Introduction to Python Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 1 - Python Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06162025_day1/module_01.html">Welcome &amp; Setup</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../06162025_day1/module_02.html">Python Basics – Variables &amp; Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06162025_day1/module_03.html">Data Structures &amp; Control Flow in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06162025_day1/module_04.html">Functions &amp; Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06162025_day1/module_05.html">Basic Data Handling with Pandas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 2 - Image Processing with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06172025_day2/module_06.html">Introduction to Bioimage Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06172025_day2/module_07.html">Digital Images as Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06172025_day2/module_08.html">Working with Images in Python Using scikit-image and imageio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06172025_day2/module_09.html">Visualizing Images in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06172025_day2/module_10.html">Image Filtering &amp; Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06172025_day2/module_11.html">Threshold-Based Segmentation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 - Image Segmentation with Deep Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="module_12.html">Deep Learning Basics for Imaging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_13.html">Cellpose for Segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_14.html">StarDist for Segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_15.html">Evaluation of Segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_16.html">Tools &amp; Next Steps in Bioimage Analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcourse_material/06182025_day3/01_image_segmentation_with_deep_learning.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/course_material/06182025_day3/01_image_segmentation_with_deep_learning.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Image segmentation with deep learning (Cellpose, StarDist – object-based approaches)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concepts-covered">Concepts Covered</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cellpose">Cellpose</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stardist">StarDist</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-project-segment-your-own-image">Mini Project: Segment Your Own Image!</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="image-segmentation-with-deep-learning-cellpose-stardist-object-based-approaches">
+<h1>Image segmentation with deep learning (Cellpose, StarDist – object-based approaches)<a class="headerlink" href="#image-segmentation-with-deep-learning-cellpose-stardist-object-based-approaches" title="Link to this heading">#</a></h1>
+<p>This session introduces object-based image segmentation using deep learning models specifically designed for microscopy images: Cellpose and StarDist. These models allow robust detection and segmentation of cells or nuclei in challenging microscopy datasets — without the need for training from scratch.</p>
+<hr class="docutils" />
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>By the end of this session, learners will:</p>
+<ul class="simple">
+<li><p>Understand the principles of object-based segmentation.</p></li>
+<li><p>Know the strengths and limitations of Cellpose and StarDist.</p></li>
+<li><p>Use Cellpose and StarDist on real microscopy images using Python and Napari.</p></li>
+<li><p>Evaluate and visualize segmentation outputs.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="concepts-covered">
+<h2>Concepts Covered<a class="headerlink" href="#concepts-covered" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Topic</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>What is object-based segmentation?</p></td>
+<td><p>Segmenting individual objects (cells/nuclei) instead of pixel-wise labels.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Why deep learning?</p></td>
+<td><p>Traditional thresholding struggles with overlapping or blurry cells. Deep models generalize better.</p></td>
+</tr>
+<tr class="row-even"><td><p>Cellpose</p></td>
+<td><p>Generalist deep learning model for cells, nuclei, and more.</p></td>
+</tr>
+<tr class="row-odd"><td><p>StarDist</p></td>
+<td><p>Object detector based on star-convex polygons, great for nuclei with varying shapes.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<p><strong>Install required packages</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">cellpose</span> <span class="pre">stardist</span> <span class="pre">tifffile</span></code></p>
+<p><strong>Load image</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tifffile</span><span class="w"> </span><span class="kn">import</span> <span class="n">imread</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="s1">&#39;example_nuclei.tif&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>cellpose<span class="w"> </span>stardist<span class="w"> </span>tifffile
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting cellpose
+  Using cached cellpose-4.0.4-py3-none-any.whl.metadata (22 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting stardist
+  Using cached stardist-0.9.1.tar.gz (888 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Installing build dependencies ... ?25l-
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> done
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25h  Getting requirements to build wheel ... ?25l- done
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25h  Preparing metadata (pyproject.toml) ... ?25l-
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> done
+?25hRequirement already satisfied: tifffile in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (2025.5.26)
+Requirement already satisfied: numpy&gt;=1.20.0 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from cellpose) (2.2.6)
+Requirement already satisfied: scipy in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from cellpose) (1.15.3)
+Collecting natsort (from cellpose)
+  Using cached natsort-8.4.0-py3-none-any.whl.metadata (21 kB)
+Collecting tqdm (from cellpose)
+  Using cached tqdm-4.67.1-py3-none-any.whl.metadata (57 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting torch&gt;=1.6 (from cellpose)
+  Using cached torch-2.7.0-cp313-none-macosx_11_0_arm64.whl.metadata (29 kB)
+Collecting torchvision (from cellpose)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Using cached torchvision-0.22.0-cp313-cp313-macosx_11_0_arm64.whl.metadata (6.1 kB)
+Collecting opencv-python-headless (from cellpose)
+  Using cached opencv_python_headless-4.11.0.86-cp37-abi3-macosx_13_0_arm64.whl.metadata (20 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting fastremap (from cellpose)
+  Using cached fastremap-1.16.1-cp313-cp313-macosx_11_0_arm64.whl.metadata (10 kB)
+Collecting imagecodecs (from cellpose)
+  Using cached imagecodecs-2025.3.30-cp313-cp313-macosx_11_0_arm64.whl.metadata (20 kB)
+Collecting roifile (from cellpose)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Using cached roifile-2025.5.10-py3-none-any.whl.metadata (5.9 kB)
+Collecting fill-voids (from cellpose)
+  Using cached fill_voids-2.0.8-cp313-cp313-macosx_11_0_arm64.whl.metadata (6.0 kB)
+Collecting segment_anything (from cellpose)
+  Using cached segment_anything-1.0-py3-none-any.whl.metadata (487 bytes)
+Collecting csbdeep&gt;=0.8.0 (from stardist)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Using cached csbdeep-0.8.1-py2.py3-none-any.whl.metadata (2.4 kB)
+Requirement already satisfied: scikit-image in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from stardist) (0.25.2)
+Collecting numba (from stardist)
+  Using cached numba-0.61.2-cp313-cp313-macosx_11_0_arm64.whl.metadata (2.7 kB)
+Requirement already satisfied: imageio in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from stardist) (2.37.0)
+Requirement already satisfied: matplotlib in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from csbdeep&gt;=0.8.0-&gt;stardist) (3.10.3)
+Requirement already satisfied: six in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from csbdeep&gt;=0.8.0-&gt;stardist) (1.17.0)
+Requirement already satisfied: packaging in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from csbdeep&gt;=0.8.0-&gt;stardist) (25.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting filelock (from torch&gt;=1.6-&gt;cellpose)
+  Using cached filelock-3.18.0-py3-none-any.whl.metadata (2.9 kB)
+Requirement already satisfied: typing-extensions&gt;=4.10.0 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from torch&gt;=1.6-&gt;cellpose) (4.13.2)
+Requirement already satisfied: setuptools in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from torch&gt;=1.6-&gt;cellpose) (78.1.1)
+Collecting sympy&gt;=1.13.3 (from torch&gt;=1.6-&gt;cellpose)
+  Using cached sympy-1.14.0-py3-none-any.whl.metadata (12 kB)
+Requirement already satisfied: networkx in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from torch&gt;=1.6-&gt;cellpose) (3.5)
+Requirement already satisfied: jinja2 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from torch&gt;=1.6-&gt;cellpose) (3.1.6)
+Collecting fsspec (from torch&gt;=1.6-&gt;cellpose)
+  Using cached fsspec-2025.5.1-py3-none-any.whl.metadata (11 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting mpmath&lt;1.4,&gt;=1.1.0 (from sympy&gt;=1.13.3-&gt;torch&gt;=1.6-&gt;cellpose)
+  Using cached mpmath-1.3.0-py3-none-any.whl.metadata (8.6 kB)
+Requirement already satisfied: pillow&gt;=8.3.2 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from imageio-&gt;stardist) (11.2.1)
+Requirement already satisfied: MarkupSafe&gt;=2.0 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from jinja2-&gt;torch&gt;=1.6-&gt;cellpose) (3.0.2)
+Requirement already satisfied: contourpy&gt;=1.0.1 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from matplotlib-&gt;csbdeep&gt;=0.8.0-&gt;stardist) (1.3.2)
+Requirement already satisfied: cycler&gt;=0.10 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from matplotlib-&gt;csbdeep&gt;=0.8.0-&gt;stardist) (0.12.1)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from matplotlib-&gt;csbdeep&gt;=0.8.0-&gt;stardist) (4.58.1)
+Requirement already satisfied: kiwisolver&gt;=1.3.1 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from matplotlib-&gt;csbdeep&gt;=0.8.0-&gt;stardist) (1.4.8)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from matplotlib-&gt;csbdeep&gt;=0.8.0-&gt;stardist) (3.2.3)
+Requirement already satisfied: python-dateutil&gt;=2.7 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from matplotlib-&gt;csbdeep&gt;=0.8.0-&gt;stardist) (2.9.0.post0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting llvmlite&lt;0.45,&gt;=0.44.0dev0 (from numba-&gt;stardist)
+  Using cached llvmlite-0.44.0-cp313-cp313-macosx_11_0_arm64.whl.metadata (4.8 kB)
+Requirement already satisfied: lazy-loader&gt;=0.4 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from scikit-image-&gt;stardist) (0.4)
+Using cached cellpose-4.0.4-py3-none-any.whl (211 kB)
+Using cached csbdeep-0.8.1-py2.py3-none-any.whl (71 kB)
+Using cached torch-2.7.0-cp313-none-macosx_11_0_arm64.whl (68.6 MB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using cached sympy-1.14.0-py3-none-any.whl (6.3 MB)
+Using cached mpmath-1.3.0-py3-none-any.whl (536 kB)
+Using cached fastremap-1.16.1-cp313-cp313-macosx_11_0_arm64.whl (582 kB)
+Using cached filelock-3.18.0-py3-none-any.whl (16 kB)
+Using cached fill_voids-2.0.8-cp313-cp313-macosx_11_0_arm64.whl (182 kB)
+Using cached fsspec-2025.5.1-py3-none-any.whl (199 kB)
+Using cached imagecodecs-2025.3.30-cp313-cp313-macosx_11_0_arm64.whl (15.0 MB)
+Using cached natsort-8.4.0-py3-none-any.whl (38 kB)
+Using cached numba-0.61.2-cp313-cp313-macosx_11_0_arm64.whl (2.8 MB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using cached llvmlite-0.44.0-cp313-cp313-macosx_11_0_arm64.whl (26.2 MB)
+Using cached opencv_python_headless-4.11.0.86-cp37-abi3-macosx_13_0_arm64.whl (37.3 MB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using cached roifile-2025.5.10-py3-none-any.whl (17 kB)
+Using cached segment_anything-1.0-py3-none-any.whl (36 kB)
+Using cached torchvision-0.22.0-cp313-cp313-macosx_11_0_arm64.whl (1.9 MB)
+Using cached tqdm-4.67.1-py3-none-any.whl (78 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Building wheels for collected packages: stardist
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Building wheel for stardist (pyproject.toml) ... ?25l-
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> error
+  <span class=" -Color -Color-Bold -Color-Bold-Red">error</span>: <span class=" -Color -Color-Bold">subprocess-exited-with-error</span>
+  
+  <span class=" -Color -Color-Red">×</span> <span class=" -Color -Color-Green">Building wheel for stardist </span><span class=" -Color -Color-Bold -Color-Bold-Green">(</span><span class=" -Color -Color-Green">pyproject.toml</span><span class=" -Color -Color-Bold -Color-Bold-Green">)</span> did not run successfully.
+  <span class=" -Color -Color-Red">│</span> exit code: <span class=" -Color -Color-Bold -Color-Bold-Cyan">1</span>
+  <span class=" -Color -Color-Red">╰─&gt;</span> <span class=" -Color -Color-Red">[77 lines of output]</span>
+  <span class=" -Color -Color-Red">   </span> /private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-xo8wxioh/overlay/lib/python3.13/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+  <span class=" -Color -Color-Red">   </span> !!
+  <span class=" -Color -Color-Red">   </span> 
+  <span class=" -Color -Color-Red">   </span>         ********************************************************************************
+  <span class=" -Color -Color-Red">   </span>         Please consider removing the following classifiers in favor of a SPDX license expression:
+  <span class=" -Color -Color-Red">   </span> 
+  <span class=" -Color -Color-Red">   </span>         License :: OSI Approved :: BSD License
+  <span class=" -Color -Color-Red">   </span> 
+  <span class=" -Color -Color-Red">   </span>         See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+  <span class=" -Color -Color-Red">   </span>         ********************************************************************************
+  <span class=" -Color -Color-Red">   </span> 
+  <span class=" -Color -Color-Red">   </span> !!
+  <span class=" -Color -Color-Red">   </span>   self._finalize_license_expression()
+  <span class=" -Color -Color-Red">   </span> running bdist_wheel
+  <span class=" -Color -Color-Red">   </span> running build
+  <span class=" -Color -Color-Red">   </span> running build_py
+  <span class=" -Color -Color-Red">   </span> creating build/lib.macosx-11.1-arm64-cpython-313/stardist
+  <span class=" -Color -Color-Red">   </span> copying stardist/version.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist
+  <span class=" -Color -Color-Red">   </span> copying stardist/rays3d.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist
+  <span class=" -Color -Color-Red">   </span> copying stardist/sample_patches.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist
+  <span class=" -Color -Color-Red">   </span> copying stardist/nms.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist
+  <span class=" -Color -Color-Red">   </span> copying stardist/__init__.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist
+  <span class=" -Color -Color-Red">   </span> copying stardist/matching.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist
+  <span class=" -Color -Color-Red">   </span> copying stardist/bioimageio_utils.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist
+  <span class=" -Color -Color-Red">   </span> copying stardist/utils.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist
+  <span class=" -Color -Color-Red">   </span> copying stardist/big.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist
+  <span class=" -Color -Color-Red">   </span> creating build/lib.macosx-11.1-arm64-cpython-313/stardist/plot
+  <span class=" -Color -Color-Red">   </span> copying stardist/plot/plot.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/plot
+  <span class=" -Color -Color-Red">   </span> copying stardist/plot/render.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/plot
+  <span class=" -Color -Color-Red">   </span> copying stardist/plot/__init__.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/plot
+  <span class=" -Color -Color-Red">   </span> creating build/lib.macosx-11.1-arm64-cpython-313/stardist/models
+  <span class=" -Color -Color-Red">   </span> copying stardist/models/model3d.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/models
+  <span class=" -Color -Color-Red">   </span> copying stardist/models/model2d.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/models
+  <span class=" -Color -Color-Red">   </span> copying stardist/models/__init__.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/models
+  <span class=" -Color -Color-Red">   </span> copying stardist/models/base.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/models
+  <span class=" -Color -Color-Red">   </span> creating build/lib.macosx-11.1-arm64-cpython-313/stardist/scripts
+  <span class=" -Color -Color-Red">   </span> copying stardist/scripts/__init__.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/scripts
+  <span class=" -Color -Color-Red">   </span> copying stardist/scripts/predict2d.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/scripts
+  <span class=" -Color -Color-Red">   </span> copying stardist/scripts/predict3d.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/scripts
+  <span class=" -Color -Color-Red">   </span> creating build/lib.macosx-11.1-arm64-cpython-313/stardist/geometry
+  <span class=" -Color -Color-Red">   </span> copying stardist/geometry/__init__.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/geometry
+  <span class=" -Color -Color-Red">   </span> copying stardist/geometry/geom3d.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/geometry
+  <span class=" -Color -Color-Red">   </span> copying stardist/geometry/geom2d.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/geometry
+  <span class=" -Color -Color-Red">   </span> creating build/lib.macosx-11.1-arm64-cpython-313/stardist/data
+  <span class=" -Color -Color-Red">   </span> copying stardist/data/__init__.py -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/data
+  <span class=" -Color -Color-Red">   </span> creating build/lib.macosx-11.1-arm64-cpython-313/stardist/kernels
+  <span class=" -Color -Color-Red">   </span> copying stardist/kernels/stardist2d.cl -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/kernels
+  <span class=" -Color -Color-Red">   </span> copying stardist/kernels/stardist3d.cl -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/kernels
+  <span class=" -Color -Color-Red">   </span> creating build/lib.macosx-11.1-arm64-cpython-313/stardist/data/images
+  <span class=" -Color -Color-Red">   </span> copying stardist/data/images/mask2d.tif -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/data/images
+  <span class=" -Color -Color-Red">   </span> copying stardist/data/images/mask3d.tif -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/data/images
+  <span class=" -Color -Color-Red">   </span> copying stardist/data/images/img3d.tif -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/data/images
+  <span class=" -Color -Color-Red">   </span> copying stardist/data/images/img2d.tif -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/data/images
+  <span class=" -Color -Color-Red">   </span> copying stardist/data/images/histo.jpg -&gt; build/lib.macosx-11.1-arm64-cpython-313/stardist/data/images
+  <span class=" -Color -Color-Red">   </span> running build_ext
+  <span class=" -Color -Color-Red">   </span> building &#39;stardist.lib.stardist2d&#39; extension
+  <span class=" -Color -Color-Red">   </span> creating build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper
+  <span class=" -Color -Color-Red">   </span> clang++ -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -I/private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-xo8wxioh/overlay/lib/python3.13/site-packages/numpy/_core/include -Istardist/lib/external/clipper -Istardist/lib/external/nanoflann -I/Users/ranit/anaconda3/envs/gbi-python-env/include/python3.13 -c stardist/lib/external/clipper/clipper.cpp -o build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper/clipper.o -std=c++11 -fopenmp
+  <span class=" -Color -Color-Red">   </span> clang++: error: unsupported option &#39;-fopenmp&#39;
+  <span class=" -Color -Color-Red">   </span> &gt;&gt;&gt; compiling with &#39;-fopenmp&#39; failed
+  <span class=" -Color -Color-Red">   </span> building &#39;stardist.lib.stardist2d&#39; extension
+  <span class=" -Color -Color-Red">   </span> clang++ -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -I/private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-xo8wxioh/overlay/lib/python3.13/site-packages/numpy/_core/include -Istardist/lib/external/clipper -Istardist/lib/external/nanoflann -I/Users/ranit/anaconda3/envs/gbi-python-env/include/python3.13 -c stardist/lib/external/clipper/clipper.cpp -o build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper/clipper.o -std=c++11 -Xpreprocessor -fopenmp
+  <span class=" -Color -Color-Red">   </span> In file included from stardist/lib/external/clipper/clipper.cpp:41:
+  <span class=" -Color -Color-Red">   </span> stardist/lib/external/clipper/clipper.hpp:52:10: fatal error: &#39;vector&#39; file not found
+  <span class=" -Color -Color-Red">   </span>    52 | #include &lt;vector&gt;
+  <span class=" -Color -Color-Red">   </span>       |          ^~~~~~~~
+  <span class=" -Color -Color-Red">   </span> 1 error generated.
+  <span class=" -Color -Color-Red">   </span> &gt;&gt;&gt; compiling with &#39;-Xpreprocessor -fopenmp&#39; failed
+  <span class=" -Color -Color-Red">   </span> &gt;&gt;&gt; compiling with OpenMP support failed, re-trying without
+  <span class=" -Color -Color-Red">   </span> building &#39;stardist.lib.stardist2d&#39; extension
+  <span class=" -Color -Color-Red">   </span> clang++ -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -I/private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-xo8wxioh/overlay/lib/python3.13/site-packages/numpy/_core/include -Istardist/lib/external/clipper -Istardist/lib/external/nanoflann -I/Users/ranit/anaconda3/envs/gbi-python-env/include/python3.13 -c stardist/lib/external/clipper/clipper.cpp -o build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper/clipper.o -std=c++11
+  <span class=" -Color -Color-Red">   </span> In file included from stardist/lib/external/clipper/clipper.cpp:41:
+  <span class=" -Color -Color-Red">   </span> stardist/lib/external/clipper/clipper.hpp:52:10: fatal error: &#39;vector&#39; file not found
+  <span class=" -Color -Color-Red">   </span>    52 | #include &lt;vector&gt;
+  <span class=" -Color -Color-Red">   </span>       |          ^~~~~~~~
+  <span class=" -Color -Color-Red">   </span> 1 error generated.
+  <span class=" -Color -Color-Red">   </span> error: command &#39;/usr/bin/clang++&#39; failed with exit code 1
+  <span class=" -Color -Color-Red">   </span> <span class=" -Color -Color-Red">[end of output]</span>
+  
+  <span class=" -Color -Color-Bold -Color-Bold-Magenta">note</span>: This error originates from a subprocess, and is likely not a problem with pip.
+<span class=" -Color -Color-Red">  ERROR: Failed building wheel for stardist</span>
+?25hFailed to build stardist
+<span class=" -Color -Color-Red">ERROR: Failed to build installable wheels for some pyproject.toml based projects (stardist)</span>
+
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tifffile</span><span class="w"> </span><span class="kn">import</span> <span class="n">imread</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="s1">&#39;example_nuclei.tif&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/ipykernel_41351/1014929433.py</span> in <span class="ni">?</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">tifffile</span><span class="w"> </span><span class="kn">import</span> <span class="n">imread</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> 
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">image</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="s1">&#39;example_nuclei.tif&#39;</span><span class="p">)</span>
+
+<span class="nn">~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/tifffile/tifffile.py</span> in <span class="ni">?</span><span class="nt">(files, selection, aszarr, key, series, level, squeeze, maxworkers, buffersize, mode, name, offset, size, pattern, axesorder, categories, imread, imreadargs, sort, container, chunkshape, chunkdtype, axestiled, ioworkers, chunkmode, fillvalue, zattrs, multiscales, omexml, out, out_inplace, _multifile, _useframes, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1195</span>         <span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1196</span>             <span class="n">files</span> <span class="o">=</span> <span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1197</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1198</span>         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1199</span>             <span class="k">with</span> <span class="n">TiffFile</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1200</span>                 <span class="n">files</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1201</span>                 <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1202</span>                 <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+
+<span class="nn">~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/tifffile/tifffile.py</span> in <span class="ni">?</span><span class="nt">(self, file, mode, name, offset, size, omexml, _multifile, _useframes, _parent, **is_flags)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4230</span>                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;invalid OME-XML&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4231</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_omexml</span> <span class="o">=</span> <span class="n">omexml</span>
+<span class="g g-Whitespace">   </span><span class="mi">4232</span>             <span class="bp">self</span><span class="o">.</span><span class="n">is_ome</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="g g-Whitespace">   </span><span class="mi">4233</span> 
+<span class="ne">-&gt; </span><span class="mi">4234</span>         <span class="n">fh</span> <span class="o">=</span> <span class="n">FileHandle</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4235</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_fh</span> <span class="o">=</span> <span class="n">fh</span>
+<span class="g g-Whitespace">   </span><span class="mi">4236</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_multifile</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">_multifile</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">bool</span><span class="p">(</span><span class="n">_multifile</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4237</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_files</span> <span class="o">=</span> <span class="p">{</span><span class="n">fh</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="bp">self</span><span class="p">}</span>
+
+<span class="nn">~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/tifffile/tifffile.py</span> in <span class="ni">?</span><span class="nt">(self, file, mode, name, offset, size)</span>
+<span class="g g-Whitespace">  </span><span class="mi">13273</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="n">offset</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">offset</span>
+<span class="g g-Whitespace">  </span><span class="mi">13274</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_size</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="n">size</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">size</span>
+<span class="g g-Whitespace">  </span><span class="mi">13275</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_close</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="g g-Whitespace">  </span><span class="mi">13276</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span> <span class="o">=</span> <span class="n">NullContext</span><span class="p">()</span>
+<span class="ne">&gt; </span><span class="mi">13277</span>         <span class="bp">self</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+<span class="g g-Whitespace">  </span><span class="mi">13278</span>         <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fh</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+<span class="nn">~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/tifffile/tifffile.py</span> in <span class="ni">?</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">  </span><span class="mi">13292</span>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;rb&#39;</span><span class="p">,</span> <span class="s1">&#39;r+b&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">,</span> <span class="s1">&#39;xb&#39;</span><span class="p">}:</span>
+<span class="g g-Whitespace">  </span><span class="mi">13293</span>                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;invalid mode </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_mode</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">  </span><span class="mi">13294</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="p">)</span>
+<span class="g g-Whitespace">  </span><span class="mi">13295</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="p">)</span>
+<span class="ne">&gt; </span><span class="mi">13296</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_fh</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="g g-Whitespace">  </span><span class="mi">13297</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_close</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="g g-Whitespace">  </span><span class="mi">13298</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span><span class="p">)</span>
+<span class="g g-Whitespace">  </span><span class="mi">13299</span>         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="p">,</span> <span class="n">FileHandle</span><span class="p">):</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/Users/ranit/Research/github/Global-BioImaging-Image-Data-2025-Course---India/course_material/06182025_day3/example_nuclei.tif&#39;
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="cellpose">
+<h2>Cellpose<a class="headerlink" href="#cellpose" title="Link to this heading">#</a></h2>
+<p><strong>What is Cellpose?</strong>
+Cellpose is a generalist deep learning model that can segment a wide variety of cell types and shapes — not just nuclei, but also cytoplasm and even bacteria or other small structures.</p>
+<p><strong>Key Features:</strong></p>
+<ul class="simple">
+<li><p>Trained on thousands of manually segmented images.</p></li>
+<li><p>Works with brightfield, fluorescence, and phase contrast images.</p></li>
+<li><p>No need to retrain — pretrained models often just work out of the box.</p></li>
+<li><p>Accepts grayscale or multi-channel input.</p></li>
+<li><p>Can estimate object size automatically.</p></li>
+</ul>
+<p>You can think of Cellpose as a smart “cell detector” that adapts to many microscopy scenarios.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cellpose</span><span class="w"> </span><span class="kn">import</span> <span class="n">models</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Cellpose</span><span class="p">(</span><span class="n">model_type</span><span class="o">=</span><span class="s1">&#39;nuclei&#39;</span><span class="p">)</span>  <span class="c1"># or &#39;cyto&#39; for cytoplasm</span>
+<span class="n">masks</span><span class="p">,</span> <span class="n">flows</span><span class="p">,</span> <span class="n">styles</span><span class="p">,</span> <span class="n">diams</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">diameter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="stardist">
+<h2>StarDist<a class="headerlink" href="#stardist" title="Link to this heading">#</a></h2>
+<p><strong>What is StarDist?</strong>
+StarDist takes a different approach. It models each object (typically a nucleus) as a star-convex polygon, a shape where all lines radiating from the center to the edge do not cross each other — perfect for round or slightly irregular nuclei.</p>
+<p><strong>Key Features:</strong></p>
+<ul class="simple">
+<li><p>Excellent for segmenting touching or overlapping nuclei.</p></li>
+<li><p>Very fast and accurate for fluorescence images.</p></li>
+<li><p>Works best with nuclear shapes but can be adapted to other types.</p></li>
+<li><p>Comes with pretrained models based on diverse datasets.</p></li>
+</ul>
+<p>StarDist is especially useful in high-throughput screens or histological images where accurate nuclear boundaries are needed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">stardist.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">StarDist2D</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">csbdeep.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">normalize</span>
+
+<span class="c1"># Normalize image between 0 and 1</span>
+<span class="n">img_norm</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">99.8</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">StarDist2D</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;2D_versatile_fluo&#39;</span><span class="p">)</span>
+<span class="n">labels</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_instances</span><span class="p">(</span><span class="n">img_norm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="mini-project-segment-your-own-image">
+<h2>Mini Project: Segment Your Own Image!<a class="headerlink" href="#mini-project-segment-your-own-image" title="Link to this heading">#</a></h2>
+<p>Task: Take a fluorescence microscopy image from your own experiment. Try both Cellpose and StarDist. Compare the masks visually in Napari.</p>
+<p>Steps:</p>
+<ul class="simple">
+<li><p>Load your image using tifffile.imread</p></li>
+<li><p>Run both segmentation methods</p></li>
+<li><p>Visualize and toggle between segmentations</p></li>
+<li><p>Take screenshots for later discussion</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./course_material/06182025_day3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concepts-covered">Concepts Covered</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cellpose">Cellpose</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stardist">StarDist</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-project-segment-your-own-image">Mini Project: Segment Your Own Image!</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ranit Karmakar
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
