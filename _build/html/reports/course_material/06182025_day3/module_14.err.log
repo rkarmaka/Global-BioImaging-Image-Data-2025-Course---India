@@ -48,7 +48,6 @@ import matplotlib.pyplot as plt
 
 ----- stdout -----
 Collecting stardist
------ stdout -----
   Using cached stardist-0.9.1.tar.gz (888 kB)
 ----- stdout -----
   Installing build dependencies ... [?25l-
@@ -59,9 +58,7 @@ Collecting stardist
 ----- stdout -----
  /
 ----- stdout -----
- -
------ stdout -----
- done
+ - done
 ----- stdout -----
 [?25h  Getting requirements to build wheel ... [?25l-
 ----- stdout -----
@@ -113,7 +110,7 @@ Building wheels for collected packages: stardist
   [31m×[0m [32mBuilding wheel for stardist [0m[1;32m([0m[32mpyproject.toml[0m[1;32m)[0m did not run successfully.
   [31m│[0m exit code: [1;36m1[0m
   [31m╰─>[0m [31m[77 lines of output][0m
-  [31m   [0m /private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-jpq5fta8/overlay/lib/python3.13/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+  [31m   [0m /private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-j3gx6v2l/overlay/lib/python3.13/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
   [31m   [0m !!
   [31m   [0m 
   [31m   [0m         ********************************************************************************
@@ -170,11 +167,11 @@ Building wheels for collected packages: stardist
   [31m   [0m running build_ext
   [31m   [0m building 'stardist.lib.stardist2d' extension
   [31m   [0m creating build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper
-  [31m   [0m clang++ -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -I/private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-jpq5fta8/overlay/lib/python3.13/site-packages/numpy/_core/include -Istardist/lib/external/clipper -Istardist/lib/external/nanoflann -I/Users/ranit/anaconda3/envs/gbi-python-env/include/python3.13 -c stardist/lib/external/clipper/clipper.cpp -o build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper/clipper.o -std=c++11 -fopenmp
+  [31m   [0m clang++ -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -I/private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-j3gx6v2l/overlay/lib/python3.13/site-packages/numpy/_core/include -Istardist/lib/external/clipper -Istardist/lib/external/nanoflann -I/Users/ranit/anaconda3/envs/gbi-python-env/include/python3.13 -c stardist/lib/external/clipper/clipper.cpp -o build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper/clipper.o -std=c++11 -fopenmp
   [31m   [0m clang++: error: unsupported option '-fopenmp'
   [31m   [0m >>> compiling with '-fopenmp' failed
   [31m   [0m building 'stardist.lib.stardist2d' extension
-  [31m   [0m clang++ -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -I/private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-jpq5fta8/overlay/lib/python3.13/site-packages/numpy/_core/include -Istardist/lib/external/clipper -Istardist/lib/external/nanoflann -I/Users/ranit/anaconda3/envs/gbi-python-env/include/python3.13 -c stardist/lib/external/clipper/clipper.cpp -o build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper/clipper.o -std=c++11 -Xpreprocessor -fopenmp
+  [31m   [0m clang++ -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -I/private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-j3gx6v2l/overlay/lib/python3.13/site-packages/numpy/_core/include -Istardist/lib/external/clipper -Istardist/lib/external/nanoflann -I/Users/ranit/anaconda3/envs/gbi-python-env/include/python3.13 -c stardist/lib/external/clipper/clipper.cpp -o build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper/clipper.o -std=c++11 -Xpreprocessor -fopenmp
   [31m   [0m In file included from stardist/lib/external/clipper/clipper.cpp:41:
   [31m   [0m stardist/lib/external/clipper/clipper.hpp:52:10: fatal error: 'vector' file not found
   [31m   [0m    52 | #include <vector>
@@ -183,7 +180,7 @@ Building wheels for collected packages: stardist
   [31m   [0m >>> compiling with '-Xpreprocessor -fopenmp' failed
   [31m   [0m >>> compiling with OpenMP support failed, re-trying without
   [31m   [0m building 'stardist.lib.stardist2d' extension
-  [31m   [0m clang++ -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -I/private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-jpq5fta8/overlay/lib/python3.13/site-packages/numpy/_core/include -Istardist/lib/external/clipper -Istardist/lib/external/nanoflann -I/Users/ranit/anaconda3/envs/gbi-python-env/include/python3.13 -c stardist/lib/external/clipper/clipper.cpp -o build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper/clipper.o -std=c++11
+  [31m   [0m clang++ -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -I/private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-j3gx6v2l/overlay/lib/python3.13/site-packages/numpy/_core/include -Istardist/lib/external/clipper -Istardist/lib/external/nanoflann -I/Users/ranit/anaconda3/envs/gbi-python-env/include/python3.13 -c stardist/lib/external/clipper/clipper.cpp -o build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper/clipper.o -std=c++11
   [31m   [0m In file included from stardist/lib/external/clipper/clipper.cpp:41:
   [31m   [0m stardist/lib/external/clipper/clipper.hpp:52:10: fatal error: 'vector' file not found
   [31m   [0m    52 | #include <vector>
