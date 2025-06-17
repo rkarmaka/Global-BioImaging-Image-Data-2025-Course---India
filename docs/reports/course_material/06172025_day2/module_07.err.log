@@ -1,0 +1,116 @@
+Traceback (most recent call last):
+  File "/Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+    ~~~~~~~~~^
+        nb,
+        ^^^
+    ...<4 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 158, in wrapped
+    return loop.run_until_complete(inner)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/asyncio/base_events.py", line 721, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+        cell, index, execution_count=self.code_cells_executed + 1
+    )
+  File "/Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from skimage import io
+
+# Load RGB image
+rgb_image = imread('data/cells.tif')
+
+print("RGB Image shape:", rgb_image.shape)
+
+# Show all three channels
+fig, axs = plt.subplots(1, 4, figsize=(12, 4))
+
+axs[0].imshow(rgb_image)
+axs[0].set_title("Original RGB")
+axs[1].imshow(rgb_image[0, :, :], cmap='Reds')
+axs[1].set_title("Red Channel")
+axs[2].imshow(rgb_image[1, :, :], cmap='Greens')
+axs[2].set_title("Green Channel")
+axs[3].imshow(rgb_image[2, :, :], cmap='Blues')
+axs[3].set_title("Blue Channel")
+
+for ax in axs:
+    ax.axis('off')
+plt.tight_layout()
+plt.show()
+------------------
+
+----- stdout -----
+RGB Image shape: (2, 256, 256)
+------------------
+
+[31m---------------------------------------------------------------------------[39m
+[31mTypeError[39m                                 Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[6][39m[32m, line 11[39m
+[32m      8[39m [38;5;66;03m# Show all three channels[39;00m
+[32m      9[39m fig, axs = plt.subplots([32m1[39m, [32m4[39m, figsize=([32m12[39m, [32m4[39m))
+[32m---> [39m[32m11[39m [43maxs[49m[43m[[49m[32;43m0[39;49m[43m][49m[43m.[49m[43mimshow[49m[43m([49m[43mrgb_image[49m[43m)[49m
+[32m     12[39m axs[[32m0[39m].set_title([33m"[39m[33mOriginal RGB[39m[33m"[39m)
+[32m     13[39m axs[[32m1[39m].imshow(rgb_image[[32m0[39m, :, :], cmap=[33m'[39m[33mReds[39m[33m'[39m)
+
+[36mFile [39m[32m~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/matplotlib/__init__.py:1521[39m, in [36m_preprocess_data.<locals>.inner[39m[34m(ax, data, *args, **kwargs)[39m
+[32m   1518[39m [38;5;129m@functools[39m.wraps(func)
+[32m   1519[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34minner[39m(ax, *args, data=[38;5;28;01mNone[39;00m, **kwargs):
+[32m   1520[39m     [38;5;28;01mif[39;00m data [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+[32m-> [39m[32m1521[39m         [38;5;28;01mreturn[39;00m [43mfunc[49m[43m([49m
+[32m   1522[39m [43m            [49m[43max[49m[43m,[49m
+[32m   1523[39m [43m            [49m[43m*[49m[38;5;28;43mmap[39;49m[43m([49m[43mcbook[49m[43m.[49m[43msanitize_sequence[49m[43m,[49m[43m [49m[43margs[49m[43m)[49m[43m,[49m
+[32m   1524[39m [43m            [49m[43m*[49m[43m*[49m[43m{[49m[43mk[49m[43m:[49m[43m [49m[43mcbook[49m[43m.[49m[43msanitize_sequence[49m[43m([49m[43mv[49m[43m)[49m[43m [49m[38;5;28;43;01mfor[39;49;00m[43m [49m[43mk[49m[43m,[49m[43m [49m[43mv[49m[43m [49m[38;5;129;43;01min[39;49;00m[43m [49m[43mkwargs[49m[43m.[49m[43mitems[49m[43m([49m[43m)[49m[43m}[49m[43m)[49m
+[32m   1526[39m     bound = new_sig.bind(ax, *args, **kwargs)
+[32m   1527[39m     auto_label = (bound.arguments.get(label_namer)
+[32m   1528[39m                   [38;5;129;01mor[39;00m bound.kwargs.get(label_namer))
+
+[36mFile [39m[32m~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/matplotlib/axes/_axes.py:5979[39m, in [36mAxes.imshow[39m[34m(self, X, cmap, norm, aspect, interpolation, alpha, vmin, vmax, colorizer, origin, extent, interpolation_stage, filternorm, filterrad, resample, url, **kwargs)[39m
+[32m   5976[39m [38;5;28;01mif[39;00m aspect [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+[32m   5977[39m     [38;5;28mself[39m.set_aspect(aspect)
+[32m-> [39m[32m5979[39m [43mim[49m[43m.[49m[43mset_data[49m[43m([49m[43mX[49m[43m)[49m
+[32m   5980[39m im.set_alpha(alpha)
+[32m   5981[39m [38;5;28;01mif[39;00m im.get_clip_path() [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+[32m   5982[39m     [38;5;66;03m# image does not already have clipping set, clip to Axes patch[39;00m
+
+[36mFile [39m[32m~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/matplotlib/image.py:685[39m, in [36m_ImageBase.set_data[39m[34m(self, A)[39m
+[32m    683[39m [38;5;28;01mif[39;00m [38;5;28misinstance[39m(A, PIL.Image.Image):
+[32m    684[39m     A = pil_to_array(A)  [38;5;66;03m# Needed e.g. to apply png palette.[39;00m
+[32m--> [39m[32m685[39m [38;5;28mself[39m._A = [38;5;28;43mself[39;49m[43m.[49m[43m_normalize_image_array[49m[43m([49m[43mA[49m[43m)[49m
+[32m    686[39m [38;5;28mself[39m._imcache = [38;5;28;01mNone[39;00m
+[32m    687[39m [38;5;28mself[39m.stale = [38;5;28;01mTrue[39;00m
+
+[36mFile [39m[32m~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/matplotlib/image.py:653[39m, in [36m_ImageBase._normalize_image_array[39m[34m(A)[39m
+[32m    651[39m     A = A.squeeze(-[32m1[39m)  [38;5;66;03m# If just (M, N, 1), assume scalar and apply colormap.[39;00m
+[32m    652[39m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m (A.ndim == [32m2[39m [38;5;129;01mor[39;00m A.ndim == [32m3[39m [38;5;129;01mand[39;00m A.shape[-[32m1[39m] [38;5;129;01min[39;00m [[32m3[39m, [32m4[39m]):
+[32m--> [39m[32m653[39m     [38;5;28;01mraise[39;00m [38;5;167;01mTypeError[39;00m([33mf[39m[33m"[39m[33mInvalid shape [39m[38;5;132;01m{[39;00mA.shape[38;5;132;01m}[39;00m[33m for image data[39m[33m"[39m)
+[32m    654[39m [38;5;28;01mif[39;00m A.ndim == [32m3[39m:
+[32m    655[39m     [38;5;66;03m# If the input data has values outside the valid range (after[39;00m
+[32m    656[39m     [38;5;66;03m# normalisation), we issue a warning and then clip X to the bounds[39;00m
+[32m    657[39m     [38;5;66;03m# - otherwise casting wraps extreme values, hiding outliers and[39;00m
+[32m    658[39m     [38;5;66;03m# making reliable interpretation impossible.[39;00m
+[32m    659[39m     high = [32m255[39m [38;5;28;01mif[39;00m np.issubdtype(A.dtype, np.integer) [38;5;28;01melse[39;00m [32m1[39m
+
+[31mTypeError[39m: Invalid shape (2, 256, 256) for image data
+

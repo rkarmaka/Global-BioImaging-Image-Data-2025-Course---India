@@ -1,0 +1,68 @@
+Traceback (most recent call last):
+  File "/Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+    ~~~~~~~~~^
+        nb,
+        ^^^
+    ...<4 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 158, in wrapped
+    return loop.run_until_complete(inner)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/asyncio/base_events.py", line 721, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+        cell, index, execution_count=self.code_cells_executed + 1
+    )
+  File "/Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import tensorflow as tf
+from tensorflow.keras import layers, models
+
+model = models.Sequential([
+    layers.Conv2D(16, (3, 3), activation='relu', input_shape=(128, 128, 1)),
+    layers.MaxPooling2D((2, 2)),
+    layers.Conv2D(32, (3, 3), activation='relu'),
+    layers.MaxPooling2D((2, 2)),
+    layers.Flatten(),
+    layers.Dense(64, activation='relu'),
+    layers.Dense(2, activation='softmax')  # example: background vs cell
+])
+
+model.summary()
+------------------
+
+
+[31m---------------------------------------------------------------------------[39m
+[31mModuleNotFoundError[39m                       Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[1][39m[32m, line 1[39m
+[32m----> [39m[32m1[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mtensorflow[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mtf[39;00m
+[32m      2[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mtensorflow[39;00m[34;01m.[39;00m[34;01mkeras[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m layers, models
+[32m      4[39m model = models.Sequential([
+[32m      5[39m     layers.Conv2D([32m16[39m, ([32m3[39m, [32m3[39m), activation=[33m'[39m[33mrelu[39m[33m'[39m, input_shape=([32m128[39m, [32m128[39m, [32m1[39m)),
+[32m      6[39m     layers.MaxPooling2D(([32m2[39m, [32m2[39m)),
+[32m   (...)[39m[32m     11[39m     layers.Dense([32m2[39m, activation=[33m'[39m[33msoftmax[39m[33m'[39m)  [38;5;66;03m# example: background vs cell[39;00m
+[32m     12[39m ])
+
+[31mModuleNotFoundError[39m: No module named 'tensorflow'
+
