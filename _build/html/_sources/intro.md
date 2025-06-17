@@ -1,7 +1,7 @@
 # Welcome to the Introduction to Python Course
 ---
 
-This course is designed to teach Python and bioimage analysis using Python.
+<!-- This course is designed to teach Python and bioimage analysis using Python.
 
 🌟 Optional Bonus Modules (as time/resources allow)
 Module X1: Intro to GitHub
@@ -22,7 +22,7 @@ Exporting notebooks, saving outputs
 
 Module X4: Real Use Case Walkthrough
 
-End-to-end walkthrough of a published research image analysis pipeline
+End-to-end walkthrough of a published research image analysis pipeline -->
 
 ---
 

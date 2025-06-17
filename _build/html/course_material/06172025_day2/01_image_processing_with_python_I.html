@@ -199,11 +199,14 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 - Image Segmentation with Deep Learning</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../06182025_day3/module_12.html">Deep Learning Basics for Imaging</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06182025_day3/module_13.html">Cellpose for Segmentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06182025_day3/module_14.html">StarDist for Segmentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06182025_day3/module_15.html">Evaluation of Segmentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06182025_day3/module_16.html">Tools &amp; Next Steps in Bioimage Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06182025_day3/01_intro_to_dl.html">A Gentle Introduction to Deep Learning for Microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06182025_day3/02_dl_timeline.html">A Brief Timeline of Deep Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06182025_day3/03_cellpose_intro.html">Introduction to Cellpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06182025_day3/04_test_Cellpose-SAM.html">Cellpose-SAM: superhuman generalization for cellular segmentation</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../06182025_day3/05_train_Cellpose-SAM.html">Cellpose-SAM: superhuman generalization for cellular segmentation</a></li>
+
+
 </ul>
 
     </div>
@@ -269,6 +272,23 @@
   <i class="fab fa-github"></i>
   </span>
 <span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/edit/master/docs/course_material/06172025_day2/01_image_processing_with_python_I.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
 </a>
 </li>
       
@@ -511,7 +531,7 @@ Data type: uint8
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x124204410&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x111aa0410&gt;
 </pre></div>
 </div>
 <img alt="../../_images/1191b8586b796f0001ce5fdeba72dc2e59abc5647e595f3f01a0ade29303b6b5.png" src="../../_images/1191b8586b796f0001ce5fdeba72dc2e59abc5647e595f3f01a0ade29303b6b5.png" />
@@ -527,7 +547,7 @@ Data type: uint8
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x124280b90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x111b1cb90&gt;
 </pre></div>
 </div>
 <img alt="../../_images/76264a5e4f7ed4d527eb3d87840f7d0adca3d003b8883a5c79fea7f51a6f973a.png" src="../../_images/76264a5e4f7ed4d527eb3d87840f7d0adca3d003b8883a5c79fea7f51a6f973a.png" />
@@ -546,7 +566,7 @@ Data type: uint8
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x1242e6850&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x111b82850&gt;
 </pre></div>
 </div>
 <img alt="../../_images/5549194347d0768f3d314257fe4a4a30f228b3e7ef91b3acee3094b7f6bc98e7.png" src="../../_images/5549194347d0768f3d314257fe4a4a30f228b3e7ef91b3acee3094b7f6bc98e7.png" />
@@ -569,7 +589,7 @@ Data type: uint8
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x124043d90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x11186bd90&gt;
 </pre></div>
 </div>
 <img alt="../../_images/77d45e2c2fcb006a484123aa76d5f4738ebf4fc53b3229a5440899e1b979e1d2.png" src="../../_images/77d45e2c2fcb006a484123aa76d5f4738ebf4fc53b3229a5440899e1b979e1d2.png" />
@@ -588,7 +608,7 @@ Data type: uint8
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x124a18cd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x1122b0cd0&gt;
 </pre></div>
 </div>
 <img alt="../../_images/476df3e8824ee065a7686f812d819f57cc0473ae9bee8e4a83f9cf7552996106.png" src="../../_images/476df3e8824ee065a7686f812d819f57cc0473ae9bee8e4a83f9cf7552996106.png" />
