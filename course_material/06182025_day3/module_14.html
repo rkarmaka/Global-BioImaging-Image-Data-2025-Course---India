@@ -58,6 +58,7 @@
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'course_material/06182025_day3/module_14';</script>
+    <link rel="canonical" href="/Global-BioImaging-Image-Data-2025-Course---India/course_material/06182025_day3/module_14.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -207,6 +208,7 @@
 <li class="toctree-l1"><a class="reference internal" href="05_train_Cellpose-SAM.html">Cellpose-SAM: superhuman generalization for cellular segmentation</a></li>
 
 
+<li class="toctree-l1"><a class="reference internal" href="06_quality_evaluation.html">Quality control of segmentation results</a></li>
 </ul>
 
     </div>
@@ -504,6 +506,12 @@ Each object is represented as a star-shaped polygon radiating out from the cente
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
 </pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> /
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> -
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> done
 </pre></div>
 </div>
@@ -529,10 +537,7 @@ Requirement already satisfied: scipy in /Users/ranit/anaconda3/envs/gbi-python-e
 Requirement already satisfied: matplotlib in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from csbdeep) (3.10.3)
 Requirement already satisfied: six in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from csbdeep) (1.17.0)
 Requirement already satisfied: tifffile in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from csbdeep) (2025.5.26)
-Collecting tqdm (from csbdeep)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Using cached tqdm-4.67.1-py3-none-any.whl.metadata (57 kB)
+Requirement already satisfied: tqdm in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from csbdeep) (4.67.1)
 Requirement already satisfied: packaging in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from csbdeep) (25.0)
 Requirement already satisfied: pillow&gt;=8.3.2 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from imageio-&gt;stardist) (11.2.1)
 Requirement already satisfied: contourpy&gt;=1.0.1 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from matplotlib-&gt;csbdeep) (1.3.2)
@@ -541,16 +546,15 @@ Requirement already satisfied: fonttools&gt;=4.22.0 in /Users/ranit/anaconda3/en
 Requirement already satisfied: kiwisolver&gt;=1.3.1 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from matplotlib-&gt;csbdeep) (1.4.8)
 Requirement already satisfied: pyparsing&gt;=2.3.1 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from matplotlib-&gt;csbdeep) (3.2.3)
 Requirement already satisfied: python-dateutil&gt;=2.7 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from matplotlib-&gt;csbdeep) (2.9.0.post0)
-Collecting llvmlite&lt;0.45,&gt;=0.44.0dev0 (from numba-&gt;stardist)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Using cached llvmlite-0.44.0-cp313-cp313-macosx_11_0_arm64.whl.metadata (4.8 kB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting llvmlite&lt;0.45,&gt;=0.44.0dev0 (from numba-&gt;stardist)
+  Using cached llvmlite-0.44.0-cp313-cp313-macosx_11_0_arm64.whl.metadata (4.8 kB)
 Requirement already satisfied: networkx&gt;=3.0 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from scikit-image-&gt;stardist) (3.5)
 Requirement already satisfied: lazy-loader&gt;=0.4 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from scikit-image-&gt;stardist) (0.4)
 Using cached csbdeep-0.8.1-py2.py3-none-any.whl (71 kB)
 Using cached numba-0.61.2-cp313-cp313-macosx_11_0_arm64.whl (2.8 MB)
 Using cached llvmlite-0.44.0-cp313-cp313-macosx_11_0_arm64.whl (26.2 MB)
-Using cached tqdm-4.67.1-py3-none-any.whl (78 kB)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Building wheels for collected packages: stardist
@@ -562,13 +566,13 @@ Using cached tqdm-4.67.1-py3-none-any.whl (78 kB)
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> error
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> | error
   <span class=" -Color -Color-Bold -Color-Bold-Red">error</span>: <span class=" -Color -Color-Bold">subprocess-exited-with-error</span>
   
   <span class=" -Color -Color-Red">×</span> <span class=" -Color -Color-Green">Building wheel for stardist </span><span class=" -Color -Color-Bold -Color-Bold-Green">(</span><span class=" -Color -Color-Green">pyproject.toml</span><span class=" -Color -Color-Bold -Color-Bold-Green">)</span> did not run successfully.
   <span class=" -Color -Color-Red">│</span> exit code: <span class=" -Color -Color-Bold -Color-Bold-Cyan">1</span>
   <span class=" -Color -Color-Red">╰─&gt;</span> <span class=" -Color -Color-Red">[77 lines of output]</span>
-  <span class=" -Color -Color-Red">   </span> /private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-ekceaquz/overlay/lib/python3.13/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+  <span class=" -Color -Color-Red">   </span> /private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-tjskhkw7/overlay/lib/python3.13/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
   <span class=" -Color -Color-Red">   </span> !!
   <span class=" -Color -Color-Red">   </span> 
   <span class=" -Color -Color-Red">   </span>         ********************************************************************************
@@ -625,11 +629,11 @@ Using cached tqdm-4.67.1-py3-none-any.whl (78 kB)
   <span class=" -Color -Color-Red">   </span> running build_ext
   <span class=" -Color -Color-Red">   </span> building &#39;stardist.lib.stardist2d&#39; extension
   <span class=" -Color -Color-Red">   </span> creating build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper
-  <span class=" -Color -Color-Red">   </span> clang++ -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -I/private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-ekceaquz/overlay/lib/python3.13/site-packages/numpy/_core/include -Istardist/lib/external/clipper -Istardist/lib/external/nanoflann -I/Users/ranit/anaconda3/envs/gbi-python-env/include/python3.13 -c stardist/lib/external/clipper/clipper.cpp -o build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper/clipper.o -std=c++11 -fopenmp
+  <span class=" -Color -Color-Red">   </span> clang++ -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -I/private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-tjskhkw7/overlay/lib/python3.13/site-packages/numpy/_core/include -Istardist/lib/external/clipper -Istardist/lib/external/nanoflann -I/Users/ranit/anaconda3/envs/gbi-python-env/include/python3.13 -c stardist/lib/external/clipper/clipper.cpp -o build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper/clipper.o -std=c++11 -fopenmp
   <span class=" -Color -Color-Red">   </span> clang++: error: unsupported option &#39;-fopenmp&#39;
   <span class=" -Color -Color-Red">   </span> &gt;&gt;&gt; compiling with &#39;-fopenmp&#39; failed
   <span class=" -Color -Color-Red">   </span> building &#39;stardist.lib.stardist2d&#39; extension
-  <span class=" -Color -Color-Red">   </span> clang++ -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -I/private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-ekceaquz/overlay/lib/python3.13/site-packages/numpy/_core/include -Istardist/lib/external/clipper -Istardist/lib/external/nanoflann -I/Users/ranit/anaconda3/envs/gbi-python-env/include/python3.13 -c stardist/lib/external/clipper/clipper.cpp -o build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper/clipper.o -std=c++11 -Xpreprocessor -fopenmp
+  <span class=" -Color -Color-Red">   </span> clang++ -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -I/private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-tjskhkw7/overlay/lib/python3.13/site-packages/numpy/_core/include -Istardist/lib/external/clipper -Istardist/lib/external/nanoflann -I/Users/ranit/anaconda3/envs/gbi-python-env/include/python3.13 -c stardist/lib/external/clipper/clipper.cpp -o build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper/clipper.o -std=c++11 -Xpreprocessor -fopenmp
   <span class=" -Color -Color-Red">   </span> In file included from stardist/lib/external/clipper/clipper.cpp:41:
   <span class=" -Color -Color-Red">   </span> stardist/lib/external/clipper/clipper.hpp:52:10: fatal error: &#39;vector&#39; file not found
   <span class=" -Color -Color-Red">   </span>    52 | #include &lt;vector&gt;
@@ -638,7 +642,7 @@ Using cached tqdm-4.67.1-py3-none-any.whl (78 kB)
   <span class=" -Color -Color-Red">   </span> &gt;&gt;&gt; compiling with &#39;-Xpreprocessor -fopenmp&#39; failed
   <span class=" -Color -Color-Red">   </span> &gt;&gt;&gt; compiling with OpenMP support failed, re-trying without
   <span class=" -Color -Color-Red">   </span> building &#39;stardist.lib.stardist2d&#39; extension
-  <span class=" -Color -Color-Red">   </span> clang++ -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -I/private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-ekceaquz/overlay/lib/python3.13/site-packages/numpy/_core/include -Istardist/lib/external/clipper -Istardist/lib/external/nanoflann -I/Users/ranit/anaconda3/envs/gbi-python-env/include/python3.13 -c stardist/lib/external/clipper/clipper.cpp -o build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper/clipper.o -std=c++11
+  <span class=" -Color -Color-Red">   </span> clang++ -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -I/private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-tjskhkw7/overlay/lib/python3.13/site-packages/numpy/_core/include -Istardist/lib/external/clipper -Istardist/lib/external/nanoflann -I/Users/ranit/anaconda3/envs/gbi-python-env/include/python3.13 -c stardist/lib/external/clipper/clipper.cpp -o build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper/clipper.o -std=c++11
   <span class=" -Color -Color-Red">   </span> In file included from stardist/lib/external/clipper/clipper.cpp:41:
   <span class=" -Color -Color-Red">   </span> stardist/lib/external/clipper/clipper.hpp:52:10: fatal error: &#39;vector&#39; file not found
   <span class=" -Color -Color-Red">   </span>    52 | #include &lt;vector&gt;
@@ -650,7 +654,9 @@ Using cached tqdm-4.67.1-py3-none-any.whl (78 kB)
   <span class=" -Color -Color-Bold -Color-Bold-Magenta">note</span>: This error originates from a subprocess, and is likely not a problem with pip.
 <span class=" -Color -Color-Red">  ERROR: Failed building wheel for stardist</span>
 ?25hFailed to build stardist
-<span class=" -Color -Color-Red">ERROR: Failed to build installable wheels for some pyproject.toml based projects (stardist)</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Red">ERROR: Failed to build installable wheels for some pyproject.toml based projects (stardist)</span>
 
 </pre></div>
 </div>
