@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -60,6 +60,7 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'course_material/06182025_day3/06_quality_evaluation_handson';</script>
+    <link rel="canonical" href="/Global-BioImaging-Image-Data-2025-Course---India/course_material/06182025_day3/06_quality_evaluation_handson.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -707,12 +708,12 @@ Accuracy of correctly classifying the pixel class.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2025-06-17 19:13:39--  https://github.com/rkarmaka/Global-BioImaging-Image-Data-2025-Course---India/raw/main/course_material/06182025_day3/data/sample_images.zip
-Resolving github.com (github.com)... 140.82.114.4
-Connecting to github.com (github.com)|140.82.114.4|:443... 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2025-06-17 19:28:29--  https://github.com/rkarmaka/Global-BioImaging-Image-Data-2025-Course---India/raw/main/course_material/06182025_day3/data/sample_images.zip
+Resolving github.com (github.com)... 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>connected.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>140.82.113.4
+Connecting to github.com (github.com)|140.82.113.4|:443... connected.
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HTTP request sent, awaiting response... 
@@ -720,11 +721,9 @@ Connecting to github.com (github.com)|140.82.114.4|:443...
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>302 Found
 Location: https://raw.githubusercontent.com/rkarmaka/Global-BioImaging-Image-Data-2025-Course---India/main/course_material/06182025_day3/data/sample_images.zip [following]
---2025-06-17 19:13:40--  https://raw.githubusercontent.com/rkarmaka/Global-BioImaging-Image-Data-2025-Course---India/main/course_material/06182025_day3/data/sample_images.zip
-Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 2606:50c0:8001::154, 2606:50c0:8003::154, 2606:50c0:8002::154, ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|2606:50c0:8001::154|:443... connected.
+--2025-06-17 19:28:29--  https://raw.githubusercontent.com/rkarmaka/Global-BioImaging-Image-Data-2025-Course---India/main/course_material/06182025_day3/data/sample_images.zip
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 2606:50c0:8001::154, 2606:50c0:8002::154, 2606:50c0:8003::154, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|2606:50c0:8001::154|:443... connected.
 HTTP request sent, awaiting response... 
 </pre></div>
 </div>
@@ -736,29 +735,16 @@ Saving to: ‘sample_images.zip’
 sample_images.zip     0%[                    ]       0  --.-KB/s               
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sample_images.zip   100%[===================&gt;]   1.98M  10.0MB/s    in 0.2s    
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sample_images.zip   100%[===================&gt;]   1.98M  11.8MB/s    in 0.2s    
 
-2025-06-17 19:13:40 (10.0 MB/s) - ‘sample_images.zip’ saved [2079370/2079370]
+2025-06-17 19:28:30 (11.8 MB/s) - ‘sample_images.zip’ saved [2079370/2079370]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Archive:  sample_images.zip
-   creating: /Users/ranit/Research/github/Global-BioImaging-Image-Data-2025-Course---India/course_material/06182025_day3/sample_images
-  inflating: sample_images/2PRED.tif  
-  inflating: sample_images/1PRED.tif  
-  inflating: sample_images/3.tif     
-  inflating: __MACOSX/sample_images/._3.tif  
-  inflating: sample_images/2.tif     
-  inflating: __MACOSX/sample_images/._2.tif  
-  inflating: sample_images/1.tif     
-  inflating: __MACOSX/sample_images/._1.tif  
-  inflating: sample_images/1GRAY.tif  
-  inflating: __MACOSX/sample_images/._1GRAY.tif  
-  inflating: sample_images/3GRAY.tif  
+replace sample_images/2PRED.tif? [y]es, [n]o, [A]ll, [N]one, [r]ename: 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  inflating: __MACOSX/sample_images/._3GRAY.tif  
-  inflating: sample_images/2GRAY.tif  
-  inflating: __MACOSX/sample_images/._2GRAY.tif  
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>^C
 </pre></div>
 </div>
 </div>
