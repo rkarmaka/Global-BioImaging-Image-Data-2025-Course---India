@@ -52,7 +52,7 @@ io.masks_flows_to_seg(image, masks, flows, diams)
 
 [31m---------------------------------------------------------------------------[39m
 [31mFileNotFoundError[39m                         Traceback (most recent call last)
-[32m/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/ipykernel_21836/3623595192.py[39m in [36m?[39m[34m()[39m
+[32m/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/ipykernel_22998/3623595192.py[39m in [36m?[39m[34m()[39m
 [32m      1[39m [38;5;66;03m# Load image[39;00m
 [32m----> [39m[32m2[39m image = imread([33m'cell_image.tif'[39m)
 [32m      3[39m 
