@@ -1,0 +1,74 @@
+Traceback (most recent call last):
+  File "/Users/ranit/anaconda3/lib/python3.11/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/ranit/anaconda3/lib/python3.11/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ranit/anaconda3/lib/python3.11/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ranit/anaconda3/lib/python3.11/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ranit/anaconda3/lib/python3.11/asyncio/base_events.py", line 653, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/Users/ranit/anaconda3/lib/python3.11/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/Users/ranit/anaconda3/lib/python3.11/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/ranit/anaconda3/lib/python3.11/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from skimage.measure import regionprops_table
+import pandas as pd
+
+# Extract intensity features for each labeled region
+labeled_mask = label(mask)
+props_intensity = regionprops_table(labeled_mask, intensity_image=image,
+    properties=['label', 'mean_intensity', 'max_intensity', 'min_intensity', 
+                'intensity_std', 'area'])
+
+# Convert to DataFrame for easy handling
+df_intensity = pd.DataFrame(props_intensity)
+df_intensity.head()
+
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mAttributeError[0m                            Traceback (most recent call last)
+Cell [0;32mIn[2], line 6[0m
+[1;32m      4[0m [38;5;66;03m# Extract intensity features for each labeled region[39;00m
+[1;32m      5[0m labeled_mask [38;5;241m=[39m label(mask)
+[0;32m----> 6[0m props_intensity [38;5;241m=[39m regionprops_table(labeled_mask, intensity_image[38;5;241m=[39mimage,
+[1;32m      7[0m     properties[38;5;241m=[39m[[38;5;124m'[39m[38;5;124mlabel[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mmean_intensity[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mmax_intensity[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mmin_intensity[39m[38;5;124m'[39m, 
+[1;32m      8[0m                 [38;5;124m'[39m[38;5;124mintensity_std[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124marea[39m[38;5;124m'[39m])
+[1;32m     10[0m [38;5;66;03m# Convert to DataFrame for easy handling[39;00m
+[1;32m     11[0m df_intensity [38;5;241m=[39m pd[38;5;241m.[39mDataFrame(props_intensity)
+
+File [0;32m~/anaconda3/lib/python3.11/site-packages/skimage/measure/_regionprops.py:1045[0m, in [0;36mregionprops_table[0;34m(label_image, intensity_image, properties, cache, separator, extra_properties, spacing)[0m
+[1;32m   1041[0m     out_d [38;5;241m=[39m _props_to_dict(regions, properties[38;5;241m=[39mproperties,
+[1;32m   1042[0m                            separator[38;5;241m=[39mseparator)
+[1;32m   1043[0m     [38;5;28;01mreturn[39;00m {k: v[:[38;5;241m0[39m] [38;5;28;01mfor[39;00m k, v [38;5;129;01min[39;00m out_d[38;5;241m.[39mitems()}
+[0;32m-> 1045[0m [38;5;28;01mreturn[39;00m _props_to_dict(
+[1;32m   1046[0m     regions, properties[38;5;241m=[39mproperties, separator[38;5;241m=[39mseparator
+[1;32m   1047[0m )
+
+File [0;32m~/anaconda3/lib/python3.11/site-packages/skimage/measure/_regionprops.py:837[0m, in [0;36m_props_to_dict[0;34m(regions, properties, separator)[0m
+[1;32m    835[0m [38;5;66;03m# determine the current property name for any deprecated property.[39;00m
+[1;32m    836[0m prop [38;5;241m=[39m PROPS[38;5;241m.[39mget(prop, prop)
+[0;32m--> 837[0m rp [38;5;241m=[39m [38;5;28mgetattr[39m(r, prop)
+[1;32m    838[0m [38;5;28;01mif[39;00m prop [38;5;129;01min[39;00m COL_DTYPES:
+[1;32m    839[0m     dtype [38;5;241m=[39m COL_DTYPES[prop]
+
+File [0;32m~/anaconda3/lib/python3.11/site-packages/skimage/measure/_regionprops.py:382[0m, in [0;36mRegionProperties.__getattr__[0;34m(self, attr)[0m
+[1;32m    380[0m     [38;5;28;01mreturn[39;00m [38;5;28mgetattr[39m([38;5;28mself[39m, PROPS[attr])
+[1;32m    381[0m [38;5;28;01melse[39;00m:
+[0;32m--> 382[0m     [38;5;28;01mraise[39;00m [38;5;167;01mAttributeError[39;00m(
+[1;32m    383[0m         [38;5;124mf[39m[38;5;124m"[39m[38;5;124m'[39m[38;5;132;01m{[39;00m[38;5;28mtype[39m([38;5;28mself[39m)[38;5;132;01m}[39;00m[38;5;124m'[39m[38;5;124m object has no attribute [39m[38;5;124m'[39m[38;5;132;01m{[39;00mattr[38;5;132;01m}[39;00m[38;5;124m'[39m[38;5;124m"[39m
+[1;32m    384[0m     )
+
+[0;31mAttributeError[0m: '<class 'skimage.measure._regionprops.RegionProperties'>' object has no attribute 'intensity_std'
+AttributeError: '<class 'skimage.measure._regionprops.RegionProperties'>' object has no attribute 'intensity_std'
+
