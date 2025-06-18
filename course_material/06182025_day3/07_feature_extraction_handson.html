@@ -1,0 +1,1086 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Feature extraction (intensity, morphological and spatial features) &#8212; Python for Bioimage Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'course_material/06182025_day3/07_feature_extraction_handson';</script>
+    <link rel="canonical" href="/Global-BioImaging-Image-Data-2025-Course---India/course_material/06182025_day3/07_feature_extraction_handson.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Python for Bioimage Analysis - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Python for Bioimage Analysis - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to the Introduction to Python Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 - Image Segmentation with Deep Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro_to_dl.html">A Gentle Introduction to Deep Learning for Microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_dl_timeline.html">A Brief Timeline of Deep Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_cellpose_intro.html">Introduction to Cellpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_test_Cellpose-SAM.html">Cellpose-SAM: superhuman generalization for cellular segmentation</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="05_train_Cellpose-SAM.html">Cellpose-SAM: superhuman generalization for cellular segmentation</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="06_quality_evaluation.html">Quality control of segmentation results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_feature_extraction.html">Feature extraction (intensity, morphological and spatial features)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_dl_further.html">Building bioimage analysis workflows (ZeroCostDL, Bioimage Zoo)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rkarmaka/Global-BioImaging-Image-Data-2025-Course---India" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rkarmaka/Global-BioImaging-Image-Data-2025-Course---India/edit/main/docs/course_material/06182025_day3/07_feature_extraction_handson.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rkarmaka/Global-BioImaging-Image-Data-2025-Course---India/issues/new?title=Issue%20on%20page%20%2Fcourse_material/06182025_day3/07_feature_extraction_handson.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/course_material/06182025_day3/07_feature_extraction_handson.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Feature extraction (intensity, morphological and spatial features)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-feature-extraction">Introduction to Feature Extraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intensity-features">Intensity Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-and-importance">Concept and Importance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-notes">Practical Notes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coding-exercise">Coding Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#morphological-features">Morphological Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-morphological-features">What Are Morphological Features?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#biological-interpretations">Biological Interpretations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#considerations-in-practice">Considerations in Practice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Coding Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-features">Spatial Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-and-applications">Concept and Applications</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#biological-use-cases">Biological Use Cases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-and-tips">Challenges and Tips</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Coding Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-thoughts-and-recommendations">Final Thoughts and Recommendations</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><a class="reference external" href="https://colab.research.google.com/github/rkarmaka/Global-BioImaging-Image-Data-2025-Course---India/blob/main/course_material/06182025_day3/07_feature_extraction_handson.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="feature-extraction-intensity-morphological-and-spatial-features">
+<h1>Feature extraction (intensity, morphological and spatial features)<a class="headerlink" href="#feature-extraction-intensity-morphological-and-spatial-features" title="Link to this heading">#</a></h1>
+<hr class="docutils" />
+<section id="introduction-to-feature-extraction">
+<h2>Introduction to Feature Extraction<a class="headerlink" href="#introduction-to-feature-extraction" title="Link to this heading">#</a></h2>
+<p>Feature extraction is the process of computing quantitative descriptors from image data that help capture relevant patterns, structures, or biological signals. In the context of microscopy, these features represent properties of cells, tissues, organelles, or other biological structures. Feature extraction bridges raw image data with biological insight, enabling classification, clustering, and statistical analysis.</p>
+<p>There are three broad types of features typically extracted:</p>
+<ul class="simple">
+<li><p><strong>Intensity features:</strong> Related to the pixel brightness distribution.</p></li>
+<li><p><strong>Morphological features:</strong> Describe shape and size.</p></li>
+<li><p><strong>Spatial features:</strong> Capture location and relationship between structures.</p></li>
+</ul>
+<p>These features can be computed on entire images or, more commonly, on segmented regions of interest (ROIs), such as individual nuclei or cells.</p>
+</section>
+<hr class="docutils" />
+<section id="intensity-features">
+<h2>Intensity Features<a class="headerlink" href="#intensity-features" title="Link to this heading">#</a></h2>
+<section id="concept-and-importance">
+<h3>Concept and Importance<a class="headerlink" href="#concept-and-importance" title="Link to this heading">#</a></h3>
+<p>Intensity features summarize the distribution of grayscale or fluorescence values within an object or ROI. These features are sensitive to signal strength and can reflect biological activity like protein expression, DNA content, or mitochondrial potential.</p>
+<p>They are generally derived from the pixel intensity values inside the segmented region (mask). Typical intensity features include:</p>
+<ul class="simple">
+<li><p><strong>Mean intensity:</strong> The average value of pixels.</p></li>
+<li><p><strong>Median intensity:</strong> The central tendency that is robust to outliers.</p></li>
+<li><p><strong>Minimum and maximum:</strong> Identify the brightest and darkest pixels.</p></li>
+<li><p><strong>Standard deviation:</strong> A measure of contrast or texture variation.</p></li>
+<li><p><strong>Integrated intensity:</strong> Sum of all pixel values, useful for quantifying total signal.</p></li>
+<li><p><strong>Percentiles (e.g., 25th, 75th):</strong> For understanding the distribution spread.</p></li>
+</ul>
+<p>These are simple yet powerful features and often correlate with molecular content in fluorescence microscopy.</p>
+</section>
+<section id="practical-notes">
+<h3>Practical Notes<a class="headerlink" href="#practical-notes" title="Link to this heading">#</a></h3>
+<p>Ensure intensity normalization (e.g., background subtraction, illumination correction) before feature extraction, especially when comparing across fields of view or slides.</p>
+</section>
+<section id="coding-exercise">
+<h3>Coding Exercise<a class="headerlink" href="#coding-exercise" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download Dataset</span>
+<span class="o">!</span>wget<span class="w"> </span>https://github.com/rkarmaka/Global-BioImaging-Image-Data-2025-Course---India/raw/main/course_material/06182025_day3/data/sample_images.zip
+<span class="o">!</span>unzip<span class="w"> </span>sample_images.zip
+<span class="o">!</span>rm<span class="w"> </span>sample_images.zip
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2025-06-17 20:48:48--  https://github.com/rkarmaka/Global-BioImaging-Image-Data-2025-Course---India/raw/main/course_material/06182025_day3/data/sample_images.zip
+Resolving github.com (github.com)... 140.82.114.3
+Connecting to github.com (github.com)|140.82.114.3|:443... 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>connected.
+HTTP request sent, awaiting response... 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>302 Found
+Location: https://raw.githubusercontent.com/rkarmaka/Global-BioImaging-Image-Data-2025-Course---India/main/course_material/06182025_day3/data/sample_images.zip [following]
+--2025-06-17 20:48:48--  https://raw.githubusercontent.com/rkarmaka/Global-BioImaging-Image-Data-2025-Course---India/main/course_material/06182025_day3/data/sample_images.zip
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 2606:50c0:8002::154, 2606:50c0:8003::154, 2606:50c0:8000::154, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|2606:50c0:8002::154|:443... connected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HTTP request sent, awaiting response... 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>200 OK
+Length: 2079370 (2.0M) [application/zip]
+Saving to: ‘sample_images.zip’
+
+
+sample_images.zip     0%[                    ]       0  --.-KB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sample_images.zip   100%[===================&gt;]   1.98M  10.4MB/s    in 0.2s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-06-17 20:48:48 (10.4 MB/s) - ‘sample_images.zip’ saved [2079370/2079370]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Archive:  sample_images.zip
+replace sample_images/2PRED.tif? [y]es, [n]o, [A]ll, [N]one, [r]ename: 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>^C
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">imread</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.measure</span><span class="w"> </span><span class="kn">import</span> <span class="n">regionprops</span><span class="p">,</span> <span class="n">label</span>
+
+<span class="c1"># Load grayscale image (e.g., nuclei)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="s2">&quot;data/1GRAY.tif&quot;</span><span class="p">)</span>
+
+<span class="c1"># Load corresponding label mask (should be labeled; each object has unique integer)</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="s2">&quot;data/1.tif&quot;</span><span class="p">)</span>
+
+<span class="c1"># If the mask is binary, label it</span>
+<span class="k">if</span> <span class="n">mask</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">label</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+
+<span class="c1"># Visualize</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Grayscale Image&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;nipy_spectral&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Labeled Mask&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/44860b9bd6fc8ffc81733817d34a6bf1e1432db6eca95af54851d14637a83859.png" src="../../_images/44860b9bd6fc8ffc81733817d34a6bf1e1432db6eca95af54851d14637a83859.png" />
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skimage.measure</span><span class="w"> </span><span class="kn">import</span> <span class="n">regionprops_table</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Extract intensity features for each labeled region</span>
+<span class="n">labeled_mask</span> <span class="o">=</span> <span class="n">label</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+<span class="n">props_intensity</span> <span class="o">=</span> <span class="n">regionprops_table</span><span class="p">(</span><span class="n">labeled_mask</span><span class="p">,</span> <span class="n">intensity_image</span><span class="o">=</span><span class="n">image</span><span class="p">,</span>
+    <span class="n">properties</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="s1">&#39;mean_intensity&#39;</span><span class="p">,</span> <span class="s1">&#39;max_intensity&#39;</span><span class="p">,</span> <span class="s1">&#39;min_intensity&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;intensity_std&#39;</span><span class="p">,</span> <span class="s1">&#39;area&#39;</span><span class="p">])</span>
+
+<span class="c1"># Convert to DataFrame for easy handling</span>
+<span class="n">df_intensity</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">props_intensity</span><span class="p">)</span>
+<span class="n">df_intensity</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>label</th>
+      <th>mean_intensity</th>
+      <th>max_intensity</th>
+      <th>min_intensity</th>
+      <th>intensity_std</th>
+      <th>area</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>225.264798</td>
+      <td>255.0</td>
+      <td>125.0</td>
+      <td>32.117022</td>
+      <td>321.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>211.144295</td>
+      <td>254.0</td>
+      <td>101.0</td>
+      <td>37.083200</td>
+      <td>298.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>159.244048</td>
+      <td>205.0</td>
+      <td>85.0</td>
+      <td>28.649981</td>
+      <td>336.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>189.897764</td>
+      <td>252.0</td>
+      <td>108.0</td>
+      <td>38.425428</td>
+      <td>313.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>145.875817</td>
+      <td>187.0</td>
+      <td>83.0</td>
+      <td>20.397783</td>
+      <td>306.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="morphological-features">
+<h2>Morphological Features<a class="headerlink" href="#morphological-features" title="Link to this heading">#</a></h2>
+<section id="what-are-morphological-features">
+<h3>What Are Morphological Features?<a class="headerlink" href="#what-are-morphological-features" title="Link to this heading">#</a></h3>
+<p>Morphological features describe the shape, size, and geometric properties of objects in the image. These features are crucial for characterizing phenotypic differences such as cell elongation, roundness, or area differences in cancer vs. healthy tissue.</p>
+<p>Common morphological features include:</p>
+<ul class="simple">
+<li><p>Area: Number of pixels in the object. Important for size estimation.</p></li>
+<li><p>Perimeter: Length of the object’s boundary.</p></li>
+<li><p>Major and Minor Axis Lengths: From fitted ellipses; reflect elongation.</p></li>
+<li><p>Eccentricity: A measure of how elongated an object is, ranging from 0 (circle) to 1 (line).</p></li>
+<li><p>Circularity or Roundness: Often computed as <span class="math notranslate nohighlight">\(\frac{4π⋅Area}{Perimeter^{2}}\)</span>; closer to 1 means more circular.</p></li>
+<li><p>Solidity: Area / Convex Area; indicates irregularity of shape.</p></li>
+<li><p>Extent: Ratio of object area to bounding box area.</p></li>
+<li><p>Orientation: The angle of the object’s major axis with respect to the x-axis.</p></li>
+</ul>
+<p>These features provide powerful, interpretable descriptors that help distinguish object types and cell states.</p>
+</section>
+<section id="biological-interpretations">
+<h3>Biological Interpretations<a class="headerlink" href="#biological-interpretations" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Large area might suggest hypertrophy or multinucleation.</p></li>
+<li><p>High eccentricity may indicate elongated cells, as seen in fibroblasts or migrating cells.</p></li>
+<li><p>Low solidity could indicate fragmented or irregular nuclei.</p></li>
+</ul>
+</section>
+<section id="considerations-in-practice">
+<h3>Considerations in Practice<a class="headerlink" href="#considerations-in-practice" title="Link to this heading">#</a></h3>
+<p>Morphological features are sensitive to segmentation quality. Debris, artifacts, or touching objects can lead to incorrect measurements. Always inspect a few random samples visually to validate your results.</p>
+</section>
+<section id="id1">
+<h3>Coding Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract morphological (shape) features</span>
+<span class="n">props_shape</span> <span class="o">=</span> <span class="n">regionprops_table</span><span class="p">(</span><span class="n">labeled_mask</span><span class="p">,</span> 
+    <span class="n">properties</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="s1">&#39;area&#39;</span><span class="p">,</span> <span class="s1">&#39;perimeter&#39;</span><span class="p">,</span> <span class="s1">&#39;eccentricity&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;solidity&#39;</span><span class="p">,</span> <span class="s1">&#39;orientation&#39;</span><span class="p">,</span> <span class="s1">&#39;major_axis_length&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;minor_axis_length&#39;</span><span class="p">])</span>
+
+<span class="n">df_shape</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">props_shape</span><span class="p">)</span>
+<span class="n">df_shape</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>label</th>
+      <th>area</th>
+      <th>perimeter</th>
+      <th>eccentricity</th>
+      <th>solidity</th>
+      <th>orientation</th>
+      <th>major_axis_length</th>
+      <th>minor_axis_length</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>321.0</td>
+      <td>64.870058</td>
+      <td>0.387213</td>
+      <td>0.963964</td>
+      <td>-1.050878</td>
+      <td>21.109467</td>
+      <td>19.462723</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>298.0</td>
+      <td>61.698485</td>
+      <td>0.364226</td>
+      <td>0.967532</td>
+      <td>1.149075</td>
+      <td>20.215977</td>
+      <td>18.827355</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>336.0</td>
+      <td>66.526912</td>
+      <td>0.193975</td>
+      <td>0.957265</td>
+      <td>-0.832187</td>
+      <td>20.956556</td>
+      <td>20.558515</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>313.0</td>
+      <td>63.941125</td>
+      <td>0.346266</td>
+      <td>0.960123</td>
+      <td>0.586113</td>
+      <td>20.646999</td>
+      <td>19.369701</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>306.0</td>
+      <td>62.526912</td>
+      <td>0.460456</td>
+      <td>0.971429</td>
+      <td>-0.934755</td>
+      <td>20.967487</td>
+      <td>18.612470</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="spatial-features">
+<h2>Spatial Features<a class="headerlink" href="#spatial-features" title="Link to this heading">#</a></h2>
+<section id="concept-and-applications">
+<h3>Concept and Applications<a class="headerlink" href="#concept-and-applications" title="Link to this heading">#</a></h3>
+<p>Spatial features deal with the position of objects in space and their relation to one another. These are essential in understanding cell-cell interaction, tissue organization, or subcellular localization patterns.</p>
+<p>There are two subcategories:
+<strong>A. Absolute Spatial Features</strong></p>
+<ul class="simple">
+<li><p>These relate to an object’s location in the image:</p></li>
+<li><p>Centroid (x, y coordinates): Geometric center of the object.</p></li>
+<li><p>Distance from image center or landmark: Useful in studying gradients or symmetry.</p></li>
+<li><p>Radial position: Especially relevant in organoids or spheroids.</p></li>
+</ul>
+<p><strong>B. Relative Spatial Features</strong>
+These features describe the relationship between objects:</p>
+<ul class="simple">
+<li><p>Nearest neighbor distance: Measures crowding or isolation.</p></li>
+<li><p>Cluster metrics: Such as number of neighbors within a certain radius.</p></li>
+<li><p>Voronoi-based area: Captures local density or influence zone.</p></li>
+<li><p>Distance to boundary: E.g., for cell polarization or proximity to blood vessels.</p></li>
+</ul>
+</section>
+<section id="biological-use-cases">
+<h3>Biological Use Cases<a class="headerlink" href="#biological-use-cases" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>In cancer pathology, tightly packed nuclei may indicate malignancy.</p></li>
+<li><p>In immunofluorescence, co-localization of proteins can be quantified via centroid distances.</p></li>
+<li><p>In developmental biology, cell positions can help track lineage or spatial fate.</p></li>
+</ul>
+</section>
+<section id="challenges-and-tips">
+<h3>Challenges and Tips<a class="headerlink" href="#challenges-and-tips" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Requires accurate centroid or boundary detection.</p></li>
+<li><p>Use consistent coordinate systems (beware of image cropping).</p></li>
+<li><p>Often needs domain knowledge to define what constitutes “nearness” or “interaction”.</p></li>
+</ul>
+</section>
+<section id="id2">
+<h3>Coding Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.spatial</span><span class="w"> </span><span class="kn">import</span> <span class="n">distance_matrix</span>
+
+<span class="c1"># Use regionprops to get centroids</span>
+<span class="n">labeled_mask</span> <span class="o">=</span> <span class="n">label</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+<span class="n">regions</span> <span class="o">=</span> <span class="n">regionprops</span><span class="p">(</span><span class="n">labeled_mask</span><span class="p">)</span>
+
+<span class="c1"># Get centroids</span>
+<span class="n">centroids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">r</span><span class="o">.</span><span class="n">centroid</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">regions</span><span class="p">])</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">r</span><span class="o">.</span><span class="n">label</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">regions</span><span class="p">])</span>
+
+<span class="c1"># Create a distance matrix between all centroids</span>
+<span class="n">dist_matrix</span> <span class="o">=</span> <span class="n">distance_matrix</span><span class="p">(</span><span class="n">centroids</span><span class="p">,</span> <span class="n">centroids</span><span class="p">)</span>
+
+<span class="c1"># For each object, find distance to nearest neighbor (excluding itself)</span>
+<span class="n">nearest_neighbor_distance</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">centroids</span><span class="p">)):</span>
+    <span class="n">dists</span> <span class="o">=</span> <span class="n">dist_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">dists</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>  <span class="c1"># ignore self-distance</span>
+    <span class="n">nearest_neighbor_distance</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">dists</span><span class="p">))</span>
+
+<span class="c1"># Add to DataFrame</span>
+<span class="n">df_spatial</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">labels</span><span class="p">,</span>
+    <span class="s1">&#39;centroid_x&#39;</span><span class="p">:</span> <span class="n">centroids</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="s1">&#39;centroid_y&#39;</span><span class="p">:</span> <span class="n">centroids</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="s1">&#39;nearest_neighbor_dist&#39;</span><span class="p">:</span> <span class="n">nearest_neighbor_distance</span>
+<span class="p">})</span>
+
+<span class="n">df_spatial</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>label</th>
+      <th>centroid_x</th>
+      <th>centroid_y</th>
+      <th>nearest_neighbor_dist</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>209.950156</td>
+      <td>14.691589</td>
+      <td>60.154079</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>352.359060</td>
+      <td>17.288591</td>
+      <td>30.511393</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>140.693452</td>
+      <td>18.750000</td>
+      <td>46.712679</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>650.549521</td>
+      <td>25.757188</td>
+      <td>51.666064</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>412.366013</td>
+      <td>26.186275</td>
+      <td>35.191155</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="final-thoughts-and-recommendations">
+<h2>Final Thoughts and Recommendations<a class="headerlink" href="#final-thoughts-and-recommendations" title="Link to this heading">#</a></h2>
+<p>Feature extraction is a critical step in turning image data into knowledge. It’s essential that microscopists understand what these features mean biologically, how they’re computed, and how their reliability depends on proper segmentation and preprocessing.</p>
+<p>Tips for robust feature extraction:</p>
+<ul class="simple">
+<li><p>Always visualize features (e.g., overlay eccentricity values on masks).</p></li>
+<li><p>Perform sanity checks (e.g., histogram of area should not have absurd values).</p></li>
+<li><p>Combine multiple features for richer biological interpretation.</p></li>
+<li><p>Use open-source tools like scikit-image, OpenCV, cellpose, and napari plugins for efficient workflows.</p></li>
+</ul>
+<p>In future workflows, these features can be fed into machine learning models, statistical pipelines, or interactive dashboards for hypothesis generation or automated classification.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./course_material/06182025_day3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-feature-extraction">Introduction to Feature Extraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intensity-features">Intensity Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-and-importance">Concept and Importance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-notes">Practical Notes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coding-exercise">Coding Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#morphological-features">Morphological Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-morphological-features">What Are Morphological Features?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#biological-interpretations">Biological Interpretations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#considerations-in-practice">Considerations in Practice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Coding Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-features">Spatial Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-and-applications">Concept and Applications</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#biological-use-cases">Biological Use Cases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-and-tips">Challenges and Tips</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Coding Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-thoughts-and-recommendations">Final Thoughts and Recommendations</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ranit Karmakar
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

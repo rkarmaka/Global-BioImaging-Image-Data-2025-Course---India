@@ -180,25 +180,7 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 1 - Python Basics</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../06162025_day1/module_01.html">Welcome &amp; Setup</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../06162025_day1/module_02.html">Python Basics – Variables &amp; Data Types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06162025_day1/module_03.html">Data Structures &amp; Control Flow in Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06162025_day1/module_04.html">Functions &amp; Libraries</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06162025_day1/module_05.html">Basic Data Handling with Pandas</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 2 - Image Processing with Python</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../06172025_day2/module_06.html">Introduction to Bioimage Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06172025_day2/module_07.html">Digital Images as Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06172025_day2/module_08.html">Working with Images in Python Using scikit-image and imageio</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06172025_day2/module_09.html">Visualizing Images in Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06172025_day2/module_10.html">Image Filtering &amp; Processing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06172025_day2/module_11.html">Threshold-Based Segmentation</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 - Image Segmentation with Deep Learning</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 - Image Segmentation with Deep Learning</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_intro_to_dl.html">A Gentle Introduction to Deep Learning for Microscopy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_dl_timeline.html">A Brief Timeline of Deep Learning</a></li>
@@ -209,6 +191,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="06_quality_evaluation.html">Quality control of segmentation results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_feature_extraction.html">Feature extraction (intensity, morphological and spatial features)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08_dl_further.html">Building bioimage analysis workflows (ZeroCostDL, Bioimage Zoo)</a></li>
 </ul>
 
@@ -534,11 +517,11 @@ document.write(`
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25h  Preparing metadata (pyproject.toml) ... ?25l- done
-?25hRequirement already satisfied: tifffile in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (2025.5.26)
-Requirement already satisfied: numpy&gt;=1.20.0 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from cellpose) (2.2.6)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: scipy in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from cellpose) (1.15.3)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25hRequirement already satisfied: tifffile in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (2025.5.26)
+Requirement already satisfied: numpy&gt;=1.20.0 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from cellpose) (2.2.6)
+Requirement already satisfied: scipy in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from cellpose) (1.15.3)
 Requirement already satisfied: natsort in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from cellpose) (8.4.0)
 Requirement already satisfied: tqdm in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from cellpose) (4.67.1)
 Requirement already satisfied: torch&gt;=1.6 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from cellpose) (2.7.1)
@@ -549,7 +532,9 @@ Requirement already satisfied: imagecodecs in /Users/ranit/anaconda3/envs/gbi-py
 Requirement already satisfied: roifile in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from cellpose) (2025.5.10)
 Requirement already satisfied: fill-voids in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from cellpose) (2.1.0)
 Requirement already satisfied: segment_anything in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from cellpose) (1.0)
-Collecting csbdeep&gt;=0.8.0 (from stardist)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting csbdeep&gt;=0.8.0 (from stardist)
   Using cached csbdeep-0.8.1-py2.py3-none-any.whl.metadata (2.4 kB)
 Requirement already satisfied: scikit-image in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from stardist) (0.25.2)
 </pre></div>
@@ -581,14 +566,12 @@ Requirement already satisfied: python-dateutil&gt;=2.7 in /Users/ranit/anaconda3
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting llvmlite&lt;0.45,&gt;=0.44.0dev0 (from numba-&gt;stardist)
   Using cached llvmlite-0.44.0-cp313-cp313-macosx_11_0_arm64.whl.metadata (4.8 kB)
 Requirement already satisfied: lazy-loader&gt;=0.4 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from scikit-image-&gt;stardist) (0.4)
+Using cached csbdeep-0.8.1-py2.py3-none-any.whl (71 kB)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using cached csbdeep-0.8.1-py2.py3-none-any.whl (71 kB)
-Using cached numba-0.61.2-cp313-cp313-macosx_11_0_arm64.whl (2.8 MB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using cached numba-0.61.2-cp313-cp313-macosx_11_0_arm64.whl (2.8 MB)
 Using cached llvmlite-0.44.0-cp313-cp313-macosx_11_0_arm64.whl (26.2 MB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Building wheels for collected packages: stardist
+Building wheels for collected packages: stardist
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Building wheel for stardist (pyproject.toml) ... ?25l-
@@ -601,12 +584,14 @@ Using cached llvmlite-0.44.0-cp313-cp313-macosx_11_0_arm64.whl (26.2 MB)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> error
-  <span class=" -Color -Color-Bold -Color-Bold-Red">error</span>: <span class=" -Color -Color-Bold">subprocess-exited-with-error</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  <span class=" -Color -Color-Bold -Color-Bold-Red">error</span>: <span class=" -Color -Color-Bold">subprocess-exited-with-error</span>
   
   <span class=" -Color -Color-Red">×</span> <span class=" -Color -Color-Green">Building wheel for stardist </span><span class=" -Color -Color-Bold -Color-Bold-Green">(</span><span class=" -Color -Color-Green">pyproject.toml</span><span class=" -Color -Color-Bold -Color-Bold-Green">)</span> did not run successfully.
   <span class=" -Color -Color-Red">│</span> exit code: <span class=" -Color -Color-Bold -Color-Bold-Cyan">1</span>
   <span class=" -Color -Color-Red">╰─&gt;</span> <span class=" -Color -Color-Red">[77 lines of output]</span>
-  <span class=" -Color -Color-Red">   </span> /private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-_9nx571t/overlay/lib/python3.13/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+  <span class=" -Color -Color-Red">   </span> /private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-7g8bdrd4/overlay/lib/python3.13/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
   <span class=" -Color -Color-Red">   </span> !!
   <span class=" -Color -Color-Red">   </span> 
   <span class=" -Color -Color-Red">   </span>         ********************************************************************************
@@ -663,11 +648,11 @@ Using cached llvmlite-0.44.0-cp313-cp313-macosx_11_0_arm64.whl (26.2 MB)
   <span class=" -Color -Color-Red">   </span> running build_ext
   <span class=" -Color -Color-Red">   </span> building &#39;stardist.lib.stardist2d&#39; extension
   <span class=" -Color -Color-Red">   </span> creating build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper
-  <span class=" -Color -Color-Red">   </span> clang++ -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -I/private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-_9nx571t/overlay/lib/python3.13/site-packages/numpy/_core/include -Istardist/lib/external/clipper -Istardist/lib/external/nanoflann -I/Users/ranit/anaconda3/envs/gbi-python-env/include/python3.13 -c stardist/lib/external/clipper/clipper.cpp -o build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper/clipper.o -std=c++11 -fopenmp
+  <span class=" -Color -Color-Red">   </span> clang++ -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -I/private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-7g8bdrd4/overlay/lib/python3.13/site-packages/numpy/_core/include -Istardist/lib/external/clipper -Istardist/lib/external/nanoflann -I/Users/ranit/anaconda3/envs/gbi-python-env/include/python3.13 -c stardist/lib/external/clipper/clipper.cpp -o build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper/clipper.o -std=c++11 -fopenmp
   <span class=" -Color -Color-Red">   </span> clang++: error: unsupported option &#39;-fopenmp&#39;
   <span class=" -Color -Color-Red">   </span> &gt;&gt;&gt; compiling with &#39;-fopenmp&#39; failed
   <span class=" -Color -Color-Red">   </span> building &#39;stardist.lib.stardist2d&#39; extension
-  <span class=" -Color -Color-Red">   </span> clang++ -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -I/private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-_9nx571t/overlay/lib/python3.13/site-packages/numpy/_core/include -Istardist/lib/external/clipper -Istardist/lib/external/nanoflann -I/Users/ranit/anaconda3/envs/gbi-python-env/include/python3.13 -c stardist/lib/external/clipper/clipper.cpp -o build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper/clipper.o -std=c++11 -Xpreprocessor -fopenmp
+  <span class=" -Color -Color-Red">   </span> clang++ -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -I/private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-7g8bdrd4/overlay/lib/python3.13/site-packages/numpy/_core/include -Istardist/lib/external/clipper -Istardist/lib/external/nanoflann -I/Users/ranit/anaconda3/envs/gbi-python-env/include/python3.13 -c stardist/lib/external/clipper/clipper.cpp -o build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper/clipper.o -std=c++11 -Xpreprocessor -fopenmp
   <span class=" -Color -Color-Red">   </span> In file included from stardist/lib/external/clipper/clipper.cpp:41:
   <span class=" -Color -Color-Red">   </span> stardist/lib/external/clipper/clipper.hpp:52:10: fatal error: &#39;vector&#39; file not found
   <span class=" -Color -Color-Red">   </span>    52 | #include &lt;vector&gt;
@@ -676,7 +661,7 @@ Using cached llvmlite-0.44.0-cp313-cp313-macosx_11_0_arm64.whl (26.2 MB)
   <span class=" -Color -Color-Red">   </span> &gt;&gt;&gt; compiling with &#39;-Xpreprocessor -fopenmp&#39; failed
   <span class=" -Color -Color-Red">   </span> &gt;&gt;&gt; compiling with OpenMP support failed, re-trying without
   <span class=" -Color -Color-Red">   </span> building &#39;stardist.lib.stardist2d&#39; extension
-  <span class=" -Color -Color-Red">   </span> clang++ -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -I/private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-_9nx571t/overlay/lib/python3.13/site-packages/numpy/_core/include -Istardist/lib/external/clipper -Istardist/lib/external/nanoflann -I/Users/ranit/anaconda3/envs/gbi-python-env/include/python3.13 -c stardist/lib/external/clipper/clipper.cpp -o build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper/clipper.o -std=c++11
+  <span class=" -Color -Color-Red">   </span> clang++ -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -fPIC -O2 -isystem /Users/ranit/anaconda3/envs/gbi-python-env/include -arch arm64 -I/private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-build-env-7g8bdrd4/overlay/lib/python3.13/site-packages/numpy/_core/include -Istardist/lib/external/clipper -Istardist/lib/external/nanoflann -I/Users/ranit/anaconda3/envs/gbi-python-env/include/python3.13 -c stardist/lib/external/clipper/clipper.cpp -o build/temp.macosx-11.1-arm64-cpython-313/stardist/lib/external/clipper/clipper.o -std=c++11
   <span class=" -Color -Color-Red">   </span> In file included from stardist/lib/external/clipper/clipper.cpp:41:
   <span class=" -Color -Color-Red">   </span> stardist/lib/external/clipper/clipper.hpp:52:10: fatal error: &#39;vector&#39; file not found
   <span class=" -Color -Color-Red">   </span>    52 | #include &lt;vector&gt;
@@ -711,7 +696,7 @@ Using cached llvmlite-0.44.0-cp313-cp313-macosx_11_0_arm64.whl (26.2 MB)
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="nn">/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/ipykernel_23280/1014929433.py</span> in <span class="ni">?</span><span class="nt">()</span>
+<span class="nn">/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/ipykernel_24348/1014929433.py</span> in <span class="ni">?</span><span class="nt">()</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">tifffile</span><span class="w"> </span><span class="kn">import</span> <span class="n">imread</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> 
 <span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">image</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="s1">&#39;example_nuclei.tif&#39;</span><span class="p">)</span>
