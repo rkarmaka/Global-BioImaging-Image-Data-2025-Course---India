@@ -45,7 +45,7 @@ The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
 # Download Dataset
-!wget https://github.com/rkarmaka/Global-BioImaging-Image-Data-2025-Course---India/raw/main/course_material/06182025_day3/data/sample_images.zip
+!wget https://github.com/rkarmaka/GBI-Python-2025/raw/main/course_material/06182025_day3/data/sample_images.zip
 !unzip sample_images.zip
 !rm sample_images.zip
 -------------------

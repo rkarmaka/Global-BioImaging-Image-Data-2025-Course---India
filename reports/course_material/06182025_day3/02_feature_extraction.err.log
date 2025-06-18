@@ -53,7 +53,7 @@ plt.show()
 
 [31m---------------------------------------------------------------------------[39m
 [31mFileNotFoundError[39m                         Traceback (most recent call last)
-[32m/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/ipykernel_25827/15664590.py[39m in [36m?[39m[34m()[39m
+[32m/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/ipykernel_26391/15664590.py[39m in [36m?[39m[34m()[39m
 [32m----> [39m[32m1[39m image = io.imread([33m'nuclei_raw.tif'[39m)
 [32m      2[39m mask = io.imread([33m'nuclei_mask.tif'[39m)  [38;5;66;03m# binary mask from segmentation[39;00m
 [32m      3[39m 
