@@ -1,23 +1,38 @@
 Traceback (most recent call last):
-  File "/Users/ranit/anaconda3/lib/python3.11/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+  File "/Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
     executenb(
-  File "/Users/ranit/anaconda3/lib/python3.11/site-packages/nbclient/client.py", line 1204, in execute
+    ~~~~~~~~~^
+        nb,
+        ^^^
+    ...<4 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/nbclient/client.py", line 1319, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/ranit/anaconda3/lib/python3.11/site-packages/nbclient/util.py", line 84, in wrapped
-    return just_run(coro(*args, **kwargs))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/ranit/anaconda3/lib/python3.11/site-packages/nbclient/util.py", line 62, in just_run
-    return loop.run_until_complete(coro)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/ranit/anaconda3/lib/python3.11/asyncio/base_events.py", line 653, in run_until_complete
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 158, in wrapped
+    return loop.run_until_complete(inner)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/asyncio/base_events.py", line 721, in run_until_complete
     return future.result()
-           ^^^^^^^^^^^^^^^
-  File "/Users/ranit/anaconda3/lib/python3.11/site-packages/nbclient/client.py", line 663, in async_execute
+           ~~~~~~~~~~~~~^^
+  File "/Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/nbclient/client.py", line 709, in async_execute
     await self.async_execute_cell(
-  File "/Users/ranit/anaconda3/lib/python3.11/site-packages/nbclient/client.py", line 965, in async_execute_cell
+        cell, index, execution_count=self.code_cells_executed + 1
+    )
+  File "/Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/nbclient/client.py", line 1062, in async_execute_cell
     await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "/Users/ranit/anaconda3/lib/python3.11/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+  File "/Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
@@ -35,56 +50,90 @@ plt.title("Segmentation Mask")
 plt.show()
 ------------------
 
-[0;31m---------------------------------------------------------------------------[0m
-[0;31mFileNotFoundError[0m                         Traceback (most recent call last)
-Cell [0;32mIn[2], line 1[0m
-[0;32m----> 1[0m image [38;5;241m=[39m io[38;5;241m.[39mimread([38;5;124m'[39m[38;5;124mnuclei_raw.tif[39m[38;5;124m'[39m)
-[1;32m      2[0m mask [38;5;241m=[39m io[38;5;241m.[39mimread([38;5;124m'[39m[38;5;124mnuclei_mask.tif[39m[38;5;124m'[39m)  [38;5;66;03m# binary mask from segmentation[39;00m
-[1;32m      4[0m plt[38;5;241m.[39mfigure(figsize[38;5;241m=[39m([38;5;241m10[39m, [38;5;241m5[39m))
 
-File [0;32m~/anaconda3/lib/python3.11/site-packages/skimage/io/_io.py:53[0m, in [0;36mimread[0;34m(fname, as_gray, plugin, **plugin_args)[0m
-[1;32m     50[0m         plugin [38;5;241m=[39m [38;5;124m'[39m[38;5;124mtifffile[39m[38;5;124m'[39m
-[1;32m     52[0m [38;5;28;01mwith[39;00m file_or_url_context(fname) [38;5;28;01mas[39;00m fname:
-[0;32m---> 53[0m     img [38;5;241m=[39m call_plugin([38;5;124m'[39m[38;5;124mimread[39m[38;5;124m'[39m, fname, plugin[38;5;241m=[39mplugin, [38;5;241m*[39m[38;5;241m*[39mplugin_args)
-[1;32m     55[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m [38;5;28mhasattr[39m(img, [38;5;124m'[39m[38;5;124mndim[39m[38;5;124m'[39m):
-[1;32m     56[0m     [38;5;28;01mreturn[39;00m img
+[31m---------------------------------------------------------------------------[39m
+[31mFileNotFoundError[39m                         Traceback (most recent call last)
+[32m/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/ipykernel_33119/15664590.py[39m in [36m?[39m[34m()[39m
+[32m----> [39m[32m1[39m image = io.imread([33m'nuclei_raw.tif'[39m)
+[32m      2[39m mask = io.imread([33m'nuclei_mask.tif'[39m)  [38;5;66;03m# binary mask from segmentation[39;00m
+[32m      3[39m 
+[32m      4[39m plt.figure(figsize=([32m10[39m, [32m5[39m))
 
-File [0;32m~/anaconda3/lib/python3.11/site-packages/skimage/io/manage_plugins.py:205[0m, in [0;36mcall_plugin[0;34m(kind, *args, **kwargs)[0m
-[1;32m    202[0m     [38;5;28;01mexcept[39;00m [38;5;167;01mIndexError[39;00m:
-[1;32m    203[0m         [38;5;28;01mraise[39;00m [38;5;167;01mRuntimeError[39;00m([38;5;124mf[39m[38;5;124m'[39m[38;5;124mCould not find the plugin [39m[38;5;124m"[39m[38;5;132;01m{[39;00mplugin[38;5;132;01m}[39;00m[38;5;124m"[39m[38;5;124m for [39m[38;5;132;01m{[39;00mkind[38;5;132;01m}[39;00m[38;5;124m.[39m[38;5;124m'[39m)
-[0;32m--> 205[0m [38;5;28;01mreturn[39;00m func([38;5;241m*[39margs, [38;5;241m*[39m[38;5;241m*[39mkwargs)
+[32m~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/skimage/_shared/utils.py[39m in [36m?[39m[34m(*args, **kwargs)[39m
+[32m    324[39m                 [38;5;28;01melif[39;00m self.new_name [38;5;28;01mis[39;00m [38;5;28;01mnot[39;00m [38;5;28;01mNone[39;00m:
+[32m    325[39m                     [38;5;66;03m# Assign old value to new one[39;00m
+[32m    326[39m                     kwargs[self.new_name] = deprecated_value
+[32m    327[39m 
+[32m--> [39m[32m328[39m             [38;5;28;01mreturn[39;00m func(*args, **kwargs)
 
-File [0;32m~/anaconda3/lib/python3.11/site-packages/skimage/io/_plugins/tifffile_plugin.py:74[0m, in [0;36mimread[0;34m(fname, **kwargs)[0m
-[1;32m     71[0m [38;5;28;01mif[39;00m [38;5;124m'[39m[38;5;124mimg_num[39m[38;5;124m'[39m [38;5;129;01min[39;00m kwargs:
-[1;32m     72[0m     kwargs[[38;5;124m'[39m[38;5;124mkey[39m[38;5;124m'[39m] [38;5;241m=[39m kwargs[38;5;241m.[39mpop([38;5;124m'[39m[38;5;124mimg_num[39m[38;5;124m'[39m)
-[0;32m---> 74[0m [38;5;28;01mreturn[39;00m tifffile_imread(fname, [38;5;241m*[39m[38;5;241m*[39mkwargs)
+[32m~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/skimage/io/_io.py[39m in [36m?[39m[34m(fname, as_gray, plugin, **plugin_args)[39m
+[32m     78[39m         [38;5;28;01mif[39;00m fname.lower().endswith(([33m'.tiff'[39m, [33m'.tif'[39m)):
+[32m     79[39m             plugin = [33m'tifffile'[39m
+[32m     80[39m 
+[32m     81[39m     [38;5;28;01mwith[39;00m file_or_url_context(fname) [38;5;28;01mas[39;00m fname, _hide_plugin_deprecation_warnings():
+[32m---> [39m[32m82[39m         img = call_plugin([33m'imread'[39m, fname, plugin=plugin, **plugin_args)
+[32m     83[39m 
+[32m     84[39m     [38;5;28;01mif[39;00m [38;5;28;01mnot[39;00m hasattr(img, [33m'ndim'[39m):
+[32m     85[39m         [38;5;28;01mreturn[39;00m img
 
-File [0;32m~/anaconda3/lib/python3.11/site-packages/tifffile/tifffile.py:816[0m, in [0;36mimread[0;34m(files, aszarr, **kwargs)[0m
-[1;32m    813[0m     files [38;5;241m=[39m files[[38;5;241m0[39m]
-[1;32m    815[0m [38;5;28;01mif[39;00m [38;5;28misinstance[39m(files, ([38;5;28mstr[39m, os[38;5;241m.[39mPathLike)) [38;5;129;01mor[39;00m [38;5;28mhasattr[39m(files, [38;5;124m'[39m[38;5;124mseek[39m[38;5;124m'[39m):
-[0;32m--> 816[0m     [38;5;28;01mwith[39;00m TiffFile(files, [38;5;241m*[39m[38;5;241m*[39mkwargs_file) [38;5;28;01mas[39;00m tif:
-[1;32m    817[0m         [38;5;28;01mif[39;00m aszarr:
-[1;32m    818[0m             [38;5;28;01mreturn[39;00m tif[38;5;241m.[39maszarr([38;5;241m*[39m[38;5;241m*[39mkwargs)
+[32m~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/skimage/_shared/utils.py[39m in [36m?[39m[34m(*args, **kwargs)[39m
+[32m    534[39m         @functools.wraps(func)
+[32m    535[39m         [38;5;28;01mdef[39;00m wrapped(*args, **kwargs):
+[32m    536[39m             stacklevel = [32m1[39m + self.get_stack_length(func) - stack_rank
+[32m    537[39m             warnings.warn(message, category=FutureWarning, stacklevel=stacklevel)
+[32m--> [39m[32m538[39m             [38;5;28;01mreturn[39;00m func(*args, **kwargs)
 
-File [0;32m~/anaconda3/lib/python3.11/site-packages/tifffile/tifffile.py:3000[0m, in [0;36mTiffFile.__init__[0;34m(self, arg, mode, name, offset, size, _multifile, _useframes, _master, **kwargs)[0m
-[1;32m   2997[0m [38;5;28;01mif[39;00m mode [38;5;129;01mnot[39;00m [38;5;129;01min[39;00m ([38;5;28;01mNone[39;00m, [38;5;124m'[39m[38;5;124mrb[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mr+b[39m[38;5;124m'[39m):
-[1;32m   2998[0m     [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m([38;5;124mf[39m[38;5;124m'[39m[38;5;124minvalid mode [39m[38;5;132;01m{[39;00mmode[38;5;132;01m!r}[39;00m[38;5;124m'[39m)
-[0;32m-> 3000[0m fh [38;5;241m=[39m FileHandle(arg, mode[38;5;241m=[39mmode, name[38;5;241m=[39mname, offset[38;5;241m=[39moffset, size[38;5;241m=[39msize)
-[1;32m   3001[0m [38;5;28mself[39m[38;5;241m.[39m_fh [38;5;241m=[39m fh
-[1;32m   3002[0m [38;5;28mself[39m[38;5;241m.[39m_multifile [38;5;241m=[39m [38;5;28mbool[39m(_multifile)
+[32m~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/skimage/io/manage_plugins.py[39m in [36m?[39m[34m(kind, *args, **kwargs)[39m
+[32m    250[39m             func = [f [38;5;28;01mfor[39;00m (p, f) [38;5;28;01min[39;00m plugin_funcs [38;5;28;01mif[39;00m p == plugin][[32m0[39m]
+[32m    251[39m         [38;5;28;01mexcept[39;00m IndexError:
+[32m    252[39m             [38;5;28;01mraise[39;00m RuntimeError(f'Could not find the plugin "{plugin}" for {kind}.')
+[32m    253[39m 
+[32m--> [39m[32m254[39m     [38;5;28;01mreturn[39;00m func(*args, **kwargs)
 
-File [0;32m~/anaconda3/lib/python3.11/site-packages/tifffile/tifffile.py:9537[0m, in [0;36mFileHandle.__init__[0;34m(self, file, mode, name, offset, size)[0m
-[1;32m   9535[0m [38;5;28mself[39m[38;5;241m.[39mis_file [38;5;241m=[39m [38;5;28;01mNone[39;00m
-[1;32m   9536[0m [38;5;28mself[39m[38;5;241m.[39m_lock [38;5;241m=[39m NullContext()
-[0;32m-> 9537[0m [38;5;28mself[39m[38;5;241m.[39mopen()
+[32m~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/skimage/io/_plugins/tifffile_plugin.py[39m in [36m?[39m[34m(fname, **kwargs)[39m
+[32m     70[39m     """
+[32m     71[39m     [38;5;28;01mif[39;00m [33m'img_num'[39m [38;5;28;01min[39;00m kwargs:
+[32m     72[39m         kwargs[[33m'key'[39m] = kwargs.pop([33m'img_num'[39m)
+[32m     73[39m 
+[32m---> [39m[32m74[39m     [38;5;28;01mreturn[39;00m tifffile_imread(fname, **kwargs)
 
-File [0;32m~/anaconda3/lib/python3.11/site-packages/tifffile/tifffile.py:9550[0m, in [0;36mFileHandle.open[0;34m(self)[0m
-[1;32m   9548[0m [38;5;28mself[39m[38;5;241m.[39m_file [38;5;241m=[39m os[38;5;241m.[39mpath[38;5;241m.[39mrealpath([38;5;28mself[39m[38;5;241m.[39m_file)
-[1;32m   9549[0m [38;5;28mself[39m[38;5;241m.[39m_dir, [38;5;28mself[39m[38;5;241m.[39m_name [38;5;241m=[39m os[38;5;241m.[39mpath[38;5;241m.[39msplit([38;5;28mself[39m[38;5;241m.[39m_file)
-[0;32m-> 9550[0m [38;5;28mself[39m[38;5;241m.[39m_fh [38;5;241m=[39m [38;5;28mopen[39m([38;5;28mself[39m[38;5;241m.[39m_file, [38;5;28mself[39m[38;5;241m.[39m_mode)
-[1;32m   9551[0m [38;5;28mself[39m[38;5;241m.[39m_close [38;5;241m=[39m [38;5;28;01mTrue[39;00m
-[1;32m   9552[0m [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39m_offset [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+[32m~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/tifffile/tifffile.py[39m in [36m?[39m[34m(files, selection, aszarr, key, series, level, squeeze, maxworkers, buffersize, mode, name, offset, size, pattern, axesorder, categories, imread, imreadargs, sort, container, chunkshape, chunkdtype, axestiled, ioworkers, chunkmode, fillvalue, zattrs, multiscales, omexml, out, out_inplace, _multifile, _useframes, **kwargs)[39m
+[32m   1195[39m         ):
+[32m   1196[39m             files = files[[32m0[39m]
+[32m   1197[39m 
+[32m   1198[39m         [38;5;28;01mif[39;00m isinstance(files, str) [38;5;28;01mor[39;00m [38;5;28;01mnot[39;00m isinstance(files, Sequence):
+[32m-> [39m[32m1199[39m             with TiffFile(
+[32m   1200[39m                 files,
+[32m   1201[39m                 mode=mode,
+[32m   1202[39m                 name=name,
 
-[0;31mFileNotFoundError[0m: [Errno 2] No such file or directory: '/Users/ranit/Research/github/GBI-Python-2025/course_material/06182025_day3/nuclei_raw.tif'
-FileNotFoundError: [Errno 2] No such file or directory: '/Users/ranit/Research/github/GBI-Python-2025/course_material/06182025_day3/nuclei_raw.tif'
+[32m~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/tifffile/tifffile.py[39m in [36m?[39m[34m(self, file, mode, name, offset, size, omexml, _multifile, _useframes, _parent, **is_flags)[39m
+[32m   4230[39m                 [38;5;28;01mraise[39;00m ValueError([33m'invalid OME-XML'[39m)
+[32m   4231[39m             self._omexml = omexml
+[32m   4232[39m             self.is_ome = [38;5;28;01mTrue[39;00m
+[32m   4233[39m 
+[32m-> [39m[32m4234[39m         fh = FileHandle(file, mode=mode, name=name, offset=offset, size=size)
+[32m   4235[39m         self._fh = fh
+[32m   4236[39m         self._multifile = [38;5;28;01mTrue[39;00m [38;5;28;01mif[39;00m _multifile [38;5;28;01mis[39;00m [38;5;28;01mNone[39;00m [38;5;28;01melse[39;00m bool(_multifile)
+[32m   4237[39m         self._files = {fh.name: self}
+
+[32m~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/tifffile/tifffile.py[39m in [36m?[39m[34m(self, file, mode, name, offset, size)[39m
+[32m  13273[39m         self._offset = -[32m1[39m [38;5;28;01mif[39;00m offset [38;5;28;01mis[39;00m [38;5;28;01mNone[39;00m [38;5;28;01melse[39;00m offset
+[32m  13274[39m         self._size = -[32m1[39m [38;5;28;01mif[39;00m size [38;5;28;01mis[39;00m [38;5;28;01mNone[39;00m [38;5;28;01melse[39;00m size
+[32m  13275[39m         self._close = [38;5;28;01mTrue[39;00m
+[32m  13276[39m         self._lock = NullContext()
+[32m> [39m[32m13277[39m         self.open()
+[32m  13278[39m         [38;5;28;01massert[39;00m self._fh [38;5;28;01mis[39;00m [38;5;28;01mnot[39;00m [38;5;28;01mNone[39;00m
+
+[32m~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/tifffile/tifffile.py[39m in [36m?[39m[34m(self)[39m
+[32m  13292[39m             [38;5;28;01mif[39;00m self._mode [38;5;28;01mnot[39;00m [38;5;28;01min[39;00m {[33m'rb'[39m, [33m'r+b'[39m, [33m'wb'[39m, [33m'xb'[39m}:
+[32m  13293[39m                 [38;5;28;01mraise[39;00m ValueError(f'invalid mode {self._mode}')
+[32m  13294[39m             self._file = os.path.realpath(self._file)
+[32m  13295[39m             self._dir, self._name = os.path.split(self._file)
+[32m> [39m[32m13296[39m             self._fh = open(self._file, self._mode, encoding=[38;5;28;01mNone[39;00m)
+[32m  13297[39m             self._close = [38;5;28;01mTrue[39;00m
+[32m  13298[39m             self._offset = max([32m0[39m, self._offset)
+[32m  13299[39m         [38;5;28;01melif[39;00m isinstance(self._file, FileHandle):
+
+[31mFileNotFoundError[39m: [Errno 2] No such file or directory: '/Users/ranit/Research/github/GBI-Python-2025/course_material/06182025_day3/nuclei_raw.tif'
 

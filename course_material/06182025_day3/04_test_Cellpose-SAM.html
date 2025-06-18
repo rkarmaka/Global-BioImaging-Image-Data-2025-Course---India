@@ -183,7 +183,9 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Image Segmentation with Deep Learning</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_intro_to_dl.html">A Gentle Introduction to Deep Learning for Microscopy</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="02_dl_timeline.html">A Brief Timeline of Deep Learning</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="03_cellpose_intro.html">Introduction to Cellpose</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Cellpose-SAM: superhuman generalization for cellular segmentation</a></li>
 
@@ -445,8 +447,8 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting git+https://www.github.com/mouseland/cellpose.git
-  Cloning https://www.github.com/mouseland/cellpose.git to /private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-req-build-pp2btrso
-  Running command git clone --filter=blob:none --quiet https://www.github.com/mouseland/cellpose.git /private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-req-build-pp2btrso
+  Cloning https://www.github.com/mouseland/cellpose.git to /private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-req-build-3y9puz95
+  Running command git clone --filter=blob:none --quiet https://www.github.com/mouseland/cellpose.git /private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-req-build-3y9puz95
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  warning: redirecting to https://github.com/mouseland/cellpose.git/
@@ -465,63 +467,31 @@ document.write(`
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> done
-?25hRequirement already satisfied: numpy&gt;=1.20.0 in /Users/ranit/anaconda3/lib/python3.11/site-packages (from cellpose==4.0.5.dev23+g15eb3c6) (1.24.3)
-Requirement already satisfied: scipy in /Users/ranit/anaconda3/lib/python3.11/site-packages (from cellpose==4.0.5.dev23+g15eb3c6) (1.10.1)
-Requirement already satisfied: natsort in /Users/ranit/anaconda3/lib/python3.11/site-packages (from cellpose==4.0.5.dev23+g15eb3c6) (8.4.0)
-Requirement already satisfied: tifffile in /Users/ranit/anaconda3/lib/python3.11/site-packages (from cellpose==4.0.5.dev23+g15eb3c6) (2021.7.2)
+?25hRequirement already satisfied: numpy&gt;=1.20.0 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from cellpose==4.0.5.dev23+g15eb3c6) (2.2.6)
+Requirement already satisfied: scipy in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from cellpose==4.0.5.dev23+g15eb3c6) (1.15.3)
+Requirement already satisfied: natsort in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from cellpose==4.0.5.dev23+g15eb3c6) (8.4.0)
+Requirement already satisfied: tifffile in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from cellpose==4.0.5.dev23+g15eb3c6) (2025.5.26)
+Requirement already satisfied: tqdm in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from cellpose==4.0.5.dev23+g15eb3c6) (4.67.1)
+Requirement already satisfied: torchvision in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from cellpose==4.0.5.dev23+g15eb3c6) (0.22.1)
+Requirement already satisfied: opencv-python-headless in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from cellpose==4.0.5.dev23+g15eb3c6) (4.11.0.86)
+Requirement already satisfied: fastremap in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from cellpose==4.0.5.dev23+g15eb3c6) (1.16.1)
+Requirement already satisfied: imagecodecs in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from cellpose==4.0.5.dev23+g15eb3c6) (2025.3.30)
+Requirement already satisfied: roifile in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from cellpose==4.0.5.dev23+g15eb3c6) (2025.5.10)
+Requirement already satisfied: fill-voids in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from cellpose==4.0.5.dev23+g15eb3c6) (2.1.0)
+Requirement already satisfied: segment_anything in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from cellpose==4.0.5.dev23+g15eb3c6) (1.0)
+Requirement already satisfied: torch==2.7.1 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from torchvision-&gt;cellpose==4.0.5.dev23+g15eb3c6) (2.7.1)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: tqdm in /Users/ranit/anaconda3/lib/python3.11/site-packages (from cellpose==4.0.5.dev23+g15eb3c6) (4.65.0)
-Requirement already satisfied: torchvision in /Users/ranit/anaconda3/lib/python3.11/site-packages (from cellpose==4.0.5.dev23+g15eb3c6) (0.22.1)
-Requirement already satisfied: opencv-python-headless in /Users/ranit/anaconda3/lib/python3.11/site-packages (from cellpose==4.0.5.dev23+g15eb3c6) (4.11.0.86)
-Requirement already satisfied: fastremap in /Users/ranit/anaconda3/lib/python3.11/site-packages (from cellpose==4.0.5.dev23+g15eb3c6) (1.16.1)
-Requirement already satisfied: imagecodecs in /Users/ranit/anaconda3/lib/python3.11/site-packages (from cellpose==4.0.5.dev23+g15eb3c6) (2021.8.26)
-Requirement already satisfied: roifile in /Users/ranit/anaconda3/lib/python3.11/site-packages (from cellpose==4.0.5.dev23+g15eb3c6) (2025.5.10)
-Requirement already satisfied: fill-voids in /Users/ranit/anaconda3/lib/python3.11/site-packages (from cellpose==4.0.5.dev23+g15eb3c6) (2.1.0)
-Requirement already satisfied: segment_anything in /Users/ranit/anaconda3/lib/python3.11/site-packages (from cellpose==4.0.5.dev23+g15eb3c6) (1.0)
-Requirement already satisfied: torch==2.7.1 in /Users/ranit/anaconda3/lib/python3.11/site-packages (from torchvision-&gt;cellpose==4.0.5.dev23+g15eb3c6) (2.7.1)
-Requirement already satisfied: pillow!=8.3.*,&gt;=5.3.0 in /Users/ranit/anaconda3/lib/python3.11/site-packages (from torchvision-&gt;cellpose==4.0.5.dev23+g15eb3c6) (9.4.0)
-Requirement already satisfied: filelock in /Users/ranit/anaconda3/lib/python3.11/site-packages (from torch==2.7.1-&gt;torchvision-&gt;cellpose==4.0.5.dev23+g15eb3c6) (3.9.0)
-Requirement already satisfied: typing-extensions&gt;=4.10.0 in /Users/ranit/anaconda3/lib/python3.11/site-packages (from torch==2.7.1-&gt;torchvision-&gt;cellpose==4.0.5.dev23+g15eb3c6) (4.14.0)
-Requirement already satisfied: sympy&gt;=1.13.3 in /Users/ranit/anaconda3/lib/python3.11/site-packages (from torch==2.7.1-&gt;torchvision-&gt;cellpose==4.0.5.dev23+g15eb3c6) (1.14.0)
-Requirement already satisfied: networkx in /Users/ranit/anaconda3/lib/python3.11/site-packages (from torch==2.7.1-&gt;torchvision-&gt;cellpose==4.0.5.dev23+g15eb3c6) (3.1)
-Requirement already satisfied: jinja2 in /Users/ranit/anaconda3/lib/python3.11/site-packages (from torch==2.7.1-&gt;torchvision-&gt;cellpose==4.0.5.dev23+g15eb3c6) (3.1.2)
-Requirement already satisfied: fsspec in /Users/ranit/anaconda3/lib/python3.11/site-packages (from torch==2.7.1-&gt;torchvision-&gt;cellpose==4.0.5.dev23+g15eb3c6) (2023.4.0)
-Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /Users/ranit/anaconda3/lib/python3.11/site-packages (from sympy&gt;=1.13.3-&gt;torch==2.7.1-&gt;torchvision-&gt;cellpose==4.0.5.dev23+g15eb3c6) (1.3.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: MarkupSafe&gt;=2.0 in /Users/ranit/anaconda3/lib/python3.11/site-packages (from jinja2-&gt;torch==2.7.1-&gt;torchvision-&gt;cellpose==4.0.5.dev23+g15eb3c6) (2.1.1)
-Building wheels for collected packages: cellpose
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Building wheel for cellpose (setup.py) ... ?25l-
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> /
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> done
-?25h  Created wheel for cellpose: filename=cellpose-4.0.5.dev23+g15eb3c6-py3-none-any.whl size=212204 sha256=305a1d5cc1a9b783074f4b4838420de651adeb014ca98e9f53252f8bf8d3dc53
-  Stored in directory: /private/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/pip-ephem-wheel-cache-al2rkvod/wheels/43/c7/c8/549fa70c201bde0c0155987ae1d397b02eeac482ea65b1ab1d
-Successfully built cellpose
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: cellpose
-  Attempting uninstall: cellpose
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Found existing installation: cellpose 4.0.4
-    Uninstalling cellpose-4.0.4:
-      Successfully uninstalled cellpose-4.0.4
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed cellpose-4.0.5.dev23+g15eb3c6
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pillow!=8.3.*,&gt;=5.3.0 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from torchvision-&gt;cellpose==4.0.5.dev23+g15eb3c6) (11.2.1)
+Requirement already satisfied: filelock in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from torch==2.7.1-&gt;torchvision-&gt;cellpose==4.0.5.dev23+g15eb3c6) (3.18.0)
+Requirement already satisfied: typing-extensions&gt;=4.10.0 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from torch==2.7.1-&gt;torchvision-&gt;cellpose==4.0.5.dev23+g15eb3c6) (4.13.2)
+Requirement already satisfied: setuptools in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from torch==2.7.1-&gt;torchvision-&gt;cellpose==4.0.5.dev23+g15eb3c6) (78.1.1)
+Requirement already satisfied: sympy&gt;=1.13.3 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from torch==2.7.1-&gt;torchvision-&gt;cellpose==4.0.5.dev23+g15eb3c6) (1.14.0)
+Requirement already satisfied: networkx in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from torch==2.7.1-&gt;torchvision-&gt;cellpose==4.0.5.dev23+g15eb3c6) (3.5)
+Requirement already satisfied: jinja2 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from torch==2.7.1-&gt;torchvision-&gt;cellpose==4.0.5.dev23+g15eb3c6) (3.1.6)
+Requirement already satisfied: fsspec in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from torch==2.7.1-&gt;torchvision-&gt;cellpose==4.0.5.dev23+g15eb3c6) (2025.5.1)
+Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from sympy&gt;=1.13.3-&gt;torch==2.7.1-&gt;torchvision-&gt;cellpose==4.0.5.dev23+g15eb3c6) (1.3.0)
+Requirement already satisfied: MarkupSafe&gt;=2.0 in /Users/ranit/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages (from jinja2-&gt;torch==2.7.1-&gt;torchvision-&gt;cellpose==4.0.5.dev23+g15eb3c6) (3.0.2)
 </pre></div>
 </div>
 </div>
@@ -549,32 +519,32 @@ Successfully built cellpose
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Welcome to CellposeSAM, cellpose v
 cellpose version: 	4.0.5.dev23+g15eb3c6 
 platform:       	darwin 
-python version: 	3.11.4 
+python version: 	3.13.0 
 torch version:  	2.7.1! The neural network component of
 CPSAM is much larger than in previous versions and CPU excution is slow. 
 We encourage users to use GPU/MPS if available. 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-06-17 21:31:39,797 [INFO] WRITING LOG OUTPUT TO /Users/ranit/.cellpose/run.log
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-06-17 22:43:22,485 [INFO] WRITING LOG OUTPUT TO /Users/ranit/.cellpose/run.log
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-06-17 21:31:39,798 [INFO] 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-06-17 22:43:22,485 [INFO] 
 cellpose version: 	4.0.5.dev23+g15eb3c6 
 platform:       	darwin 
-python version: 	3.11.4 
+python version: 	3.13.0 
 torch version:  	2.7.1
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-06-17 21:31:39,819 [INFO] ** TORCH MPS version installed and working. **
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-06-17 22:43:22,523 [INFO] ** TORCH MPS version installed and working. **
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-06-17 21:31:39,819 [INFO] ** TORCH MPS version installed and working. **
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-06-17 22:43:22,524 [INFO] ** TORCH MPS version installed and working. **
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-06-17 21:31:39,820 [INFO] &gt;&gt;&gt;&gt; using GPU (MPS)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-06-17 22:43:22,525 [INFO] &gt;&gt;&gt;&gt; using GPU (MPS)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-06-17 21:31:41,231 [INFO] &gt;&gt;&gt;&gt; loading model /Users/ranit/.cellpose/models/cpsam
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-06-17 22:43:23,909 [INFO] &gt;&gt;&gt;&gt; loading model /Users/ranit/.cellpose/models/cpsam
 </pre></div>
 </div>
 </div>
@@ -617,25 +587,28 @@ torch version:  	2.7.1
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|                                                                                                                                | 0.00/21.3M [00:00&lt;?, ?B/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2%|██                                                                                                                      | 376k/21.3M [00:00&lt;00:06, 3.21MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1%|█▏                                                                                                                      | 224k/21.3M [00:00&lt;00:09, 2.28MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 14%|████████████████                                                                                                       | 2.88M/21.3M [00:00&lt;00:01, 15.5MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  9%|██████████▏                                                                                                            | 1.81M/21.3M [00:00&lt;00:02, 9.97MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 39%|██████████████████████████████████████████████▉                                                                        | 8.39M/21.3M [00:00&lt;00:00, 33.6MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 27%|████████████████████████████████                                                                                       | 5.73M/21.3M [00:00&lt;00:00, 23.4MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 58%|████████████████████████████████████████████████████████████████████▋                                                  | 12.3M/21.3M [00:00&lt;00:00, 36.3MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 44%|████████████████████████████████████████████████████▋                                                                  | 9.41M/21.3M [00:00&lt;00:00, 29.2MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 78%|████████████████████████████████████████████████████████████████████████████████████████████▌                          | 16.5M/21.3M [00:00&lt;00:00, 39.1MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 63%|███████████████████████████████████████████████████████████████████████████▍                                           | 13.5M/21.3M [00:00&lt;00:00, 33.9MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 98%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌  | 20.8M/21.3M [00:00&lt;00:00, 40.4MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 81%|████████████████████████████████████████████████████████████████████████████████████████████████▏                      | 17.2M/21.3M [00:00&lt;00:00, 35.5MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 21.3M/21.3M [00:00&lt;00:00, 33.1MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 97%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████▎   | 20.6M/21.3M [00:00&lt;00:00, 31.9MB/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 21.3M/21.3M [00:00&lt;00:00, 28.7MB/s]
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -644,16 +617,19 @@ torch version:  	2.7.1
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|                                                                                                                                | 0.00/1.63M [00:00&lt;?, ?B/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 13%|███████████████▍                                                                                                        | 216k/1.63M [00:00&lt;00:00, 2.05MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 13%|███████████████▍                                                                                                        | 216k/1.63M [00:00&lt;00:00, 1.89MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1.63M/1.63M [00:00&lt;00:00, 8.32MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 97%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌   | 1.59M/1.63M [00:00&lt;00:00, 8.73MB/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1.63M/1.63M [00:00&lt;00:00, 7.77MB/s]
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<img alt="../../_images/9663a61187d4e15436b1245c0b17231cfada17372b13eb4a3a4b88ce2f227a51.png" src="../../_images/9663a61187d4e15436b1245c0b17231cfada17372b13eb4a3a4b88ce2f227a51.png" />
+<img alt="../../_images/3f214f527c8e09ac45e878a6beed4e3d005a29ea2a31976a411f2f01b2a6eb20.png" src="../../_images/3f214f527c8e09ac45e878a6beed4e3d005a29ea2a31976a411f2f01b2a6eb20.png" />
 </div>
 </div>
 </section>
@@ -666,18 +642,18 @@ torch version:  	2.7.1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-06-17 21:31:44,686 [INFO] 0%|          | 0/24 [00:00&lt;?, ?it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-06-17 22:43:26,827 [INFO] 0%|          | 0/24 [00:00&lt;?, ?it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-06-17 21:32:14,757 [INFO] 42%|####1     | 10/24 [00:30&lt;00:42,  3.01s/it]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-06-17 22:43:56,919 [INFO] 46%|####5     | 11/24 [00:30&lt;00:35,  2.74s/it]
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
 <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">masks_pred</span><span class="p">,</span> <span class="n">flows</span><span class="p">,</span> <span class="n">styles</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">imgs</span><span class="p">,</span> <span class="n">niter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">masks_pred</span><span class="p">,</span> <span class="n">flows</span><span class="p">,</span> <span class="n">styles</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">imgs</span><span class="p">,</span> <span class="n">niter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span> <span class="c1"># using more iterations for bacteria</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/cellpose/models.py:230,</span> in <span class="ni">CellposeModel.eval</span><span class="nt">(self, x, batch_size, resample, channels, channel_axis, z_axis, normalize, invert, rescale, diameter, flow_threshold, cellprob_threshold, do_3D, anisotropy, flow3D_smooth, stitch_threshold, min_size, max_size_fraction, niter, augment, tile_overlap, bsize, compute_masks, progress)</span>
+<span class="nn">File ~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/cellpose/models.py:230,</span> in <span class="ni">CellposeModel.eval</span><span class="nt">(self, x, batch_size, resample, channels, channel_axis, z_axis, normalize, invert, rescale, diameter, flow_threshold, cellprob_threshold, do_3D, anisotropy, flow3D_smooth, stitch_threshold, min_size, max_size_fraction, niter, augment, tile_overlap, bsize, compute_masks, progress)</span>
 <span class="g g-Whitespace">    </span><span class="mi">228</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">iterator</span><span class="p">:</span>
 <span class="g g-Whitespace">    </span><span class="mi">229</span>     <span class="n">tic</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="ne">--&gt; </span><span class="mi">230</span>     <span class="n">maski</span><span class="p">,</span> <span class="n">flowi</span><span class="p">,</span> <span class="n">stylei</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span>
@@ -707,7 +683,7 @@ torch version:  	2.7.1
 <span class="g g-Whitespace">    </span><span class="mi">254</span>     <span class="n">masks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">maski</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">255</span>     <span class="n">flows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">flowi</span><span class="p">)</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/cellpose/models.py:313,</span> in <span class="ni">CellposeModel.eval</span><span class="nt">(self, x, batch_size, resample, channels, channel_axis, z_axis, normalize, invert, rescale, diameter, flow_threshold, cellprob_threshold, do_3D, anisotropy, flow3D_smooth, stitch_threshold, min_size, max_size_fraction, niter, augment, tile_overlap, bsize, compute_masks, progress)</span>
+<span class="nn">File ~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/cellpose/models.py:313,</span> in <span class="ni">CellposeModel.eval</span><span class="nt">(self, x, batch_size, resample, channels, channel_axis, z_axis, normalize, invert, rescale, diameter, flow_threshold, cellprob_threshold, do_3D, anisotropy, flow3D_smooth, stitch_threshold, min_size, max_size_fraction, niter, augment, tile_overlap, bsize, compute_masks, progress)</span>
 <span class="g g-Whitespace">    </span><span class="mi">310</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">anisotropy</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">))</span> <span class="ow">and</span> <span class="n">image_scaling</span><span class="p">:</span>
 <span class="g g-Whitespace">    </span><span class="mi">311</span>     <span class="n">anisotropy</span> <span class="o">=</span> <span class="n">image_scaling</span> <span class="o">*</span> <span class="n">anisotropy</span>
 <span class="ne">--&gt; </span><span class="mi">313</span> <span class="n">dP</span><span class="p">,</span> <span class="n">cellprob</span><span class="p">,</span> <span class="n">styles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_net</span><span class="p">(</span>
@@ -721,7 +697,7 @@ torch version:  	2.7.1
 <span class="g g-Whitespace">    </span><span class="mi">322</span> <span class="k">if</span> <span class="n">do_3D</span><span class="p">:</span>    
 <span class="g g-Whitespace">    </span><span class="mi">323</span>     <span class="k">if</span> <span class="n">flow3D_smooth</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/cellpose/models.py:478,</span> in <span class="ni">CellposeModel._run_net</span><span class="nt">(self, x, augment, batch_size, tile_overlap, bsize, anisotropy, do_3D)</span>
+<span class="nn">File ~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/cellpose/models.py:478,</span> in <span class="ni">CellposeModel._run_net</span><span class="nt">(self, x, augment, batch_size, tile_overlap, bsize, anisotropy, do_3D)</span>
 <span class="g g-Whitespace">    </span><span class="mi">476</span>     <span class="n">dP</span> <span class="o">=</span> <span class="n">yf</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <span class="g g-Whitespace">    </span><span class="mi">477</span> <span class="k">else</span><span class="p">:</span>
 <span class="ne">--&gt; </span><span class="mi">478</span>     <span class="n">yf</span><span class="p">,</span> <span class="n">styles</span> <span class="o">=</span> <span class="n">run_net</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">bsize</span><span class="o">=</span><span class="n">bsize</span><span class="p">,</span> <span class="n">augment</span><span class="o">=</span><span class="n">augment</span><span class="p">,</span>
@@ -731,26 +707,26 @@ torch version:  	2.7.1
 <span class="g g-Whitespace">    </span><span class="mi">482</span>     <span class="n">cellprob</span> <span class="o">=</span> <span class="n">yf</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="g g-Whitespace">    </span><span class="mi">483</span>     <span class="n">dP</span> <span class="o">=</span> <span class="n">yf</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/cellpose/core.py:230,</span> in <span class="ni">run_net</span><span class="nt">(net, imgi, batch_size, augment, tile_overlap, bsize, rsz)</span>
+<span class="nn">File ~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/cellpose/core.py:230,</span> in <span class="ni">run_net</span><span class="nt">(net, imgi, batch_size, augment, tile_overlap, bsize, rsz)</span>
 <span class="g g-Whitespace">    </span><span class="mi">228</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">IMGa</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">batch_size</span><span class="p">):</span>
 <span class="g g-Whitespace">    </span><span class="mi">229</span>     <span class="n">bslc</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">IMGa</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 <span class="ne">--&gt; </span><span class="mi">230</span>     <span class="n">ya0</span><span class="p">,</span> <span class="n">stylea0</span> <span class="o">=</span> <span class="n">_forward</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">IMGa</span><span class="p">[</span><span class="n">bslc</span><span class="p">])</span>
 <span class="g g-Whitespace">    </span><span class="mi">231</span>     <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
 <span class="g g-Whitespace">    </span><span class="mi">232</span>         <span class="n">nout</span> <span class="o">=</span> <span class="n">ya0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/cellpose/core.py:158,</span> in <span class="ni">_forward</span><span class="nt">(net, x)</span>
+<span class="nn">File ~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/cellpose/core.py:158,</span> in <span class="ni">_forward</span><span class="nt">(net, x)</span>
 <span class="g g-Whitespace">    </span><span class="mi">156</span> <span class="n">net</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
 <span class="g g-Whitespace">    </span><span class="mi">157</span> <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
 <span class="ne">--&gt; </span><span class="mi">158</span>     <span class="n">y</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">net</span><span class="p">(</span><span class="n">X</span><span class="p">)[:</span><span class="mi">2</span><span class="p">]</span>
 <span class="g g-Whitespace">    </span><span class="mi">159</span> <span class="k">del</span> <span class="n">X</span>
 <span class="g g-Whitespace">    </span><span class="mi">160</span> <span class="n">y</span> <span class="o">=</span> <span class="n">_from_device</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py:1751,</span> in <span class="ni">Module._wrapped_call_impl</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="nn">File ~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/torch/nn/modules/module.py:1751,</span> in <span class="ni">Module._wrapped_call_impl</span><span class="nt">(self, *args, **kwargs)</span>
 <span class="g g-Whitespace">   </span><span class="mi">1749</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># type: ignore[misc]</span>
 <span class="g g-Whitespace">   </span><span class="mi">1750</span> <span class="k">else</span><span class="p">:</span>
 <span class="ne">-&gt; </span><span class="mi">1751</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py:1762,</span> in <span class="ni">Module._call_impl</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="nn">File ~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/torch/nn/modules/module.py:1762,</span> in <span class="ni">Module._call_impl</span><span class="nt">(self, *args, **kwargs)</span>
 <span class="g g-Whitespace">   </span><span class="mi">1757</span> <span class="c1"># If we don&#39;t have any hooks, we want to skip the rest of the logic in</span>
 <span class="g g-Whitespace">   </span><span class="mi">1758</span> <span class="c1"># this function, and just call forward.</span>
 <span class="g g-Whitespace">   </span><span class="mi">1759</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backward_pre_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_pre_hooks</span>
@@ -760,19 +736,19 @@ torch version:  	2.7.1
 <span class="g g-Whitespace">   </span><span class="mi">1764</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="g g-Whitespace">   </span><span class="mi">1765</span> <span class="n">called_always_called_hooks</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/cellpose/vit_sam.py:70,</span> in <span class="ni">Transformer.forward</span><span class="nt">(self, x)</span>
+<span class="nn">File ~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/cellpose/vit_sam.py:70,</span> in <span class="ni">Transformer.forward</span><span class="nt">(self, x)</span>
 <span class="g g-Whitespace">     </span><span class="mi">68</span> <span class="k">else</span><span class="p">:</span>
 <span class="g g-Whitespace">     </span><span class="mi">69</span>     <span class="k">for</span> <span class="n">blk</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="o">.</span><span class="n">blocks</span><span class="p">:</span>
 <span class="ne">---&gt; </span><span class="mi">70</span>         <span class="n">x</span> <span class="o">=</span> <span class="n">blk</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">72</span> <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="o">.</span><span class="n">neck</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <span class="g g-Whitespace">     </span><span class="mi">74</span> <span class="c1"># readout is changed here</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py:1751,</span> in <span class="ni">Module._wrapped_call_impl</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="nn">File ~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/torch/nn/modules/module.py:1751,</span> in <span class="ni">Module._wrapped_call_impl</span><span class="nt">(self, *args, **kwargs)</span>
 <span class="g g-Whitespace">   </span><span class="mi">1749</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># type: ignore[misc]</span>
 <span class="g g-Whitespace">   </span><span class="mi">1750</span> <span class="k">else</span><span class="p">:</span>
 <span class="ne">-&gt; </span><span class="mi">1751</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py:1762,</span> in <span class="ni">Module._call_impl</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="nn">File ~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/torch/nn/modules/module.py:1762,</span> in <span class="ni">Module._call_impl</span><span class="nt">(self, *args, **kwargs)</span>
 <span class="g g-Whitespace">   </span><span class="mi">1757</span> <span class="c1"># If we don&#39;t have any hooks, we want to skip the rest of the logic in</span>
 <span class="g g-Whitespace">   </span><span class="mi">1758</span> <span class="c1"># this function, and just call forward.</span>
 <span class="g g-Whitespace">   </span><span class="mi">1759</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backward_pre_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_pre_hooks</span>
@@ -782,19 +758,19 @@ torch version:  	2.7.1
 <span class="g g-Whitespace">   </span><span class="mi">1764</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="g g-Whitespace">   </span><span class="mi">1765</span> <span class="n">called_always_called_hooks</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/segment_anything/modeling/image_encoder.py:174,</span> in <span class="ni">Block.forward</span><span class="nt">(self, x)</span>
+<span class="nn">File ~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/segment_anything/modeling/image_encoder.py:174,</span> in <span class="ni">Block.forward</span><span class="nt">(self, x)</span>
 <span class="g g-Whitespace">    </span><span class="mi">171</span>     <span class="n">H</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 <span class="g g-Whitespace">    </span><span class="mi">172</span>     <span class="n">x</span><span class="p">,</span> <span class="n">pad_hw</span> <span class="o">=</span> <span class="n">window_partition</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_size</span><span class="p">)</span>
 <span class="ne">--&gt; </span><span class="mi">174</span> <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">175</span> <span class="c1"># Reverse window partition</span>
 <span class="g g-Whitespace">    </span><span class="mi">176</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py:1751,</span> in <span class="ni">Module._wrapped_call_impl</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="nn">File ~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/torch/nn/modules/module.py:1751,</span> in <span class="ni">Module._wrapped_call_impl</span><span class="nt">(self, *args, **kwargs)</span>
 <span class="g g-Whitespace">   </span><span class="mi">1749</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># type: ignore[misc]</span>
 <span class="g g-Whitespace">   </span><span class="mi">1750</span> <span class="k">else</span><span class="p">:</span>
 <span class="ne">-&gt; </span><span class="mi">1751</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py:1762,</span> in <span class="ni">Module._call_impl</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="nn">File ~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/torch/nn/modules/module.py:1762,</span> in <span class="ni">Module._call_impl</span><span class="nt">(self, *args, **kwargs)</span>
 <span class="g g-Whitespace">   </span><span class="mi">1757</span> <span class="c1"># If we don&#39;t have any hooks, we want to skip the rest of the logic in</span>
 <span class="g g-Whitespace">   </span><span class="mi">1758</span> <span class="c1"># this function, and just call forward.</span>
 <span class="g g-Whitespace">   </span><span class="mi">1759</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backward_pre_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_pre_hooks</span>
@@ -804,29 +780,28 @@ torch version:  	2.7.1
 <span class="g g-Whitespace">   </span><span class="mi">1764</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="g g-Whitespace">   </span><span class="mi">1765</span> <span class="n">called_always_called_hooks</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/segment_anything/modeling/image_encoder.py:234,</span> in <span class="ni">Attention.forward</span><span class="nt">(self, x)</span>
+<span class="nn">File ~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/segment_anything/modeling/image_encoder.py:234,</span> in <span class="ni">Attention.forward</span><span class="nt">(self, x)</span>
 <span class="g g-Whitespace">    </span><span class="mi">231</span> <span class="n">attn</span> <span class="o">=</span> <span class="p">(</span><span class="n">q</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">)</span> <span class="o">@</span> <span class="n">k</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">233</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_rel_pos</span><span class="p">:</span>
 <span class="ne">--&gt; </span><span class="mi">234</span>     <span class="n">attn</span> <span class="o">=</span> <span class="n">add_decomposed_rel_pos</span><span class="p">(</span><span class="n">attn</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rel_pos_h</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rel_pos_w</span><span class="p">,</span> <span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">W</span><span class="p">),</span> <span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">W</span><span class="p">))</span>
 <span class="g g-Whitespace">    </span><span class="mi">236</span> <span class="n">attn</span> <span class="o">=</span> <span class="n">attn</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">237</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">attn</span> <span class="o">@</span> <span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_heads</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/segment_anything/modeling/image_encoder.py:350,</span> in <span class="ni">add_decomposed_rel_pos</span><span class="nt">(attn, q, rel_pos_h, rel_pos_w, q_size, k_size)</span>
+<span class="nn">File ~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/segment_anything/modeling/image_encoder.py:350,</span> in <span class="ni">add_decomposed_rel_pos</span><span class="nt">(attn, q, rel_pos_h, rel_pos_w, q_size, k_size)</span>
 <span class="g g-Whitespace">    </span><span class="mi">348</span> <span class="n">k_h</span><span class="p">,</span> <span class="n">k_w</span> <span class="o">=</span> <span class="n">k_size</span>
 <span class="g g-Whitespace">    </span><span class="mi">349</span> <span class="n">Rh</span> <span class="o">=</span> <span class="n">get_rel_pos</span><span class="p">(</span><span class="n">q_h</span><span class="p">,</span> <span class="n">k_h</span><span class="p">,</span> <span class="n">rel_pos_h</span><span class="p">)</span>
 <span class="ne">--&gt; </span><span class="mi">350</span> <span class="n">Rw</span> <span class="o">=</span> <span class="n">get_rel_pos</span><span class="p">(</span><span class="n">q_w</span><span class="p">,</span> <span class="n">k_w</span><span class="p">,</span> <span class="n">rel_pos_w</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">352</span> <span class="n">B</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">shape</span>
 <span class="g g-Whitespace">    </span><span class="mi">353</span> <span class="n">r_q</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">q_h</span><span class="p">,</span> <span class="n">q_w</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/segment_anything/modeling/image_encoder.py:292,</span> in <span class="ni">get_rel_pos</span><span class="nt">(q_size, k_size, rel_pos)</span>
+<span class="nn">File ~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/segment_anything/modeling/image_encoder.py:292,</span> in <span class="ni">get_rel_pos</span><span class="nt">(q_size, k_size, rel_pos)</span>
 <span class="g g-Whitespace">    </span><span class="mi">288</span>         <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="p">:</span><span class="n">H</span><span class="p">,</span> <span class="p">:</span><span class="n">W</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">contiguous</span><span class="p">()</span>
 <span class="g g-Whitespace">    </span><span class="mi">289</span>     <span class="k">return</span> <span class="n">x</span>
 <span class="ne">--&gt; </span><span class="mi">292</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_rel_pos</span><span class="p">(</span><span class="n">q_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">k_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">rel_pos</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
 <span class="g g-Whitespace">    </span><span class="mi">293</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="g g-Whitespace">    </span><span class="mi">294</span><span class="sd">     Get relative positional embeddings according to the relative positions of</span>
 <span class="g g-Whitespace">    </span><span class="mi">295</span><span class="sd">         query and key sizes.</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">302</span><span class="sd">         Extracted positional embeddings according to relative positions.</span>
+<span class="sd">   (...)    302         Extracted positional embeddings according to relative positions.</span>
 <span class="g g-Whitespace">    </span><span class="mi">303</span><span class="sd">     &quot;&quot;&quot;</span>
 <span class="g g-Whitespace">    </span><span class="mi">304</span>     <span class="n">max_rel_dist</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="n">q_size</span><span class="p">,</span> <span class="n">k_size</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 

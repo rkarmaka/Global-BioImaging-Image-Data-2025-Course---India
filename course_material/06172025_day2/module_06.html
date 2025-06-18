@@ -183,7 +183,9 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Image Segmentation with Deep Learning</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../06182025_day3/01_intro_to_dl.html">A Gentle Introduction to Deep Learning for Microscopy</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="../06182025_day3/02_dl_timeline.html">A Brief Timeline of Deep Learning</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="../06182025_day3/03_cellpose_intro.html">Introduction to Cellpose</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../06182025_day3/04_test_Cellpose-SAM.html">Cellpose-SAM: superhuman generalization for cellular segmentation</a></li>
 
@@ -481,7 +483,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b09c5b841740ede1b2cb50ccc9dec77c84346cbcb9d6948c73b7a1b75af795cc.png" src="../../_images/b09c5b841740ede1b2cb50ccc9dec77c84346cbcb9d6948c73b7a1b75af795cc.png" />
+<img alt="../../_images/2d71fb73bbaa601e2aef54fd63e92b904936a56c332cdaef15d853ac809c232a.png" src="../../_images/2d71fb73bbaa601e2aef54fd63e92b904936a56c332cdaef15d853ac809c232a.png" />
 </div>
 </div>
 </section>
@@ -555,35 +557,36 @@ document.write(`
 <span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rgb_image</span><span class="p">)</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/skimage/_shared/utils.py:326,</span> in <span class="ni">channel_as_last_axis.__call__.&lt;locals&gt;.fixed_func</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">323</span> <span class="n">channel_axis</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;channel_axis&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">325</span> <span class="k">if</span> <span class="n">channel_axis</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">326</span>     <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">328</span> <span class="c1"># TODO: convert scalars to a tuple in anticipation of eventually</span>
-<span class="g g-Whitespace">    </span><span class="mi">329</span> <span class="c1">#       supporting a tuple of channel axes. Right now, only an</span>
-<span class="g g-Whitespace">    </span><span class="mi">330</span> <span class="c1">#       integer or a single-element tuple is supported, though.</span>
-<span class="g g-Whitespace">    </span><span class="mi">331</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">(</span><span class="n">channel_axis</span><span class="p">):</span>
+<span class="nn">File ~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/skimage/_shared/utils.py:445,</span> in <span class="ni">channel_as_last_axis.__call__.&lt;locals&gt;.fixed_func</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">442</span> <span class="n">channel_axis</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;channel_axis&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">444</span> <span class="k">if</span> <span class="n">channel_axis</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">445</span>     <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">447</span> <span class="c1"># TODO: convert scalars to a tuple in anticipation of eventually</span>
+<span class="g g-Whitespace">    </span><span class="mi">448</span> <span class="c1">#       supporting a tuple of channel axes. Right now, only an</span>
+<span class="g g-Whitespace">    </span><span class="mi">449</span> <span class="c1">#       integer or a single-element tuple is supported, though.</span>
+<span class="g g-Whitespace">    </span><span class="mi">450</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">(</span><span class="n">channel_axis</span><span class="p">):</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/skimage/color/colorconv.py:875,</span> in <span class="ni">rgb2gray</span><span class="nt">(rgb, channel_axis)</span>
-<span class="g g-Whitespace">    </span><span class="mi">834</span> <span class="nd">@channel_as_last_axis</span><span class="p">(</span><span class="n">multichannel_output</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">835</span> <span class="k">def</span><span class="w"> </span><span class="nf">rgb2gray</span><span class="p">(</span><span class="n">rgb</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">channel_axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">836</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Compute luminance of an RGB image.</span>
-<span class="g g-Whitespace">    </span><span class="mi">837</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">838</span><span class="sd">     Parameters</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">873</span><span class="sd">     &gt;&gt;&gt; img_gray = rgb2gray(img)</span>
-<span class="g g-Whitespace">    </span><span class="mi">874</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">875</span>     <span class="n">rgb</span> <span class="o">=</span> <span class="n">_prepare_colorarray</span><span class="p">(</span><span class="n">rgb</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">876</span>     <span class="n">coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.2125</span><span class="p">,</span> <span class="mf">0.7154</span><span class="p">,</span> <span class="mf">0.0721</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">rgb</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">877</span>     <span class="k">return</span> <span class="n">rgb</span> <span class="o">@</span> <span class="n">coeffs</span>
+<span class="nn">File ~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/skimage/color/colorconv.py:982,</span> in <span class="ni">rgb2gray</span><span class="nt">(rgb, channel_axis)</span>
+<span class="g g-Whitespace">    </span><span class="mi">941</span> <span class="nd">@channel_as_last_axis</span><span class="p">(</span><span class="n">multichannel_output</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">942</span> <span class="k">def</span><span class="w"> </span><span class="nf">rgb2gray</span><span class="p">(</span><span class="n">rgb</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">channel_axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">943</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Compute luminance of an RGB image.</span>
+<span class="g g-Whitespace">    </span><span class="mi">944</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">945</span><span class="sd">     Parameters</span>
+<span class="sd">   (...)    980     &gt;&gt;&gt; img_gray = rgb2gray(img)</span>
+<span class="g g-Whitespace">    </span><span class="mi">981</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">982</span>     <span class="n">rgb</span> <span class="o">=</span> <span class="n">_prepare_colorarray</span><span class="p">(</span><span class="n">rgb</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">983</span>     <span class="n">coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.2125</span><span class="p">,</span> <span class="mf">0.7154</span><span class="p">,</span> <span class="mf">0.0721</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">rgb</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">984</span>     <span class="k">return</span> <span class="n">rgb</span> <span class="o">@</span> <span class="n">coeffs</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/skimage/color/colorconv.py:140,</span> in <span class="ni">_prepare_colorarray</span><span class="nt">(arr, force_copy, channel_axis)</span>
-<span class="g g-Whitespace">    </span><span class="mi">137</span> <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">channel_axis</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">138</span>     <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;the input array must have size 3 along `channel_axis`, &#39;</span>
-<span class="g g-Whitespace">    </span><span class="mi">139</span>            <span class="sa">f</span><span class="s1">&#39;got </span><span class="si">{</span><span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">140</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">142</span> <span class="n">float_dtype</span> <span class="o">=</span> <span class="n">_supported_float_type</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">143</span> <span class="k">if</span> <span class="n">float_dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">:</span>
+<span class="nn">File ~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/skimage/color/colorconv.py:170,</span> in <span class="ni">_prepare_colorarray</span><span class="nt">(arr, force_copy, channel_axis)</span>
+<span class="g g-Whitespace">    </span><span class="mi">165</span> <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">channel_axis</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">166</span>     <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">167</span>         <span class="sa">f</span><span class="s1">&#39;the input array must have size 3 along `channel_axis`, &#39;</span>
+<span class="g g-Whitespace">    </span><span class="mi">168</span>         <span class="sa">f</span><span class="s1">&#39;got </span><span class="si">{</span><span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="g g-Whitespace">    </span><span class="mi">169</span>     <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">170</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">172</span> <span class="n">float_dtype</span> <span class="o">=</span> <span class="n">_supported_float_type</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">173</span> <span class="k">if</span> <span class="n">float_dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">:</span>
 
 <span class="ne">ValueError</span>: the input array must have size 3 along `channel_axis`, got (512, 512)
 </pre></div>

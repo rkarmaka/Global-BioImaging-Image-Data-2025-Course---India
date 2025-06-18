@@ -183,7 +183,9 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Image Segmentation with Deep Learning</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../06182025_day3/01_intro_to_dl.html">A Gentle Introduction to Deep Learning for Microscopy</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="../06182025_day3/02_dl_timeline.html">A Brief Timeline of Deep Learning</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="../06182025_day3/03_cellpose_intro.html">Introduction to Cellpose</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../06182025_day3/04_test_Cellpose-SAM.html">Cellpose-SAM: superhuman generalization for cellular segmentation</a></li>
 
@@ -483,7 +485,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/ipykernel_28502/2197165173.py:6: DeprecationWarning: Starting with ImageIO v3 the behavior of this function will switch to that of iio.v3.imread. To keep the current behavior (and make this warning disappear) use `import imageio.v2 as imageio` or call `imageio.v2.imread` directly.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/ipykernel_33065/2197165173.py:6: DeprecationWarning: Starting with ImageIO v3 the behavior of this function will switch to that of iio.v3.imread. To keep the current behavior (and make this warning disappear) use `import imageio.v2 as imageio` or call `imageio.v2.imread` directly.
   img_png = imageio.imread(&#39;data/nuclei.png&#39;)
 </pre></div>
 </div>
@@ -496,29 +498,27 @@ document.write(`
 <span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1"># Load a JPG image</span>
 <span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">img_jpg</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;example_image.jpg&#39;</span><span class="p">)</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/imageio/__init__.py:97,</span> in <span class="ni">imread</span><span class="nt">(uri, format, **kwargs)</span>
+<span class="nn">File ~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/imageio/__init__.py:97,</span> in <span class="ni">imread</span><span class="nt">(uri, format, **kwargs)</span>
 <span class="g g-Whitespace">     </span><span class="mi">68</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;imread(uri, format=None, **kwargs)</span>
 <span class="g g-Whitespace">     </span><span class="mi">69</span><span class="sd"> </span>
 <span class="g g-Whitespace">     </span><span class="mi">70</span><span class="sd"> Reads an image from the specified file. Returns a numpy array, which</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">     </span><span class="mi">86</span><span class="sd">     to see what arguments are available for a particular format.</span>
+<span class="sd">   (...)     86     to see what arguments are available for a particular format.</span>
 <span class="g g-Whitespace">     </span><span class="mi">87</span><span class="sd"> &quot;&quot;&quot;</span>
 <span class="g g-Whitespace">     </span><span class="mi">89</span> <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
 <span class="g g-Whitespace">     </span><span class="mi">90</span>     <span class="s2">&quot;Starting with ImageIO v3 the behavior of this function will switch to that of&quot;</span>
 <span class="g g-Whitespace">     </span><span class="mi">91</span>     <span class="s2">&quot; iio.v3.imread. To keep the current behavior (and make this warning disappear)&quot;</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">94</span>     <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>     <span class="mi">94</span>     <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
 <span class="g g-Whitespace">     </span><span class="mi">95</span> <span class="p">)</span>
 <span class="ne">---&gt; </span><span class="mi">97</span> <span class="k">return</span> <span class="n">imread_v2</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/imageio/v2.py:359,</span> in <span class="ni">imread</span><span class="nt">(uri, format, **kwargs)</span>
+<span class="nn">File ~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/imageio/v2.py:359,</span> in <span class="ni">imread</span><span class="nt">(uri, format, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">356</span> <span class="n">imopen_args</span> <span class="o">=</span> <span class="n">decypher_format_arg</span><span class="p">(</span><span class="nb">format</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">357</span> <span class="n">imopen_args</span><span class="p">[</span><span class="s2">&quot;legacy_mode&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="ne">--&gt; </span><span class="mi">359</span> <span class="k">with</span> <span class="n">imopen</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="s2">&quot;ri&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">imopen_args</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
 <span class="g g-Whitespace">    </span><span class="mi">360</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">362</span> <span class="k">return</span> <span class="n">result</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/imageio/core/imopen.py:113,</span> in <span class="ni">imopen</span><span class="nt">(uri, io_mode, plugin, extension, format_hint, legacy_mode, **kwargs)</span>
+<span class="nn">File ~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/imageio/core/imopen.py:113,</span> in <span class="ni">imopen</span><span class="nt">(uri, io_mode, plugin, extension, format_hint, legacy_mode, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">111</span>     <span class="n">request</span><span class="o">.</span><span class="n">format_hint</span> <span class="o">=</span> <span class="n">format_hint</span>
 <span class="g g-Whitespace">    </span><span class="mi">112</span> <span class="k">else</span><span class="p">:</span>
 <span class="ne">--&gt; </span><span class="mi">113</span>     <span class="n">request</span> <span class="o">=</span> <span class="n">Request</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="n">io_mode</span><span class="p">,</span> <span class="n">format_hint</span><span class="o">=</span><span class="n">format_hint</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="n">extension</span><span class="p">)</span>
@@ -526,21 +526,21 @@ document.write(`
 <span class="g g-Whitespace">    </span><span class="mi">117</span> <span class="c1"># fast-path based on plugin</span>
 <span class="g g-Whitespace">    </span><span class="mi">118</span> <span class="c1"># (except in legacy mode)</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/imageio/core/request.py:247,</span> in <span class="ni">Request.__init__</span><span class="nt">(self, uri, mode, extension, format_hint, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">244</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid Request.Mode: </span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">246</span> <span class="c1"># Parse what was given</span>
-<span class="ne">--&gt; </span><span class="mi">247</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_uri</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">249</span> <span class="c1"># Set extension</span>
-<span class="g g-Whitespace">    </span><span class="mi">250</span> <span class="k">if</span> <span class="n">extension</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="nn">File ~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/imageio/core/request.py:249,</span> in <span class="ni">Request.__init__</span><span class="nt">(self, uri, mode, extension, format_hint, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">246</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid Request.Mode: </span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">248</span> <span class="c1"># Parse what was given</span>
+<span class="ne">--&gt; </span><span class="mi">249</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_uri</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">251</span> <span class="c1"># Set extension</span>
+<span class="g g-Whitespace">    </span><span class="mi">252</span> <span class="k">if</span> <span class="n">extension</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/imageio/core/request.py:407,</span> in <span class="ni">Request._parse_uri</span><span class="nt">(self, uri)</span>
-<span class="g g-Whitespace">    </span><span class="mi">404</span> <span class="k">if</span> <span class="n">is_read_request</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">405</span>     <span class="c1"># Reading: check that the file exists (but is allowed a dir)</span>
-<span class="g g-Whitespace">    </span><span class="mi">406</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">407</span>         <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;No such file: &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="n">fn</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">408</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">409</span>     <span class="c1"># Writing: check that the directory to write to does exist</span>
-<span class="g g-Whitespace">    </span><span class="mi">410</span>     <span class="n">dn</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+<span class="nn">File ~/anaconda3/envs/gbi-python-env/lib/python3.13/site-packages/imageio/core/request.py:409,</span> in <span class="ni">Request._parse_uri</span><span class="nt">(self, uri)</span>
+<span class="g g-Whitespace">    </span><span class="mi">406</span> <span class="k">if</span> <span class="n">is_read_request</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">407</span>     <span class="c1"># Reading: check that the file exists (but is allowed a dir)</span>
+<span class="g g-Whitespace">    </span><span class="mi">408</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">409</span>         <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;No such file: &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="n">fn</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">410</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">411</span>     <span class="c1"># Writing: check that the directory to write to does exist</span>
+<span class="g g-Whitespace">    </span><span class="mi">412</span>     <span class="n">dn</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 
 <span class="ne">FileNotFoundError</span>: No such file: &#39;/Users/ranit/Research/github/GBI-Python-2025/course_material/06172025_day2/data/nuclei.png&#39;
 </pre></div>
