@@ -114,5 +114,5 @@ plt.show()
 [32m    411[39m     [38;5;66;03m# Writing: check that the directory to write to does exist[39;00m
 [32m    412[39m     dn = os.path.dirname(fn)
 
-[31mFileNotFoundError[39m: No such file: '/Users/ranit/Research/github/Global-BioImaging-Image-Data-2025-Course---India/course_material/06172025_day2/data/nuclei.png'
+[31mFileNotFoundError[39m: No such file: '/Users/ranit/Research/github/GBI-Python-2025/course_material/06172025_day2/data/nuclei.png'
 

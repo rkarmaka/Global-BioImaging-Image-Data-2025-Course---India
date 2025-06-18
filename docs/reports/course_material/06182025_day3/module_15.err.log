@@ -150,5 +150,5 @@ show_overlay(image, gt_mask, pred_mask)
 [32m  13298[39m             self._offset = max([32m0[39m, self._offset)
 [32m  13299[39m         [38;5;28;01melif[39;00m isinstance(self._file, FileHandle):
 
-[31mFileNotFoundError[39m: [Errno 2] No such file or directory: '/Users/ranit/Research/github/Global-BioImaging-Image-Data-2025-Course---India/course_material/06182025_day3/cell_image.tif'
+[31mFileNotFoundError[39m: [Errno 2] No such file or directory: '/Users/ranit/Research/github/GBI-Python-2025/course_material/06182025_day3/cell_image.tif'
 

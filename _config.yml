@@ -22,7 +22,7 @@ bibtex_bibfiles:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/rkarmaka/Global-BioImaging-Image-Data-2025-Course---India
+  url: https://github.com/rkarmaka/GBI-Python-2025
   path_to_book: docs
   branch: main
 
@@ -32,5 +32,5 @@ html:
   use_issues_button: true
   use_repository_button: true
   use_edit_page_button: true
-  baseurl: /Global-BioImaging-Image-Data-2025-Course---India
+  baseurl: /GBI-Python-2025
 

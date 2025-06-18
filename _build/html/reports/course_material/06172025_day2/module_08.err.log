@@ -57,7 +57,7 @@ plt.show()
 ------------------
 
 ----- stderr -----
-/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/ipykernel_25753/2197165173.py:6: DeprecationWarning: Starting with ImageIO v3 the behavior of this function will switch to that of iio.v3.imread. To keep the current behavior (and make this warning disappear) use `import imageio.v2 as imageio` or call `imageio.v2.imread` directly.
+/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/ipykernel_26317/2197165173.py:6: DeprecationWarning: Starting with ImageIO v3 the behavior of this function will switch to that of iio.v3.imread. To keep the current behavior (and make this warning disappear) use `import imageio.v2 as imageio` or call `imageio.v2.imread` directly.
   img_png = imageio.imread('data/nuclei.png')
 ------------------
 
