@@ -21,7 +21,7 @@ parts:
   #     - file: course_material/06172025_day2/module_10.ipynb
   #     - file: course_material/06172025_day2/module_11.ipynb
 
-  - caption: Day 3 - Image Segmentation with Deep Learning
+  - caption: Image Segmentation with Deep Learning
     chapters:
       - file: course_material/06182025_day3/01_intro_to_dl.ipynb
       - file: course_material/06182025_day3/02_dl_timeline.ipynb

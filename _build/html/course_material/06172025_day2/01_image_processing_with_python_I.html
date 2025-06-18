@@ -180,25 +180,7 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 1 - Python Basics</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../06162025_day1/module_01.html">Welcome &amp; Setup</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../06162025_day1/module_02.html">Python Basics – Variables &amp; Data Types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06162025_day1/module_03.html">Data Structures &amp; Control Flow in Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06162025_day1/module_04.html">Functions &amp; Libraries</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06162025_day1/module_05.html">Basic Data Handling with Pandas</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 2 - Image Processing with Python</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="module_06.html">Introduction to Bioimage Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_07.html">Digital Images as Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_08.html">Working with Images in Python Using scikit-image and imageio</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_09.html">Visualizing Images in Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_10.html">Image Filtering &amp; Processing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_11.html">Threshold-Based Segmentation</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 - Image Segmentation with Deep Learning</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Image Segmentation with Deep Learning</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../06182025_day3/01_intro_to_dl.html">A Gentle Introduction to Deep Learning for Microscopy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../06182025_day3/02_dl_timeline.html">A Brief Timeline of Deep Learning</a></li>
@@ -209,6 +191,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="../06182025_day3/06_quality_evaluation.html">Quality control of segmentation results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06182025_day3/07_feature_extraction.html">Feature extraction (intensity, morphological and spatial features)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../06182025_day3/08_dl_further.html">Building bioimage analysis workflows (ZeroCostDL, Bioimage Zoo)</a></li>
 </ul>
 
@@ -534,7 +517,7 @@ Data type: uint8
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x12741c410&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x11ae94410&gt;
 </pre></div>
 </div>
 <img alt="../../_images/1191b8586b796f0001ce5fdeba72dc2e59abc5647e595f3f01a0ade29303b6b5.png" src="../../_images/1191b8586b796f0001ce5fdeba72dc2e59abc5647e595f3f01a0ade29303b6b5.png" />
@@ -550,7 +533,7 @@ Data type: uint8
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x1274b4b90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x11af28b90&gt;
 </pre></div>
 </div>
 <img alt="../../_images/76264a5e4f7ed4d527eb3d87840f7d0adca3d003b8883a5c79fea7f51a6f973a.png" src="../../_images/76264a5e4f7ed4d527eb3d87840f7d0adca3d003b8883a5c79fea7f51a6f973a.png" />
@@ -569,7 +552,7 @@ Data type: uint8
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x127512850&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x11b812850&gt;
 </pre></div>
 </div>
 <img alt="../../_images/5549194347d0768f3d314257fe4a4a30f228b3e7ef91b3acee3094b7f6bc98e7.png" src="../../_images/5549194347d0768f3d314257fe4a4a30f228b3e7ef91b3acee3094b7f6bc98e7.png" />
@@ -592,7 +575,7 @@ Data type: uint8
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x12753e5d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x11b8425d0&gt;
 </pre></div>
 </div>
 <img alt="../../_images/77d45e2c2fcb006a484123aa76d5f4738ebf4fc53b3229a5440899e1b979e1d2.png" src="../../_images/77d45e2c2fcb006a484123aa76d5f4738ebf4fc53b3229a5440899e1b979e1d2.png" />
@@ -611,7 +594,7 @@ Data type: uint8
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x130e54e10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x11c0f0e10&gt;
 </pre></div>
 </div>
 <img alt="../../_images/476df3e8824ee065a7686f812d819f57cc0473ae9bee8e4a83f9cf7552996106.png" src="../../_images/476df3e8824ee065a7686f812d819f57cc0473ae9bee8e4a83f9cf7552996106.png" />
