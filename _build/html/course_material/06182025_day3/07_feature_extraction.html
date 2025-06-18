@@ -515,7 +515,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/44860b9bd6fc8ffc81733817d34a6bf1e1432db6eca95af54851d14637a83859.png" src="../../_images/44860b9bd6fc8ffc81733817d34a6bf1e1432db6eca95af54851d14637a83859.png" />
+<img alt="../../_images/3d121313c84a0079f7fd4ad50039a25b809da1f2e59a66e20f456e26f4bd8f7e.png" src="../../_images/3d121313c84a0079f7fd4ad50039a25b809da1f2e59a66e20f456e26f4bd8f7e.png" />
 </div>
 </details>
 </div>
@@ -537,81 +537,43 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Extract intensity features for each labeled region</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">labeled_mask</span> <span class="o">=</span> <span class="n">label</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">props_intensity</span> <span class="o">=</span> <span class="n">regionprops_table</span><span class="p">(</span><span class="n">labeled_mask</span><span class="p">,</span> <span class="n">intensity_image</span><span class="o">=</span><span class="n">image</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">properties</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="s1">&#39;mean_intensity&#39;</span><span class="p">,</span> <span class="s1">&#39;max_intensity&#39;</span><span class="p">,</span> <span class="s1">&#39;min_intensity&#39;</span><span class="p">,</span> 
+<span class="g g-Whitespace">      </span><span class="mi">8</span>                 <span class="s1">&#39;intensity_std&#39;</span><span class="p">,</span> <span class="s1">&#39;area&#39;</span><span class="p">])</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="c1"># Convert to DataFrame for easy handling</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">df_intensity</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">props_intensity</span><span class="p">)</span>
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/skimage/measure/_regionprops.py:1045,</span> in <span class="ni">regionprops_table</span><span class="nt">(label_image, intensity_image, properties, cache, separator, extra_properties, spacing)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1041</span>     <span class="n">out_d</span> <span class="o">=</span> <span class="n">_props_to_dict</span><span class="p">(</span><span class="n">regions</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="n">properties</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1042</span>                            <span class="n">separator</span><span class="o">=</span><span class="n">separator</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1043</span>     <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span><span class="p">[:</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">out_d</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+<span class="ne">-&gt; </span><span class="mi">1045</span> <span class="k">return</span> <span class="n">_props_to_dict</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1046</span>     <span class="n">regions</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="n">properties</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="n">separator</span>
+<span class="g g-Whitespace">   </span><span class="mi">1047</span> <span class="p">)</span>
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>label</th>
-      <th>mean_intensity</th>
-      <th>max_intensity</th>
-      <th>min_intensity</th>
-      <th>intensity_std</th>
-      <th>area</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>225.264798</td>
-      <td>255.0</td>
-      <td>125.0</td>
-      <td>32.117022</td>
-      <td>321.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>211.144295</td>
-      <td>254.0</td>
-      <td>101.0</td>
-      <td>37.083200</td>
-      <td>298.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>159.244048</td>
-      <td>205.0</td>
-      <td>85.0</td>
-      <td>28.649981</td>
-      <td>336.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>189.897764</td>
-      <td>252.0</td>
-      <td>108.0</td>
-      <td>38.425428</td>
-      <td>313.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>145.875817</td>
-      <td>187.0</td>
-      <td>83.0</td>
-      <td>20.397783</td>
-      <td>306.0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/skimage/measure/_regionprops.py:837,</span> in <span class="ni">_props_to_dict</span><span class="nt">(regions, properties, separator)</span>
+<span class="g g-Whitespace">    </span><span class="mi">835</span> <span class="c1"># determine the current property name for any deprecated property.</span>
+<span class="g g-Whitespace">    </span><span class="mi">836</span> <span class="n">prop</span> <span class="o">=</span> <span class="n">PROPS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">prop</span><span class="p">,</span> <span class="n">prop</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">837</span> <span class="n">rp</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">prop</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">838</span> <span class="k">if</span> <span class="n">prop</span> <span class="ow">in</span> <span class="n">COL_DTYPES</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">839</span>     <span class="n">dtype</span> <span class="o">=</span> <span class="n">COL_DTYPES</span><span class="p">[</span><span class="n">prop</span><span class="p">]</span>
+
+<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/skimage/measure/_regionprops.py:382,</span> in <span class="ni">RegionProperties.__getattr__</span><span class="nt">(self, attr)</span>
+<span class="g g-Whitespace">    </span><span class="mi">380</span>     <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">PROPS</span><span class="p">[</span><span class="n">attr</span><span class="p">])</span>
+<span class="g g-Whitespace">    </span><span class="mi">381</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">382</span>     <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">383</span>         <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39; object has no attribute &#39;</span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">384</span>     <span class="p">)</span>
+
+<span class="ne">AttributeError</span>: &#39;&lt;class &#39;skimage.measure._regionprops.RegionProperties&#39;&gt;&#39; object has no attribute &#39;intensity_std&#39;
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
