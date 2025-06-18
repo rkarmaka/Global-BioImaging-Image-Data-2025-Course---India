@@ -64,7 +64,7 @@ show_overlay(image, gt_mask, pred_mask)
 
 [31m---------------------------------------------------------------------------[39m
 [31mFileNotFoundError[39m                         Traceback (most recent call last)
-[32m/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/ipykernel_23018/2088862724.py[39m in [36m?[39m[34m()[39m
+[32m/var/folders/5t/3zkcp0dd27s3txcmjn8jl96m0000gq/T/ipykernel_23477/2088862724.py[39m in [36m?[39m[34m()[39m
 [32m      2[39m [38;5;28;01mimport[39;00m matplotlib.pyplot [38;5;28;01mas[39;00m plt
 [32m      3[39m [38;5;28;01mfrom[39;00m skimage.io [38;5;28;01mimport[39;00m imread
 [32m      4[39m 
